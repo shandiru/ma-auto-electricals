@@ -5,7 +5,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 const palette = {
-  primary: "#2F7D33",     // green accent
+  primary: "#317F21",     // green accent
   heading: "#111827",     // dark heading
   muted: "#4B5563",       // muted body text
   badgeBg: "#A4BE6A",
@@ -43,7 +43,7 @@ export default function ContactHero() {
           >
             Contact{" "}
             <span style={{ color: palette.primary }}>
-              Stoneley&apos;s Garage
+              Ma auto electrics
             </span>
           </h1>
 
@@ -51,9 +51,7 @@ export default function ContactHero() {
             data-aos="zoom-in"
             className="text-xl max-w-3xl mx-auto leading-relaxed text-[var(--contact-muted)]"
           >
-            Family-run garage established 1973. Contact our friendly team for
-            professional automotive services, quotes, or to book your
-            appointment. We&apos;re here to help with all your vehicle needs.
+            MA Auto Electrics specialise in supplying and fitting of in car audio & car DVD / navigation solutions, vehicle security, diagnostics and dashcams. Get in touch for further details
           </p>
         </div>
       </div>

@@ -47,7 +47,7 @@ export default function EmergencyCTA() {
           data-aos="zoom-in"
         >
           {/* Call Now Button */}
-          <a href="tel:+441623623759" className="inline-block">
+          <a href="tel:+44 7889 133123" className="inline-block">
             <button
               className="
                 inline-flex items-center justify-center gap-2 h-10 rounded-md px-6 font-semibold shadow
@@ -59,17 +59,17 @@ export default function EmergencyCTA() {
               }}
             >
               <FaPhone className="h-5 w-5" />
-              Call +44 1623 623759
+              Call +44 7889 133123
             </button>
           </a>
 
           {/* Emergency Service Button */}
           <button
-            onClick={() => window.open('tel:+441623623759', '_self')}
+            onClick={() => window.open('tel:+44 7889 133123', '_self')}
             className="
               inline-flex items-center justify-center gap-2 h-10 rounded-md px-6 font-semibold border
-              transition duration-300 hover:bg-white hover:text-green-900 
-              active:bg-white active:text-green-900 focus:bg-white focus:text-green-900
+              transition duration-300 hover:bg-white hover:text-[#317F21] 
+              active:bg-white active:text-[#317F21] focus:bg-white focus:text-[#317F21]
             "
             style={{
               backgroundColor: "transparent",
