@@ -1,100 +1,86 @@
-"use client";
-import React from "react";
-import { ArrowRight, Menu } from "lucide-react";
+import { Car, Wrench, Clock } from "lucide-react";
 
 export default function HeroSection() {
   return (
-    <section className="w-full min-h-screen bg-black text-white p-4 md:p-6 lg:p-8">
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+    <section className="relative w-full h-[120vh] flex items-center text-white">
+      <div className="max-w-6xl mx-auto">
 
-        {/* LEFT BIG HERO WITH VIDEO */}
-        <div className="relative lg:col-span-2 rounded-2xl overflow-hidden">
-          <video
-            src="/vedio.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full h-[65vh] md:h-[80vh] lg:h-full object-cover"
+        {/* Background */}
+        <div className="absolute inset-0">
+          <img
+            src="https://framerusercontent.com/images/dyUVy700DwPm1498uwEGVq8ZdA.png"
+            className="w-full h-full object-cover"
+            alt="hero background"
           />
-          <div className="absolute inset-0 bg-black/40"></div>
-
-          <div className="absolute bottom-10 left-10">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif leading-tight">
-              SUSHI <br /> SENSATION
-            </h1>
-          </div>
-
-          {/* Top Navigation */}
-          <div className="absolute top-6 left-6 flex items-center gap-4 bg-black/40 px-5 py-3 rounded-xl backdrop-blur-sm">
-            <Menu className="h-6 w-6 cursor-pointer" />
-            <h2 className="text-xl tracking-wide font-semibold">QITCHEN</h2>
-
-            <nav className="hidden md:flex items-center gap-5 text-sm">
-              <a href="#">MENU</a>
-              <a href="#">ABOUT</a>
-              <a
-                href="#"
-                className="bg-white text-black px-4 py-2 rounded-md text-xs font-semibold"
-              >
-                BOOK A TABLE
-              </a>
-            </nav>
-          </div>
+          <div className="absolute inset-0 bg-black/40" />
         </div>
 
-        {/* RIGHT SIDE BENTO GRID */}
-        <div className="flex flex-col gap-6">
+        {/* CONTENT */}
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full">
 
-          {[
-            { img: "/h1.avif", title: "MENU", desc: "Discover our signature dishes" },
-            { img: "/h2.avif", title: "RESERVATION", desc: "Book your dining experience" },
-            { img: "/h3.avif", title: "OUR PLACE", desc: "Explore our restaurant story" },
-          ].map((item, index) => (
-            <div
-              key={index}
-              className="group relative rounded-2xl overflow-hidden h-48 md:h-56 cursor-pointer"
-            >
-              {/* IMAGE */}
-              <img
-                src={item.img}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                alt={item.title}
-              />
+          <div className="max-w-3xl pt-20 md:pt-0">
+            <h1 className="text-4xl md:text-6xl lg:text-[70px] mt-30 font-bold leading-tight mb-6">
+              Welcome to <br /> MA Auto Electrics
+            </h1>
 
-              {/* OVERLAY */}
-              <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-all"></div>
+            <p className="text-lg md:text-xl text-white/90 max-w-xl mb-10">
+              Car Electric Specialists in Accrington, Lancashire
+            </p>
 
-              {/* TITLE */}
-              <div
-                className="
-                  absolute bottom-4 right-4 flex items-center gap-1 
-                  text-lg font-semibold tracking-wide
-                  transition-all duration-500
-                  group-hover:translate-y-[-20px] group-hover:opacity-0
-                "
-              >
-                {item.title}
-                <ArrowRight className="h-5 w-5 transition-transform duration-500 group-hover:translate-x-2" />
-              </div>
+            <div className="flex gap-4 mb-20">
+              <button className="px-6 py-3 bg-lime-300 text-black font-semibold rounded-lg hover:bg-lime-400 transition">
+                Contact us
+              </button>
 
-              {/* DESCRIPTION */}
-              <div
-                className="
-                  absolute bottom-4 right-4 flex items-center gap-1
-                   opacity-0
-                  transition-all duration-500
-                  group-hover:opacity-100 group-hover:translate-y-[-5px]
-                "
-              >
-                {item.desc}
-                <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-2" />
-              </div>
+              <button className="px-6 py-3 border border-white/40 rounded-lg backdrop-blur-sm hover:bg-white/10 transition">
+                See Products
+              </button>
             </div>
-          ))}
+          </div>
 
+          {/* FEATURE CARDS */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-[-40px]">
+
+            <FeatureCard
+              icon={<Car className="w-6 h-6" />}
+              title="Automotive Electrical Specialists"
+              desc="Expert technicians skilled in diagnosing and repairing all car electrical issues."
+            />
+
+            <FeatureCard
+              icon={<Wrench className="w-6 h-6" />}
+              title="Advanced Diagnostic Tools"
+              desc="We use modern diagnostic equipment to identify and fix problems accurately."
+            />
+
+            <FeatureCard
+              icon={<Clock className="w-6 h-6" />}
+              title="Quick Turnaround Time"
+              desc="Fast, reliable service to get you back on the road as soon as possible."
+            />
+
+          </div>
         </div>
       </div>
     </section>
+  );
+}
+
+/* FEATURE CARD COMPONENT */
+function FeatureCard({ icon, title, desc }) {
+  return (
+    <div className="backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl p-6 flex gap-4 items-start shadow-lg">
+      
+      <div>
+        {/* Icon Circle */}
+        <div className="w-12 h-12 mb-5 flex items-center justify-center rounded-full border border-white/30 bg-white/10">
+          <div className="text-white">{icon}</div>
+        </div>
+
+        <h3 className="text-lg font-semibold mb-3">{title}</h3>
+        <p className="text-sm text-white/80">{desc}</p>
+      </div>
+
+    </div>
   );
 }
