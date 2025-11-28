@@ -38,7 +38,7 @@ export default function ProductCard() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-4 sm:p-6 lg:p-8">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-3xl sm:text-4xl mt-20 font-bold text-gray-900 mb-8 text-center">
+        <h1 className="text-3xl sm:text-4xl mt-20 font-bold text-[#317F21] mb-8 text-center">
           Featured Vehicles
         </h1>
         
@@ -104,7 +104,7 @@ export default function ProductCard() {
                   <span className="text-3xl font-bold text-gray-900">
                     {car.price}
                   </span>
-                  <button className="flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold group/btn transition-colors">
+                  <button className="flex items-center gap-2 text-[#317F21]  hover:text-[#3ad81a]  font-semibold group/btn transition-colors">
                     View Details
                     <ChevronRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
                   </button>

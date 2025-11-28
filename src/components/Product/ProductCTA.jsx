@@ -4,7 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 
 export default function ProductCTA() {
     return (
-        <section className="w-full bg-[#1A2A47] py-20 px-4">
+        <section className="w-full bg-[#317F21]  py-20 px-4">
             <div className="max-w-3xl mx-auto text-center">
 
                 {/* Heading */}
@@ -26,7 +26,7 @@ export default function ProductCTA() {
                     />
 
                     <div className="p-0.5">
-                        <button className="bg-blue-700 rounded-full flex items-center gap-2 hover:bg-blue-800 text-white px-6 md:px-10 py-3 font-medium whitespace-nowrap">
+                        <button className="hover:bg-[#317F21]  rounded-full flex items-center gap-2 bg-[#3ad81a] text-white px-6 md:px-10 py-3 font-medium whitespace-nowrap">
                             View Our Cars 
                             <ArrowUpRight className="w-4 h-4" />
                         </button>
