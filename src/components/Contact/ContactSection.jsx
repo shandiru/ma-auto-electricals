@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import emailjs from "emailjs-com";
+import emailjs from "@emailjs/browser";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
@@ -16,6 +16,7 @@ import {
 } from "react-icons/fa";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { FiPhone } from "react-icons/fi";
 
 // EmailJS credentials
 const SERVICE_ID = "service_2u9sb2c";
@@ -89,14 +90,14 @@ export default function ContactSection() {
   };
 
   return (
-    <section className="py-16 bg-[#F3F6F4] dark:bg-[#0B0F0C] overflow-x-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-16 bg-[#F3F6F4]  overflow-x-hidden">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12">
           {/* FORM */}
           <div
             data-aos="fade-right"
-            className="flex flex-col gap-6 rounded-xl border border-brand-border dark:border-white/10 
-                       bg-white dark:bg-[#0F1115] py-6 shadow-sm box-border w-full"
+            className="flex flex-col gap-6 rounded-xl border border-brand-border  
+                       bg-white  py-6 shadow-sm box-border w-full"
           >
             <div className="px-6">
               <div className="text-2xl font-bold flex items-center text-[#111827] dark:text-gray-100">
@@ -122,7 +123,7 @@ export default function ContactSection() {
                   id="phone"
                   label="Phone Number *"
                   placeholder="Your phone number"
-                  icon={<FaPhone className="h-4 w-4" />}
+                  icon={<FiPhone className="h-4 w-4" />}
                   value={formData.phone}
                   onChange={handleChange}
                   error={formErrors.phone}
@@ -210,40 +211,38 @@ export default function ContactSection() {
               title="Opening Hours"
               icon={<FaClock className="h-5 w-5" />}
             >
-              <HoursRow day="Monday" time="8:00 AM – 5:30 PM" />
-              <HoursRow day="Tuesday" time="8:00 AM – 5:30 PM" />
-              <HoursRow day="Wednesday" time="8:00 AM – 5:30 PM" />
-              <HoursRow day="Thursday" time="8:00 AM – 5:30 PM" />
-              <HoursRow day="Friday" time="8:00 AM – 5:30 PM" />
-              <HoursRow day="Saturday" time="8:00 AM – 4:00 PM" />
-              <HoursRow day="Sunday" time="Closed" muted />
+              <HoursRow day="Monday" time="9:00 AM – 6:00 PM" />
+              <HoursRow day="Tuesday" time="9:00 AM – 6:00 PM" />
+              <HoursRow day="Wednesday" time="9:00 AM – 6:00 PM" />
+              <HoursRow day="Thursday" time="9:00 AM – 6:00 PM" />
+              <HoursRow day="Friday" time="9:00 AM – 6:00 PM" />
+              <HoursRow day="Saturday" time="9:00 AM – 6:00 PM" />
+              <HoursRow day="Sunday" time="9:00 AM – 6:00 PM" />
             </SideCard>
 
             <SideCard data-aos="fade-left" title="Find Us" icon={<FaMapMarkerAlt className="h-5 w-5" />}>
               <div className="space-y-1 mb-4">
-                <p className="font-semibold">Stoneley's Garage Services</p>
+                <p className="font-semibold">Ma auto electrics</p>
                 <p className="text-sm text-muted dark:text-gray-400">
-                  Oakham Business Park, Hamilton Way, Mansfield NG18 5BU, UK
+                  13 laburnum drive oswaldtwistele accrington bb5 3aw
                 </p>
               </div>
 
               <a
-                href="https://www.google.com/maps/place/Stoneley's+Garage+Services/data=!4m2!3m1!1s0x0:0x5a644c3262063baf"
+                href="https://maps.app.goo.gl/EPnqrDkCRBvqW38z8"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <button className="h-9 w-full rounded-md border px-4 py-2 text-sm font-medium flex items-center justify-center bg-white dark:bg-[#1B1E24] text-[#111827] dark:text-white border-brand-border dark:border-white/10 hover:shadow">
+                <button className="h-9 w-full rounded-md border px-4 py-2 text-sm font-medium flex items-center justify-center bg-white dark:bg-[#1B1E24] text-[#111827]  border-brand-border dark:border-white/10 hover:shadow">
                   <FaDirections className="mr-2 h-4 w-4" />
                   View on Google Maps
                 </button>
               </a>
             </SideCard>
 
-            <SideCard data-aos="fade-left" title="About Stoneley's Garage">
-              <p className="text-sm text-muted dark:text-gray-400 leading-relaxed">
-                Family-run garage established in 1973, serving Mansfield and surrounding areas.
-                Our certified technicians provide reliable service for cars, commercial vehicles,
-                and motorhomes.
+            <SideCard data-aos="fade-left" title="Ma auto electrics">
+              <p className="text-sm text-muted  leading-relaxed">
+                MA Auto Electrics specialise in supplying and fitting of in car audio & car DVD / navigation solutions, vehicle security, diagnostics and dashcams. Get in touch for further details
               </p>
             </SideCard>
           </div>
@@ -268,9 +267,8 @@ function FormInput({ id, label, placeholder, icon, value, onChange, type = "text
           name={id}
           type={type}
           placeholder={placeholder}
-          className={`h-9 w-full rounded-md border bg-white dark:bg-[#1B1E24] px-3 pl-10 text-[#111827] dark:text-white ${
-            error ? "border-red-500" : "border-brand-border dark:border-white/10"
-          }`}
+          className={`h-9 w-full rounded-md border bg-white dark:bg-[#1B1E24] px-3 pl-10 text-[#111827] dark:text-white ${error ? "border-red-500" : "border-brand-border dark:border-white/10"
+            }`}
           value={value}
           onChange={onChange}
         />

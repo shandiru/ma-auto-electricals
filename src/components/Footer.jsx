@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 
 export default function Footer() {
   const address =
-    "AF-MOK Performance, Unit 6, Spon Lane Trading Estate, Varney Ave, West Bromwich B70 6AE, United Kingdom";
+    "13 laburnum drive oswaldtwistele accrington bb5 3aw";
   const mapsUrl =
-    "https://www.google.com/maps/search/?api=1&query=" +
+    "https://maps.app.goo.gl/EPnqrDkCRBvqW38z8" +
     encodeURIComponent(address);
 
   return (
@@ -17,19 +17,17 @@ export default function Footer() {
           {/* Company Info */}
           <div>
             <div className="flex items-center space-x-3">
-              <span className="text-2xl font-bold gradient-blue">
-                kwon Wei
+              <span className="text-2xl font-bold text-[#317F21]">
+                Ma auto electrics
               </span>
             </div>
             <p className="text-gray-400 mb-4 mt-2">
-              High-quality performance tuning and emissions solutions for cars
-              and LCVs. Maximize your vehicle’s power, efficiency, and
-              reliability.
+              Expert Auto Electrical Repairs & Advanced Diagnostics Balanced, professional, and fits your full service range.
             </p>
             <div className="flex space-x-4">
               {/* Facebook */}
               <a
-                //href="https://www.facebook.com/share/16eb5kcuGU/?mibextid=wwXIfr"
+                href="https://web.facebook.com/maautoelectrics/#"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
@@ -42,7 +40,7 @@ export default function Footer() {
 
               {/* Instagram */}
               <a
-               // href="https://www.instagram.com/afmokperformance/"
+                href="https://www.instagram.com/mobirise/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
@@ -55,20 +53,20 @@ export default function Footer() {
 
               {/* TikTok */}
               <a
-                //href="https://www.tiktok.com/@afmok.performance"
+                href="https://www.youtube.com/c/mobirise"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="TikTok"
+                aria-label="YouTube"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 256 256"
-                  className="text-gray-400 hover:text-white transition-colors"
+                  viewBox="0 0 24 24"
                   width={20}
                   height={20}
+                  className="text-gray-400 hover:text-white transition-colors"
                   fill="currentColor"
                 >
-                  <path d="M240 80a64 64 0 0 1-64-64h-32v168a40 40 0 1 1-40-40 39.6 39.6 0 0 1 8 .8V112a72 72 0 1 0 64 71.6V97.7A95.6 95.6 0 0 0 240 112Z" />
+                  <path d="M19.615 3.184a3.016 3.016 0 0 1 2.121 2.121C22.5 7.5 22.5 12 22.5 12s0 4.5-.764 6.695a3.016 3.016 0 0 1-2.121 2.121C17.5 21.5 12 21.5 12 21.5s-5.5 0-7.695-.684a3.016 3.016 0 0 1-2.121-2.121C1.5 16.5 1.5 12 1.5 12s0-4.5.684-6.695A3.016 3.016 0 0 1 4.305 3.184C6.5 2.5 12 2.5 12 2.5s5.5 0 7.615.684ZM10 15.5l6-3.5-6-3.5v7Z" />
                 </svg>
               </a>
             </div>
@@ -76,7 +74,7 @@ export default function Footer() {
 
           {/* Services */}
           <div>
-            <h3 className="font-bold mb-4 gradient-blue">Quick Link</h3>
+            <h3 className="font-bold mb-4 text-[#317F21]">Quick Link</h3>
             <ul className="space-y-2 text-gray-400">
               <li>
                 <a href="#services" className="hover:text-white transition-colors">
@@ -90,11 +88,11 @@ export default function Footer() {
               </li>
               <li>
                 <a href="#services" className="hover:text-white transition-colors">
-                 Venues
+                  Service
                 </a>
               </li>
               <li>
-                <a href="#services" className="hover:text-white transition-colors">
+                <a href="/contact" className="hover:text-white transition-colors">
                   Contact
                 </a>
               </li>
@@ -113,9 +111,9 @@ export default function Footer() {
 
           {/* Contact Info */}
           <div>
-            <h3 className="font-bold mb-4 gradient-blue">Contact Info</h3>
+            <h3 className="font-bold mb-4 text-[#317F21]">Contact Info</h3>
             <ul className="space-y-2 text-gray-400">
-              <li>kwon Wei</li>
+              <li>Ma auto electrics</li>
               <li>
                 <a
                   href={mapsUrl}
@@ -123,9 +121,9 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="hover:text-white transition-colors"
                 >
-                  Unit 6, Spon Lane Trading Estate,
+                  13 laburnum drive oswaldtwistele
                   <br />
-                  Varney Ave, West Bromwich B70 6AE,
+                  accrington bb5 3aw,
                   <br />
                   United Kingdom
                 </a>
@@ -134,20 +132,20 @@ export default function Footer() {
               {/* Phone */}
               <li>
                 <a
-                  href="tel:+447494481443"
+                  href="tel:+44 7889 133123"
                   className="hover:text-white transition-colors"
                 >
-                  +44 7494 481443
+                  +44 7889 133123
                 </a>
               </li>
 
               {/* Email */}
               <li>
                 <a
-                  href="mailto:afmok.performance@outlook.com"
+                  href="mailto:maautoelectrics@gmail.com"
                   className="hover:text-white transition-colors break-all"
                 >
-                  Benihana Main@outlook.com
+                  maautoelectrics@gmail.com
                 </a>
               </li>
             </ul>
@@ -156,7 +154,7 @@ export default function Footer() {
 
         {/* Bottom */}
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; 2025 AF-MOK Performance. All rights reserved.</p>
+          <p>&copy; 2025 Ma auto electrics. All rights reserved.</p>
         </div>
 
         {/* Bottom Bar */}
@@ -167,7 +165,7 @@ export default function Footer() {
               href="https://www.ansely.co.uk/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-cyan-400 hover:underline"
+              className="text-[#317F21] hover:underline"
             >
               Ansely
             </a>

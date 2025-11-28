@@ -8,7 +8,7 @@ import ContactSection from "../components/Contact/ContactSection";
 import EmergencyCTA from "../components/Contact/EmergencyCTA";
 
 
-export default function About() {
+export default function ContactPage() {
   return (
     <div>
        <section>

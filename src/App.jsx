@@ -7,17 +7,21 @@ import Home from "./page/Home";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import ScrollToTop from "./components/ScrollToTop";
 import GDPRBanner from "../src/components/GDPRBanner"
+import Navbar from "./components/Header";
+import ContactPage from "./page/Contact";
+import ProductPage from "./page/ProductPage";
 
 function App() {
   return (
     <Router>
       <ScrollToTop />
-      {/* <Header /> */}
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/terms-conditions" element={<TermsConditions />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-         <Route path="/contact" element={<Contact />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/product" element={<ProductPage />} />
       </Routes>
       <Footer />
       <GDPRBanner />

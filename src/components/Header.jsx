@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { HashLink } from "react-router-hash-link";
 
-export default function Header() {
+export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const waNumber = "447494481443";
@@ -19,11 +19,11 @@ export default function Header() {
       <div className="mx-auto max-w-7xl px-4 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo only */}
-          <div className="flex items-center min-w-0">
+          <div className="flex items-center">
             <img
-              src="/logo.jpeg"
+              src="/logo.png"
               alt="AF-MOK Logo"
-              className="rounded-full w-14 h-14 lg:w-16 lg:h-16 flex-shrink-0"
+              className=" w-35 h-14  flex-shrink-0"
             />
           </div>
 
@@ -38,10 +38,10 @@ export default function Header() {
             <HashLink smooth to="/#about" scroll={scrollWithOffset} className="text-gray-300 hover:text-white transition-colors">
               About
             </HashLink>
-            <HashLink smooth to="/#testimonials" scroll={scrollWithOffset} className="text-gray-300 hover:text-white transition-colors">
-              Testimonials
+            <HashLink smooth to="/product" scroll={scrollWithOffset} className="text-gray-300 hover:text-white transition-colors">
+              Product
             </HashLink>
-            <HashLink smooth to="/#contact" scroll={scrollWithOffset} className="text-gray-300 hover:text-white transition-colors">
+            <HashLink smooth to="/contact" scroll={scrollWithOffset} className="text-gray-300 hover:text-white transition-colors">
               Contact
             </HashLink>
           </nav>
@@ -122,5 +122,3 @@ export default function Header() {
     </header>
   );
 };
-
-export default Navbar;

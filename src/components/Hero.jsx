@@ -28,7 +28,7 @@ export default function HeroSection() {
             </p>
 
             <div className="flex gap-4 mb-20">
-              <button className="px-6 py-3 bg-lime-300 text-black font-semibold rounded-lg hover:bg-lime-400 transition">
+              <button className="px-6 py-3 bg-[#317F21] text-black font-semibold rounded-lg hover:bg-lime-400 transition">
                 Contact us
               </button>
 

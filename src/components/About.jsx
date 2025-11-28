@@ -1,132 +1,44 @@
-export default function AboutUs() {
+import React from 'react';
+
+export default function About() {
   return (
-    <section className="relative py-20 bg-[#F7F7F2] overflow-hidden">
+    <div className="min-h-screen bg-white">
+      <div className="max-w-6xl mx-auto px-4 py-8 lg:py-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+          {/* Image Section */}
+          <div className="order-1 lg:order-1">
+            <div className="rounded-2xl overflow-hidden shadow-2xl">
+              <img
+                src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=800&h=800&fit=crop"
+                alt="Luxury car interior"
+                className="w-full h-auto object-cover"
+              />
+            </div>
+          </div>
 
-      {/* Side Decorative Images */}
-      <img
-        src="https://www.benihanainternational.com/wp-content/themes/grilla/img/left-letters.svg"
-        alt=""
-        className="absolute left-0 top-1/2 -translate-y-1/2 opacity-30 pointer-events-none hidden md:block"
-      />
-      <img
-        src="https://www.benihanainternational.com/wp-content/themes/grilla/img/right-letters.svg"
-        alt=""
-        className="absolute right-0 top-1/2 -translate-y-1/2 opacity-30 pointer-events-none hidden md:block"
-      />
+          {/* Content Section */}
+          <div className="order-2 lg:order-2 space-y-6 lg:space-y-8">
+            <div>
+              <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 leading-tight">
+                We help you{' '}
+                <span className="text-[#317F21]">get credit.</span>
+              </h1>
+            </div>
 
-      <div className="max-w-4xl mx-auto px-6 relative z-10 text-center">
+            <div>
+              <p className="text-xl sm:text-2xl text-gray-900 font-medium leading-relaxed">
+                Get pre-approved in minutes and let our finance team get you the best rate from our top lenders.
+              </p>
+            </div>
 
-        {/* Flower Icon */}
-        <img
-          src="https://www.benihanainternational.com/wp-content/uploads/2025/07/flower.svg"
-          alt=""
-          className="mx-auto mb-10 w-24 md:w-32"
-        />
-
-        {/* Title */}
-        <h2 className="text-3xl md:text-[32px] font-extrabold leading-snug text-[#02130E] uppercase tracking-wide">
-          Two Benihana Restaurants in London –
-        </h2>
-
-        {/* Description */}
-        <div className="mt-6 space-y-5 text-base md:text-lg text-[#333] max-w-2xl mx-auto leading-relaxed">
-          <p>
-            At Benihana, every meal is more than just dining — it’s a show.
-            With two London locations in Chelsea and Covent Garden, we bring
-            world-famous Japanese teppanyaki theatre to your table.
-          </p>
-          <p>
-            Whether you’re celebrating a birthday, marking an anniversary,
-            hosting a business dinner, or simply gathering with friends,
-            Benihana sets the stage for unforgettable moments.
-          </p>
-          <p>
-            From hibachi steak to sushi and cocktails, choose your London
-            Benihana and let the celebration begin.
-          </p>
+            <div>
+              <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
+                Our extensive experience in the industry has enabled us to cultivate valuable relationships that we leverage to your advantage. This includes our partnerships with trusted lenders, guaranteeing you the most competitive rates available. Apply now through our fully secure credit application and kickstart your journey to a newer, more luxurious car today.
+              </p>
+            </div>
+          </div>
         </div>
-
-        {/* Cards Section */}
-        {/* <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto">
-
-         
-          <a
-            href="/locations/chelsea"
-            className="group relative rounded-[32px] overflow-hidden shadow-lg transition-all duration-500"
-          >
-          
-            <img
-              src="https://www.benihanainternational.com/wp-content/uploads/2025/07/Chelsea-Hero-Shot.jpg"
-              alt="Chelsea"
-              className="w-full h-96 object-cover group-hover:scale-105 transition-all duration-700"
-            />
-
-           
-            <div className="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition-all duration-300"></div>
-
-          
-            <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/70 to-transparent"></div>
-
-          
-            <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
-
-           
-              <h3 className="
-                text-2xl md:text-3xl 
-                uppercase font-extrabold tracking-wide 
-                absolute top-6 left-1/2 -translate-x-1/2
-              ">
-                Chelsea
-              </h3>
-
-              <p className="opacity-90 text-sm md:text-base mt-auto">
-                West London
-              </p>
-
-              <span className="mt-3 inline-block bg-[#E41E26] text-white px-6 py-2 text-xs md:text-sm font-semibold tracking-widest rounded-full">
-                Explore Chelsea
-              </span>
-            </div>
-          </a>
-
-         
-          <a
-            href="/locations/covent-garden"
-            className="group relative rounded-[32px] overflow-hidden shadow-lg transition-all duration-500"
-          >
-            <img
-              src="https://www.benihanainternational.com/wp-content/uploads/2025/07/CG-Ground-Floor.jpg"
-              alt="Covent Garden"
-              className="w-full h-96 object-cover group-hover:scale-105 transition-all duration-700"
-            />
-
-            <div className="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition-all duration-300"></div>
-
-            <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/70 to-transparent"></div>
-
-            <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
-
-            
-              <h3 className="
-                text-2xl md:text-3xl
-                uppercase font-extrabold tracking-wide
-                absolute top-6 left-1/2 -translate-x-1/2
-              ">
-                Covent Garden
-              </h3>
-
-              <p className="opacity-90 text-sm md:text-base mt-auto">
-                Central London
-              </p>
-
-              <span className="mt-3 inline-block bg-[#E41E26] text-white px-6 py-2 text-xs md:text-sm font-semibold tracking-widest rounded-full">
-                Covent Garden
-              </span>
-            </div>
-          </a>
-
-        </div> */}
       </div>
-    </section>
+    </div>
   );
 }

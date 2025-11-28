@@ -1,23 +1,21 @@
 import React from 'react'
-import Menu from "../components/Menu";
 import About from "../components/About";
-import Review from "../components/Review";
-import Contact from "../components/Contact";
-import WhyChooseUs from "../components/WhyChooseUs";
 import ImageSlider from "../components/ImageSlider"
-import VenueSection from "../components/VenueSection"
 import HeroSection from '../components/Hero';
+import Service from '../components/Service';
+import ProductSellers from '../components/ProductSection';
+import ContactSection from '../components/Contact/ContactSection';
+import Testimonials from '../components/ImageSlider';
+
 const Home = () => {
     return (
         <div>
             <HeroSection />
-            <Menu />
             <About />
-            <ImageSlider />
-            <Review />
-             <VenueSection />
-            {/* <WhyChooseUs /> */}
-            <Contact />
+            <Service />
+            <ProductSellers />
+            <ContactSection />
+            <Testimonials />
         </div>
     )
 }

@@ -1,0 +1,127 @@
+import React, { useState } from "react";
+import { Leaf, Wind, Scissors, ArrowRight } from "lucide-react";
+
+const ServiceCard = ({ service }) => {
+    const [isHovered, setIsHovered] = useState(false);
+
+    return (
+        <div
+            className="relative overflow-hidden rounded-2xl h-120 shadow-xl cursor-pointer group"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+        >
+            {/* Background Image with smooth zoom */}
+            <div
+                className={`absolute inset-0 transition-transform duration-700 ease-out ${isHovered ? "scale-110" : "scale-100"
+                    }`}
+                style={{
+                    backgroundImage: `url(${service.image})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                }}
+            />
+
+            {/* Overlay */}
+            <div className="absolute inset-0 bg-black/40"></div>
+
+            {/* Front Content */}
+            <div className="relative h-full flex flex-col justify-end p-6 sm:p-8">
+                <div className="bg-slate-900/90 backdrop-blur-sm rounded-2xl p-6 sm:p-7">
+
+                    {/* Icon */}
+                    <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-4">
+                        {service.icon}
+                    </div>
+
+                    {/* Title */}
+                    <h3 className="text-white text-2xl sm:text-3xl font-bold mb-3">
+                        {service.title}
+                    </h3>
+
+                    {/* Description — smooth fade + slide */}
+                    <div
+                        className={`transition-all duration-500 ease-out overflow-hidden ${isHovered
+                                ? "max-h-32 opacity-100 translate-y-0 mb-4"
+                                : "max-h-0 opacity-0 -translate-y-3 mb-0"
+                            }`}
+                    >
+                        <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
+                            {service.description}
+                        </p>
+                    </div>
+
+                    {/* Button — smooth fade-in */}
+                    <div
+                        className={`transition-all duration-500 ease-out overflow-hidden ${isHovered
+                                ? "max-h-20 opacity-100 translate-y-0"
+                                : "max-h-0 opacity-0 translate-y-3"
+                            }`}
+                    >
+                        <button className="bg-[#317F21] hover:bg-emerald-500 text-slate-900 font-semibold px-6 py-3 rounded-full text-sm flex items-center gap-2 transition-all duration-300 group/button">
+                            See Details
+
+                            <ArrowRight
+                                className="w-4 h-4 transition-transform duration-300 group-hover/button:translate-x-1"
+                            />
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default function Service() {
+    const services = [
+        {
+            id: 1,
+            title: "Lawn Health Inspection",
+            description:
+                "Comprehensive analysis of your lawn's health with expert recommendations.",
+            icon: <Leaf className="w-6 h-6 text-[#317F21]" />,
+            image:
+                "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
+        },
+        {
+            id: 2,
+            title: "Debris/Blow Cleanup",
+            description:
+                "Keep your outdoor space clean, tidy, and professionally maintained.",
+            icon: <Wind className="w-6 h-6 text-[#317F21]" />,
+            image:
+                "https://images.unsplash.com/photo-1592492152545-8c2d0a29c0c8?w=800&q=80",
+        },
+        {
+            id: 3,
+            title: "Grass Adjustment",
+            description:
+                "Perfectly trimmed grass to maintain the beauty of your lawn.",
+            icon: <Scissors className="w-6 h-6 text-[#317F21]" />,
+            image:
+                "https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?w=800&q=80",
+        },
+    ];
+
+    return (
+        <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 py-12 px-6">
+            <div className="max-w-6xl mx-auto">
+                <div className="text-center mb-14">
+                    <h1 className="text-4xl font-bold text-slate-900 mb-3">
+                        Our Lawn Care Services
+                    </h1>
+                    <p className="text-lg text-slate-600">
+                        Professional lawn care tailored to your needs
+                    </p>
+                </div>
+
+                {/* Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {services.map((service) => (
+                        <ServiceCard key={service.id} service={service} />
+                    ))}
+                </div>
+            </div>
+        </div>
+    );
+}

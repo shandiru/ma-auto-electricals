@@ -31,7 +31,7 @@ export default function ContactHero() {
         <div className="text-center mb-12">
           <span
             data-aos="fade-down"
-            className="inline-flex items-center justify-center rounded-md px-2 py-0.5 text-xs font-medium mb-4"
+            className="inline-flex mt-10 items-center justify-center rounded-md px-2 py-0.5 text-xs font-medium mb-4"
             style={{ backgroundColor: palette.badgeBg, color: palette.badgeText }}
           >
             Get In Touch
