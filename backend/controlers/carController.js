@@ -3,13 +3,29 @@ import carModel from "../models/CarModel.js";
 // CREATE car
 export const createCar = async (req, res) => {
   try {
-    const car = new carModel(req.body);
-    const savedCar = await car.save();
-    res.status(201).json(savedCar);
+    if (!req.files || req.files.length === 0) {
+      return res.status(400).json({ success: false, message: "No images uploaded" });
+    }
+
+    const images = req.files.map((file) => file.filename);
+
+    const car = new carModel({
+      name: req.body.name,
+      description: req.body.description,
+      price: req.body.price,
+      year: req.body.year,
+      model: req.body.model,
+      images, // array of filenames
+    });
+
+    await car.save();
+    res.json({ success: true, message: "Car added successfully" });
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    console.error(error);
+    res.status(500).json({ success: false, message: "Failed to add car" });
   }
 };
+
 
 // GET all cars
 export const getCars = async (req, res) => {

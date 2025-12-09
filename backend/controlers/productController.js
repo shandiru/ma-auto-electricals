@@ -1,15 +1,42 @@
 import productModel from "../models/ProductModel.js";
 
 // CREATE product
+import multer from "multer";
+import path from "path";
+
+// Multer config
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads/");
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + path.extname(file.originalname));
+  },
+});
+
+export const upload = multer({ storage });
+
 export const createProduct = async (req, res) => {
   try {
-    const product = new productModel(req.body);
+    const { name, description, price, count, category } = req.body;
+    const images = req.files.map((file) => `${file.filename}`);
+
+    const product = new productModel({
+      name,
+      description,
+      price,
+      count,
+      images,
+      category: category || "Default", // fallback if category not provided
+    });
+
     const savedProduct = await product.save();
-    res.status(201).json(savedProduct);
+    res.status(201).json({ success: true, message: "Product created", data: savedProduct });
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(400).json({ success: false, message: error.message });
   }
 };
+
 
 // GET all products
 export const getProducts = async (req, res) => {
