@@ -1,4 +1,6 @@
 import carModel from "../models/CarModel.js";
+import fs from "fs";
+import path from "path";
 
 // CREATE car
 export const createCar = async (req, res) => {
@@ -50,21 +52,55 @@ export const getCarById = async (req, res) => {
   }
 };
 
-// UPDATE car
+// Update Car Controller
 export const updateCar = async (req, res) => {
   try {
-    const updatedCar = await carModel.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true }
-    );
+    const carId = req.params.id;
+    console.log("Updating car with ID:", carId);
+    console.log("Request body:", req.body);
 
-    if (!updatedCar)
-      return res.status(404).json({ error: "Car not found" });
+    const car = await carModel.findById(carId);
+    if (!car) return res.status(404).json({ success: false, message: "Car not found" });
 
-    res.status(200).json(updatedCar);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
+    const { name, description, price, year, model, removeImages } = req.body;
+
+    // Update fields if provided
+    if (name) car.name = name;
+    if (description) car.description = description;
+    if (price) car.price = Number(price);
+    if (year) car.year = Number(year);
+    if (model) car.model = model;
+
+    console.log(name, description, price, year, model, removeImages);
+
+    // Remove selected images
+    if (removeImages) {
+      const imagesToRemove = JSON.parse(removeImages);
+      car.images = car.images.filter(img => !imagesToRemove.includes(img));
+      
+      imagesToRemove.forEach(img => {
+        const filePath = path.join("uploads", img);
+        if (fs.existsSync(filePath)) {
+          fs.unlinkSync(filePath);
+          console.log(`Deleted file: ${filePath}`);
+        } else {
+          console.log(`File not found: ${filePath}`);
+        }
+      });
+    }
+
+    // Add new uploaded images
+    if (req.files && req.files.length > 0) {
+      const newImages = req.files.map(file => file.filename);
+      car.images = [...car.images, ...newImages];
+      console.log("Added images:", newImages);
+    }
+
+    await car.save();
+    res.status(200).json({ success: true, message: "Car updated successfully", data: car });
+  } catch (err) {
+    console.error(err);
+    res.status(400).json({ success: false, message: err.message });
   }
 };
 

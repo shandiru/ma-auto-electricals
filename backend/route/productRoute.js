@@ -24,7 +24,7 @@ productRouter.post("/", upload.array("images", 5), createProduct);
 
 productRouter.get("/", getProducts);
 productRouter.get("/:id", getProductById);
-productRouter.put("/:id", updateProduct);
+productRouter.put("/:id", upload.array("images", 5), updateProduct);
 productRouter.delete("/:id", deleteProduct);
 
 export default productRouter;

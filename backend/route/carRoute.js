@@ -17,7 +17,7 @@ const upload = multer({ storage });
 carRouter.post("/", upload.array("images", 5), createCar); // max 5 images
 carRouter.get("/", getCars);
 carRouter.get("/:id", getCarById);
-carRouter.put("/:id", updateCar);
+carRouter.put("/:id", upload.array("images", 5), updateCar);
 carRouter.delete("/:id", deleteCar);
 
 export default carRouter;

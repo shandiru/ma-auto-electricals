@@ -1,5 +1,5 @@
 import productModel from "../models/ProductModel.js";
-
+import fs from "fs";
 // CREATE product
 import multer from "multer";
 import path from "path";
@@ -64,18 +64,38 @@ export const getProductById = async (req, res) => {
 // UPDATE product
 export const updateProduct = async (req, res) => {
   try {
-    const updatedProduct = await productModel.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true } // return updated data
-    );
+    const product = await productModel.findById(req.params.id);
+    if (!product) return res.status(404).json({ success: false, message: "Product not found" });
 
-    if (!updatedProduct)
-      return res.status(404).json({ error: "Product not found" });
+    const { name, description, price, count, category, removeImages } = req.body;
 
-    res.status(200).json(updatedProduct);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
+    if (name) product.name = name;
+    if (description) product.description = description;
+    if (price) product.price = Number(price);
+    if (count) product.count = Number(count);
+    if (category) product.category = category;
+
+    // Remove images
+    if (removeImages) {
+      const imgsToRemove = JSON.parse(removeImages);
+      product.images = product.images.filter(img => !imgsToRemove.includes(img));
+      imgsToRemove.forEach(img => {
+        const filePath = path.join("uploads", img);
+        if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
+      });
+    }
+
+    // Add new images
+    if (req.files && req.files.length > 0) {
+      const newImages = req.files.map(f => f.filename);
+      product.images = [...product.images, ...newImages];
+    }
+
+    await product.save();
+    res.status(200).json({ success: true, message: "Product updated", data: product });
+  } catch (err) {
+    console.error(err);
+    res.status(400).json({ success: false, message: err.message });
   }
 };
 
