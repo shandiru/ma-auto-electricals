@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import { Routes, Route, BrowserRouter, useLocation } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Sidebar from './components/Sidebar';
@@ -8,6 +8,24 @@ import CarList from './pages/List/CarList';
 import ProductList from './pages/List/ProductList';
 import AddCar from './pages/Add/AddCar';
 import AddProduct from './pages/Add/AddProduct';
+import Auth from './components/Auth';
+
+const Layout = ({ children }) => {
+  const location = useLocation();
+  
+  // Hide Sidebar & Navbar on login/auth page
+  const hideLayout = location.pathname === '/';
+
+  return (
+    <div className="flex min-h-screen">
+      {!hideLayout && <Sidebar className="w-64" />}
+      <div className="flex-1 bg-slate-50 p-4 md:p-8 overflow-auto">
+        {!hideLayout && <Navbar />}
+        {children}
+      </div>
+    </div>
+  );
+};
 
 const App = () => {
   const url = "http://localhost:4000";
@@ -15,21 +33,22 @@ const App = () => {
   return (
     <BrowserRouter>
       <ToastContainer />
-      <Navbar />
-      <div className="flex min-h-screen">
-        {/* Sidebar */}
-        <Sidebar className="w-64" />
-
-        {/* Main content */}
-        <div className="flex-1 bg-slate-50 p-4 md:p-8 overflow-auto">
-          <Routes>
-            <Route path="/list/product" element={<ProductList url={url} />} />
-            <Route path="/list/car" element={<CarList url={url} />} />
-            <Route path="/add/car" element={<AddCar url={url} />} />
-            <Route path="/add/product" element={<AddProduct url={url} />} />
-          </Routes>
-        </div>
-      </div>
+      <Routes>
+        <Route path="/" element={<Auth />} />
+        <Route
+          path="*"
+          element={
+            <Layout>
+              <Routes>
+                <Route path="/list/product" element={<ProductList url={url} />} />
+                <Route path="/list/car" element={<CarList url={url} />} />
+                <Route path="/add/car" element={<AddCar url={url} />} />
+                <Route path="/add/product" element={<AddProduct url={url} />} />
+              </Routes>
+            </Layout>
+          }
+        />
+      </Routes>
     </BrowserRouter>
   );
 };
