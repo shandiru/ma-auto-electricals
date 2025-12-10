@@ -55,13 +55,13 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="w-64 min-h-screen bg-gradient-to-b from-slate-50 to-white border-r border-slate-200 
+    <div className="w-54 min-h-screen bg-linear-to-b from-slate-50 to-white border-r border-slate-200 
                     max-md:w-20 transition-all duration-300">
       
       {/* Logo/Header Section */}
       <div className="p-6 border-b border-slate-200 max-md:p-4">
         <div className="flex items-center gap-3 max-md:justify-center">
-          <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl 
+          <div className="w-10 h-10 bg-linear-to-br from-blue-600 to-purple-600 rounded-xl 
                           flex items-center justify-center shadow-lg">
             <span className="text-white font-bold text-lg">A</span>
           </div>
