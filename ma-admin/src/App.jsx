@@ -8,11 +8,12 @@ import CarList from './pages/List/CarList';
 import ProductList from './pages/List/ProductList';
 import AddCar from './pages/Add/AddCar';
 import AddProduct from './pages/Add/AddProduct';
-import Auth from './components/Auth';
+import Login from './components/Login';
+import Signup from './components/Signup';
 
 const Layout = ({ children }) => {
   const location = useLocation();
-  
+
   // Hide Sidebar & Navbar on login/auth page
   const hideLayout = location.pathname === '/';
 
@@ -34,7 +35,8 @@ const App = () => {
     <BrowserRouter>
       <ToastContainer />
       <Routes>
-        <Route path="/" element={<Auth />} />
+        <Route path="/" element={<Login url={url} />} />
+        <Route path="/signup" element={<Signup url={url} />} />
         <Route
           path="*"
           element={

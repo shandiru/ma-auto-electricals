@@ -1,85 +1,95 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { Eye, EyeOff } from "lucide-react"; // ← Lucide icons
+import AuthContainer from "../components/Auth";
 
-const Second = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState(null);
+export default function Login({ url }) {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setError(null);
+  const [showPassword, setShowPassword] = useState(false); // toggle password visibility
 
-        try {
-            const response = await fetch('http://10.10.106.220:8080/api/v1/auth/authenticate', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email, password })
-            });
+  const navigate = useNavigate();
 
-            const data = await response.json();
-            console.log(data);
-            if (!response.ok) {
-                throw new Error(data.message || 'Something went wrong');
-            }
-            
-            alert('Sign in successful!');
-        } catch (err) {
-            setError(err.message);
-        }
-    };
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-    return (
-        <div className='w-[45%] flex items-center justify-center'>
-            <div className='w-[85%] h-4/5 p-9 flex flex-col gap-7 box-border rounded-3xl border border-[#0089ED] bg-white'>
-                <div className='flex items-start justify-between p-2'>
-                    <div className='flex flex-col gap-5'>
-                        <h1 className='text-xl font-normal'>Welcome to <span className='text-[#0089ED] font-bold'>DevPos</span></h1>
-                        <h1 className='text-5xl font-medium'>Sign in</h1>
-                    </div>
-                </div>
-                {/* <div className='flex gap-4'>
-                    <div className='p-2 w-[75%] rounded-xl border bg-[#E9F1FF] flex items-center justify-center gap-5 text-[#4285F4] cursor-pointer'>
-                        <img src={Google} alt="Google" /> Sign in with Google
-                    </div>
-                    <div className='p-2 rounded-xl border bg-[#F6F6F6] flex items-center justify-center cursor-pointer'><img src={Apple} alt="Apple" /></div>
-                    <div className='p-2 rounded-xl border bg-[#F6F6F6] flex items-center justify-center cursor-pointer'><img src={Facebook} alt="Facebook" /></div>
-                </div> */}
-                <form className='flex flex-col gap-3' onSubmit={handleSubmit}>
-                    <div className='flex gap-3 flex-col'>
-                        <label htmlFor="email" className='font-medium'>Enter your username or email address</label>
-                        <input 
-                            className='p-3 rounded-xl border border-[#4285F4]'
-                            type="email" 
-                            id="email" 
-                            placeholder='Username or email address' 
-                            value={email} 
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div className='flex gap-3 flex-col mt-5'>
-                        <label htmlFor="password" className='font-medium'>Enter your Password</label>
-                        <input 
-                            className='p-3 rounded-xl border border-[#4285F4]'
-                            type="password" 
-                            id="password" 
-                            placeholder='Password' 
-                            value={password} 
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <a href='#' className='text-[#4285F4]'>
-                        <h3 className='text-right'>Forget Password</h3>
-                    </a>
-                    {error && <p className='text-red-500'>{error}</p>}
-                    <button type="submit" className='bg-[#0089ED] p-3 mt-3 rounded-xl text-white font-semibold'>Sign in</button>
-                </form>
-            </div>
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await fetch(`${url}/api/user/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+      console.log(data);
+
+      if (data.success) {
+        localStorage.setItem("token", data.token);
+        toast.success("Login successful!");
+        navigate("/list/product");
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Something went wrong!");
+    }
+  };
+
+  return (
+    <AuthContainer title="Welcome Back">
+      <form onSubmit={handleLogin} className="space-y-4">
+        {/* Email */}
+        <input
+          type="email"
+          name="email"
+          placeholder="Email Address"
+          onChange={handleChange}
+          className="w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-indigo-400 outline-none"
+          required
+        />
+
+        {/* Password */}
+        <div className="relative">
+          <input
+            type={showPassword ? "text" : "password"}
+            name="password"
+            placeholder="Password"
+            onChange={handleChange}
+            className="w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-indigo-400 outline-none pr-10"
+            required
+          />
+          <span
+            className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-500"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+          </span>
         </div>
-    );
-};
 
-export default Second;
+        {/* Login Button */}
+        <button
+          type="submit"
+          className="w-full bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700 transition-all duration-200 shadow-md"
+        >
+          Login
+        </button>
+
+        <p className="text-center mt-3 text-sm">
+          Don’t have an account?{" "}
+          <a href="/signup" className="text-indigo-600 font-semibold">
+            Create one
+          </a>
+        </p>
+      </form>
+    </AuthContainer>
+  );
+}

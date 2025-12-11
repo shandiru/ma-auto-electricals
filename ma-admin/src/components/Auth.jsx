@@ -1,34 +1,14 @@
-import React, { useState } from 'react';
-import SignIn from './Login';  // Your SignIn component
-import Signup from './Signup';  // Your Signup component
+import React from "react";
 
-const Auth = () => {
-    const [isSignUp, setIsSignUp] = useState(false);
-
-    return (
-        <div className="w-full flex items-center justify-center h-screen">
-            {isSignUp ? (
-                <Signup />
-            ) : (
-                <SignIn />
-            )}
-            <div className="absolute ">
-                {isSignUp ? (
-                    <div className='mt-180'>
-                        <span>Already have an account?
-                            <a href="#" className="text-[#4285F4]" onClick={() => setIsSignUp(false)}> Sign in</a>
-                        </span>
-                    </div>
-                ) : (
-                    <div className='mt-122'>
-                        <span>No Account?
-                            <a href="#" className="text-[#4285F4]" onClick={() => setIsSignUp(true)}> Sign up</a>
-                        </span>
-                    </div>
-                )}
-            </div>
-        </div>
-    );
-};
-
-export default Auth;
+export default function AuthContainer({ title, children }) {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-gray-100 to-gray-300 p-4">
+      <div className="w-full max-w-md bg-white/30 backdrop-blur-lg shadow-xl rounded-2xl p-8 border border-white/40">
+        <h2 className="text-3xl font-bold text-center mb-6 text-gray-800">
+          {title}
+        </h2>
+        {children}
+      </div>
+    </div>
+  );
+}
