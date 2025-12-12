@@ -7,7 +7,7 @@ import {
   deleteProduct,
 } from "../controlers/productController.js";
 import multer from "multer";
-import authMiddleware from "../middleware/authMiddleware.js";
+import authMiddleware from "../middleware/auth.js";
 const productRouter = express.Router();
 
 // Multer setup
