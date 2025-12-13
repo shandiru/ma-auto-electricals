@@ -7,7 +7,7 @@ import {
   deleteProduct,
 } from "../controlers/productController.js";
 import multer from "multer";
-import authMiddleware from "../middleware/auth.js";
+
 const productRouter = express.Router();
 
 // Multer setup
@@ -25,7 +25,7 @@ productRouter.post("/", upload.array("images", 5), createProduct);
 productRouter.get("/", getProducts);
 productRouter.get("/:id", getProductById);
 productRouter.put("/:id", upload.array("images", 5), updateProduct);
-//productRouter.delete("/:id", deleteProduct);
-productRouter.delete("/:id", authMiddleware, deleteProduct);
+productRouter.delete("/:id", deleteProduct);
+
 
 export default productRouter;
