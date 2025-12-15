@@ -68,7 +68,7 @@ const CarList = ({ url }) => {
                 <td className="px-6 py-3">{car.name}</td>
                 <td className="px-6 py-3">{car.model}</td>
                 <td className="px-6 py-3">{car.year}</td>
-                <td className="px-6 py-3 text-green-600">${car.price?.toLocaleString()}</td>
+                <td className="px-6 py-3 text-green-600">£{car.price?.toLocaleString()}</td>
                 <td className="px-6 py-3 flex gap-2">
                   <button onClick={() => openEdit(car)} className="p-2 bg-blue-50 rounded"><Edit className="text-blue-500"/></button>
                   <button onClick={() => removeCar(car._id)} disabled={deleteId===car._id} className="p-2 bg-red-50 rounded"><Trash2 className="text-red-500"/></button>

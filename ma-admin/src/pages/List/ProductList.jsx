@@ -191,7 +191,7 @@ const ProductList = ({ url }) => {
                     <div className="flex items-center gap-2">
                       <DollarSign size={16} className="text-green-600" />
                       <span className="text-green-600 font-bold text-base sm:text-lg">
-                        ${item.price?.toLocaleString()}
+                        £{item.price?.toLocaleString()}
                       </span>
                     </div>
                     <div className="flex gap-2">
