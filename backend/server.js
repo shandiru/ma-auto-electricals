@@ -5,6 +5,8 @@ import userRouter from "./route/userRoute.js";
 import "dotenv/config.js";
 import carRouter from "./route/carRoute.js";
 import productRrouter from "./route/productRoute.js";
+import stripeRouter from "./route/stripeRoute.js";
+import orderRouter from "./route/orderRoute.js";
 
 // App config
 const app = express();
@@ -22,6 +24,9 @@ app.use("/images", express.static("uploads"));
 app.use("/api/user", userRouter); 
 app.use("/api/cars", carRouter); 
 app.use("/api/products", productRrouter);
+app.use("/api/stripe", stripeRouter);
+app.use("/api/orders", orderRouter);
+
 
 // Root endpoint
 app.get("/", (req, res) => {
