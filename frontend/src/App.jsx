@@ -10,6 +10,9 @@ import GDPRBanner from "../src/components/GDPRBanner"
 import Navbar from "./components/Header";
 import ContactPage from "./page/Contact";
 import ProductPage from "./page/ProductPage";
+import ProductDetails from "./components/Product/ProductDetails";
+import CartPage from "./components/Product/CartPage";
+import SuccessPage from "./components/Product/SuccessPage";
 
 function App() {
   return (
@@ -22,6 +25,9 @@ function App() {
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/product" element={<ProductPage />} />
+        <Route path="/products/:id" element={<ProductDetails />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/success" element={<SuccessPage />} />
       </Routes>
       <Footer />
       <GDPRBanner />
