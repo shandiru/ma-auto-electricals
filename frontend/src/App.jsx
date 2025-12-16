@@ -14,6 +14,7 @@ import ProductDetails from "./components/Product/ProductDetails";
 import CartPage from "./components/Product/CartPage";
 import SuccessPage from "./components/Product/SuccessPage";
 import Gumtree from "./page/Gumtree";
+import MotPage from "../src/page/mot"
 function App() {
   return (
     <Router>
@@ -29,6 +30,7 @@ function App() {
         <Route path="/cart" element={<CartPage />} />
         <Route path="/success" element={<SuccessPage />} />
          <Route path="/gumtree" element={<Gumtree  />} />
+          <Route path="/motpage" element={<MotPage  />} />
       </Routes>
       <Footer />
       <GDPRBanner />
