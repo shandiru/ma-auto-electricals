@@ -1,23 +1,25 @@
 import nodemailer from "nodemailer";
 
-export const sendEmail = async ({ to, subject, text, html }) => {
+export const sendEmail = async ({ to, subject, html }) => {
   try {
-    // Create transporter (using Gmail SMTP for example)
     const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
-      port: 465,
-      secure: true, // true for 465, false for other ports
+      host: process.env.EMAIL_HOST,
+      port: Number(process.env.EMAIL_PORT),
+      secure: process.env.EMAIL_PORT == 465, // true for 465, false for 587
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
     });
 
-    const info = await transporter.sendMail({
+    await transporter.sendMail({
+      from: `"Your Company" <${process.env.EMAIL_USER}>`,
       to,
       subject,
-      text,
       html,
     });
 
-    console.log("Email sent:", info.messageId);
   } catch (err) {
-    console.error("Email sending failed:", err);
+    console.error("Error sending email:", err);
   }
 };
