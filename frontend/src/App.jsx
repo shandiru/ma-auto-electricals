@@ -13,7 +13,7 @@ import ProductPage from "./page/ProductPage";
 import ProductDetails from "./components/Product/ProductDetails";
 import CartPage from "./components/Product/CartPage";
 import SuccessPage from "./components/Product/SuccessPage";
-
+import Gumtree from "./page/Gumtree";
 function App() {
   return (
     <Router>
@@ -28,6 +28,7 @@ function App() {
         <Route path="/products/:id" element={<ProductDetails />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/success" element={<SuccessPage />} />
+         <Route path="/gumtree" element={<Gumtree  />} />
       </Routes>
       <Footer />
       <GDPRBanner />
