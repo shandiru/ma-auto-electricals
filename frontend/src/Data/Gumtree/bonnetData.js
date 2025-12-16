@@ -60,5 +60,17 @@ export const vehicleData = {
   bodyType: 'Hatchback',
   engine: '1.1L',
   colour: 'Glacier White',
-  images: Array(8).fill('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800&h=600&fit=crop')
+ images: [
+    "/gum.jpg",
+    "/gum1.jpg",
+    "/gum2.jpg",
+    "/gum3.jpg",
+    "/gum4.jpg",
+    "/gum5.jpg",
+    "/gum6.jpg",
+    "/gum7.jpg",
+    "/gum8.jpg",
+    "/gum9.jpg",
+    "/gum10.jpg",
+  ],
 };

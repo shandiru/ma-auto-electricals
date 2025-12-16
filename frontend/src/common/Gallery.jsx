@@ -40,13 +40,13 @@ export default function GallerySection({ images }) {
   return (
     <section
       id="V-Gallery"
-      className="py-6 md:py-10 bg-[#020000] rounded-b-3xl overflow-hidden relative"
+      className="py-6 md:py-10 bg-[#0B1F1A] rounded-b-3xl overflow-hidden relative"
     >
       <div className="max-w-6xl mx-auto px-4 relative z-10">
 
         <h2
           data-aos="fade-up"
-          className="text-center text-2xl md:text-3xl font-bold text-[#FCFCFC] mb-6"
+          className="text-center text-2xl md:text-3xl font-bold text-[#72EF36] mb-6"
         >
           Photo Gallery
         </h2>
@@ -56,7 +56,7 @@ export default function GallerySection({ images }) {
             <div key={index} data-aos="zoom-in" data-aos-delay={index * 150}>
               <img
                 src={url}
-                className="w-full h-full object-cover rounded-lg cursor-pointer"
+                className="w-full h-full object-cover rounded-lg cursor-pointer border border-[#72EF36]/20"
                 onClick={() => openPopup(index)}
               />
             </div>
@@ -72,7 +72,7 @@ export default function GallerySection({ images }) {
             >
               <img
                 src={url}
-                className="w-full h-full object-cover rounded-lg cursor-pointer"
+                className="w-full h-full object-cover rounded-lg cursor-pointer border border-[#72EF36]/10"
                 onClick={() => openPopup(index + 2)}
               />
             </div>
@@ -82,7 +82,7 @@ export default function GallerySection({ images }) {
 
       <div
         data-aos="fade-in"
-        className="absolute bottom-2 left-1/2 -translate-x-1/2 text-[90px] md:text-[140px] font-extrabold text-[#A7A1A2]/10 pointer-events-none select-none"
+        className="absolute bottom-2 left-1/2 -translate-x-1/2 text-[90px] md:text-[140px] font-extrabold text-[#72EF36]/10 pointer-events-none select-none"
       >
         Gallery
       </div>
@@ -90,11 +90,11 @@ export default function GallerySection({ images }) {
       {isOpen && (
         <div
           data-aos="fade-in"
-          className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
+          className="fixed inset-0 bg-black/85 flex items-center justify-center z-50 p-4"
         >
           <button
             data-aos="fade-down"
-            className="absolute top-6 right-6 text-[#FCFCFC] text-3xl font-bold"
+            className="absolute top-6 right-6 text-[#72EF36] text-3xl font-bold"
             onClick={() => setIsOpen(false)}
           >
             ✕
@@ -103,12 +103,12 @@ export default function GallerySection({ images }) {
           <img
             data-aos="zoom-in"
             src={images[activeIndex]}
-            className="max-w-[90%] max-h-[80%] rounded-xl shadow-xl border-4 border-[#B40B1F] transition-all duration-300"
+            className="max-w-[90%] max-h-[80%] rounded-xl shadow-xl border-4 border-[#72EF36] transition-all duration-300"
           />
 
           <button
             data-aos="fade-right"
-            className="absolute left-6 top-1/2 -translate-y-1/2 text-[#FCFCFC] text-5xl font-bold hover:text-[#B40B1F]"
+            className="absolute left-6 top-1/2 -translate-y-1/2 text-[#72EF36] text-5xl font-bold hover:opacity-80"
             onClick={prevImage}
           >
             ‹
@@ -116,7 +116,7 @@ export default function GallerySection({ images }) {
 
           <button
             data-aos="fade-left"
-            className="absolute right-6 top-1/2 -translate-y-1/2 text-[#FCFCFC] text-5xl font-bold hover:text-[#B40B1F]"
+            className="absolute right-6 top-1/2 -translate-y-1/2 text-[#72EF36] text-5xl font-bold hover:opacity-80"
             onClick={nextImage}
           >
             ›

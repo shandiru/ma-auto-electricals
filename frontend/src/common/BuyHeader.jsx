@@ -1,181 +1,189 @@
-import React, { useState } from 'react';
-import { ChevronLeft, ChevronRight, Camera, Settings, Info, Heart, Share2 } from 'lucide-react';
+import React, { useState } from "react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Camera,
+  Settings,
+  Info,
+  Heart,
+  Share2,
+} from "lucide-react";
 
 const VehicleDetailsPage = ({ vehicle }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [showEnquiryModal, setShowEnquiryModal] = useState(false);
-  const [showReserveModal, setShowReserveModal] = useState(false);
 
   const details = [
-    { label: 'ULEZ Compliant', value: 'ULEZ Compliant' },
-    { label: 'Year', value: `${vehicle.year} (${vehicle.registration})` },
-    { label: 'Mileage', value: `${vehicle.mileage.toLocaleString()} mi` },
-    { label: 'Fuel Type', value: vehicle.fuelType },
-    { label: 'Transmission', value: vehicle.transmission },
-    { label: 'Body Type', value: vehicle.bodyType },
-    { label: 'Engine', value: `${vehicle.engine} ${vehicle.fuelType}` },
-    { label: 'Colour', value: vehicle.colour }
+    { value: "ULEZ Compliant" },
+    { value: `${vehicle.year} (${vehicle.registration})` },
+    { value: `${vehicle.mileage.toLocaleString()} mi` },
+    { value: vehicle.fuelType },
+    { value: vehicle.transmission },
+    { value: vehicle.bodyType },
+    { value: `${vehicle.engine} ${vehicle.fuelType}` },
+    { value: vehicle.colour },
   ];
 
-  const nextImage = () => setCurrentImageIndex((prev) => (prev + 1) % vehicle.images.length);
-  const prevImage = () => setCurrentImageIndex((prev) => (prev - 1 + vehicle.images.length) % vehicle.images.length);
+  const nextImage = () =>
+    setCurrentImageIndex(
+      (prev) => (prev + 1) % vehicle.images.length
+    );
+
+  const prevImage = () =>
+    setCurrentImageIndex(
+      (prev) =>
+        (prev - 1 + vehicle.images.length) %
+        vehicle.images.length
+    );
 
   return (
-    <div className="min-h-screen bg-black text-white">
-      <div className="container mx-auto px-4 py-4 md:py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
-          {/* Left Column - Images */}
+    <div className="min-h-screen bg-[#0B1F1A] text-white py-20">
+      <div className="container mx-auto px-4 py-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+          {/* LEFT – IMAGES */}
           <div className="lg:col-span-7 xl:col-span-8">
             <div className="sticky top-4">
-              <div className="relative rounded-2xl overflow-hidden bg-black/20 backdrop-blur">
+              <div className="relative rounded-2xl overflow-hidden bg-black/30 backdrop-blur">
+
                 <img
                   src={vehicle.images[currentImageIndex]}
                   alt={`${vehicle.make} ${vehicle.model}`}
-                  className="w-full h-64 sm:h-96 md:h-[500px] object-cover"
+                  className="w-full h-64 sm:h-96 md:h-[520px] object-cover"
                 />
+
+                {/* Arrows */}
                 <button
                   onClick={prevImage}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 backdrop-blur-sm p-2 md:p-3 rounded-full transition"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 p-3 rounded-full transition"
                 >
-                  <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
+                  <ChevronLeft className="w-6 h-6 text-[#72EF36]" />
                 </button>
+
                 <button
                   onClick={nextImage}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 backdrop-blur-sm p-2 md:p-3 rounded-full transition"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 p-3 rounded-full transition"
                 >
-                  <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
+                  <ChevronRight className="w-6 h-6 text-[#72EF36]" />
                 </button>
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 backdrop-blur px-4 py-2 rounded-full text-sm font-semibold">
+
+                {/* Image Counter */}
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/70 px-4 py-1 rounded-full text-sm text-[#72EF36]">
                   {currentImageIndex + 1} / {vehicle.images.length}
                 </div>
+
+                {/* Icons */}
                 <div className="absolute top-4 right-4 flex gap-2">
-                  <button className="bg-white/10 hover:bg-white/20 backdrop-blur-sm p-2 rounded-full transition">
-                    <Heart className="w-5 h-5" />
+                  <button className="bg-black/60 hover:bg-black/80 p-2 rounded-full">
+                    <Heart className="w-5 h-5 text-[#72EF36]" />
                   </button>
-                  <button className="bg-white/10 hover:bg-white/20 backdrop-blur-sm p-2 rounded-full transition">
-                    <Share2 className="w-5 h-5" />
+                  <button className="bg-black/60 hover:bg-black/80 p-2 rounded-full">
+                    <Share2 className="w-5 h-5 text-[#72EF36]" />
                   </button>
                 </div>
               </div>
 
-              {/* Thumbnail Navigation */}
-              <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2 mt-3">
+              {/* Thumbnails */}
+              <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2 mt-4">
                 {vehicle.images.slice(0, 8).map((img, idx) => (
                   <button
                     key={idx}
                     onClick={() => setCurrentImageIndex(idx)}
                     className={`rounded-lg overflow-hidden border-2 transition ${
-                      currentImageIndex === idx ? 'border-blue-400' : 'border-transparent opacity-60 hover:opacity-100'
+                      currentImageIndex === idx
+                        ? "border-[#72EF36]"
+                        : "border-transparent opacity-60 hover:opacity-100"
                     }`}
                   >
-                    <img src={img} alt={`Thumbnail ${idx + 1}`} className="w-full h-16 sm:h-20 object-cover" />
+                    <img
+                      src={img}
+                      alt="thumb"
+                      className="w-full h-16 sm:h-20 object-cover"
+                    />
                   </button>
                 ))}
               </div>
 
               {/* Quick Links */}
-              <div className="flex flex-wrap gap-2 mt-4 bg-white/5 backdrop-blur rounded-full p-2">
-                <a href="#photos" className="flex-1 text-center py-2 px-3 hover:bg-white/10 rounded-full transition text-sm md:text-base">
-                  <Camera className="w-4 h-4 inline mr-1 md:mr-2" />
-                  <span className="hidden sm:inline">50 </span>Photos
+              <div className="flex gap-2 mt-5 bg-black/40 rounded-full p-2">
+                <a className="flex-1 text-center py-2 hover:bg-[#72EF36]/10 rounded-full text-sm">
+                  <Camera className="inline w-4 h-4 mr-1" />
+                  Photos
                 </a>
-                <a href="#tech" className="flex-1 text-center py-2 px-3 hover:bg-white/10 rounded-full transition text-sm md:text-base border-x border-white/10">
-                  <Settings className="w-4 h-4 inline mr-1 md:mr-2" />
-                  <span className="hidden sm:inline">Tech </span>Data
+                <a className="flex-1 text-center py-2 hover:bg-[#72EF36]/10 rounded-full text-sm border-x border-white/10">
+                  <Settings className="inline w-4 h-4 mr-1" />
+                  Tech
                 </a>
-                <a href="#info" className="flex-1 text-center py-2 px-3 hover:bg-white/10 rounded-full transition text-sm md:text-base">
-                  <Info className="w-4 h-4 inline mr-1 md:mr-2" />
+                <a className="flex-1 text-center py-2 hover:bg-[#72EF36]/10 rounded-full text-sm">
+                  <Info className="inline w-4 h-4 mr-1" />
                   Info
                 </a>
               </div>
             </div>
           </div>
 
-          {/* Right Column - Details */}
+          {/* RIGHT – DETAILS */}
           <div className="lg:col-span-5 xl:col-span-4">
-            <div className="sticky top-4 space-y-4">
+            <div className="sticky top-4 space-y-5">
+
               {/* Title */}
-              <div className="text-center lg:text-left">
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2">
+              <div>
+                <h1 className="text-4xl font-bold">
                   {vehicle.make} {vehicle.model}
                 </h1>
-                <h2 className="text-lg md:text-xl opacity-75 font-light">{vehicle.variant}</h2>
+                <p className="opacity-70 mt-1">{vehicle.variant}</p>
               </div>
 
-              {/* Pricing Cards */}
-              <div className="grid sm:grid-cols-2 lg:grid-cols-1 gap-4">
-                <div className="bg-[#C8102E] rounded-2xl p-6 text-center">
-                  <div className="text-sm opacity-75 mb-2">Finance this Car from</div>
-                  <div className="text-4xl font-bold mb-3">£{vehicle.monthlyPayment}</div>
-                  <button className="bg-white text-black hover:bg-blue-50 px-6 py-2 rounded-full font-semibold transition text-sm">
-                    Apply Now
+              {/* Finance Card */}
+              <div className="bg-[#1A5E20] rounded-2xl p-6 text-center border border-[#72EF36]/30">
+                <div className="text-sm opacity-80 mb-2">
+                  Finance from
+                </div>
+                <div className="text-4xl font-bold text-[#72EF36] mb-3">
+                  £{vehicle.monthlyPayment}
+                </div>
+                <button className="bg-[#72EF36] text-black px-6 py-2 rounded-full font-semibold hover:opacity-90 transition">
+                  Apply for Finance
+                </button>
+              </div>
+
+              {/* Buy Card */}
+              <div className="bg-black/40 rounded-2xl p-6 border border-[#72EF36]/20 text-center">
+                <div className="text-sm opacity-80 mb-2">
+                  Buy this Car
+                </div>
+                <div className="text-4xl font-bold text-[#72EF36] mb-4">
+                  £{vehicle.price.toLocaleString()}
+                </div>
+
+                <div className="flex flex-col gap-3">
+                  <button className="bg-[#72EF36] text-black py-3 rounded-full font-semibold hover:opacity-90">
+                    Contact Seller
                   </button>
-                </div>
-                <div className="bg-gradient-to-br from-slate-700 to-slate-900 rounded-2xl p-6 text-center">
-                  <div className="text-sm opacity-75 mb-2">Buy this Car</div>
-                  <div className="text-4xl font-bold mb-3">£{vehicle.price.toLocaleString()}</div>
-                  <div className="flex flex-col sm:flex-row lg:flex-col gap-2">
-                    <button
-                      onClick={() => setShowEnquiryModal(true)}
-                      className="flex-1 bg-white/10 hover:bg-white/20 px-4 py-2 rounded-full font-semibold transition text-sm border border-white/20"
-                    >
-                      Enquire Now
-                    </button>
-                    <div className="flex-1">
-                      <button
-                        onClick={() => setShowReserveModal(true)}
-                        className="w-full bg-[#C8102E] hover:bg-red-600 px-4 py-2 rounded-full font-semibold transition text-sm animate-pulse"
-                      >
-                        Reserve for £100
-                      </button>
-                      <div className="text-xs opacity-50 mt-1">Fully Refundable</div>
-                    </div>
-                  </div>
+                  <button className="border border-[#72EF36] text-[#72EF36] py-3 rounded-full hover:bg-[#72EF36]/10">
+                    Save Vehicle
+                  </button>
+                  <p className="text-xs opacity-60">
+                    Trusted Gumtree-style listing
+                  </p>
                 </div>
               </div>
 
-              {/* Vehicle Details Grid */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-2">
-                {details.map((detail, idx) => (
+              {/* Specs */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                {details.map((item, idx) => (
                   <div
                     key={idx}
-                    className="bg-white/5 backdrop-blur border border-white/10 rounded-full px-3 py-2 text-center"
+                    className="bg-black/40 border border-white/10 rounded-full px-3 py-2 text-center text-sm"
                   >
-                    <div className="font-semibold text-xs sm:text-sm truncate">{detail.value}</div>
+                    {item.value}
                   </div>
                 ))}
               </div>
 
-              
             </div>
           </div>
         </div>
       </div>
-
-      {/* Modals */}
-      {showEnquiryModal && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50" onClick={() => setShowEnquiryModal(false)}>
-          <div className="bg-slate-800 rounded-2xl p-6 max-w-md w-full" onClick={(e) => e.stopPropagation()}>
-            <h3 className="text-2xl font-bold mb-4">Enquire Now</h3>
-            <p className="mb-4">Get in touch with us about this {vehicle.make} {vehicle.model}</p>
-            <button onClick={() => setShowEnquiryModal(false)} className="w-full bg-blue-500 hover:bg-blue-600 py-3 rounded-lg font-semibold">
-              Close
-            </button>
-          </div>
-        </div>
-      )}
-
-      {showReserveModal && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50" onClick={() => setShowReserveModal(false)}>
-          <div className="bg-slate-800 rounded-2xl p-6 max-w-md w-full" onClick={(e) => e.stopPropagation()}>
-            <h3 className="text-2xl font-bold mb-4">Reserve Vehicle</h3>
-            <p className="mb-4">Reserve this {vehicle.make} {vehicle.model} for just £100 (fully refundable)</p>
-            <button onClick={() => setShowReserveModal(false)} className="w-full bg-green-500 hover:bg-green-600 py-3 rounded-lg font-semibold">
-              Close
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
