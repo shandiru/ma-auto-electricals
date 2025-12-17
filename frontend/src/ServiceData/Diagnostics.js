@@ -1,56 +1,194 @@
-import { FaPhoneAlt , FaPhone , FaCar,
-  FaWrench,
+import {
+  FaPhoneAlt,
+  FaPhone,
+  FaCar,
+   FaBluetooth,
   FaTools,
-  FaClock,} from "react-icons/fa";
+   FaMobileAlt,
+  FaMusic,
+
+
+  FaBolt,
+  FaMicrochip,
+  FaCheckCircle,
+  
+  
+} from "react-icons/fa";
+
 
 export const motHeroData = {
-  badge: "Qualified Technicians",
+  badge: "Vehicle Diagnostics Experts",
 
   title: {
-    before: "Car Service &",
-    highlight: "MOT Testing",
+    before: "Vehicle",
+    highlight: "Diagnostics Services",
   },
 
   description: {
-    beforeBold: "Trust ",
-    bold: "Naz Motors",
     afterBold:
-      " to keep you and your vehicle safe. Professional car servicing and MOT testing from certified motor technicians. We ensure your car is roadworthy, reliable, and ready to perform.",
+      "Accurate and reliable vehicle diagnostics to quickly identify electrical and mechanical faults. At MA Auto Electrics, we use advanced diagnostic equipment to keep your vehicle running efficiently and safely.",
   },
 
   buttons: {
     primary: {
-      text: "Book MOT: 0116 251 5961",
+      text: "Book: 0116 251 5961",
       href: "tel:01162515961",
       icon: FaPhoneAlt,
-      bg: "#C8102E",
+      bg: "#317F21",
       color: "#FFFFFF",
     },
     secondary: {
-      text: "Book Your MOT",
+      text: "Book Your Service",
       href: "/contact",
-      border: "#C8102E",
-      color: "#C8102E",
-      hoverBg: "#C8102E",
+      border: "#317F21",
+      color: "#317F21",
+      hoverBg: "#317F21",
       hoverColor: "#FFFFFF",
     },
   },
 };
 
+
+
+
+export const automotiveServicesData = {
+  heading: {
+    title: "Professional Vehicle Diagnostics",
+    subtitle:
+      "Advanced fault-finding solutions for all vehicle makes and models",
+  },
+
+  services: [
+    {
+      title: "Computerised Vehicle Diagnostics",
+      desc:
+        "Comprehensive computer diagnostics to detect faults across your vehicle’s systems.",
+      icon: FaCar,
+      points: [
+        "Engine management diagnostics",
+        "ABS and airbag fault detection",
+        "Transmission and gearbox diagnostics",
+        "Emissions and sensor checks",
+      ],
+    },
+    {
+      title: "Engine Fault Code Reading",
+      desc:
+        "Quick and accurate identification of engine warning lights and fault codes.",
+      icon: FaBolt,
+      points: [
+        "Check engine light diagnostics",
+        "Fault code interpretation",
+        "Clear and reset warning lights",
+        "Detailed fault explanation",
+      ],
+    },
+    {
+      title: "Electrical System Diagnostics",
+      desc:
+        "Expert testing of your vehicle’s electrical components and wiring.",
+      icon: FaTools,
+      points: [
+        "Battery and charging system checks",
+        "Alternator and starter motor testing",
+        "Wiring and fuse inspections",
+        "Electrical fault tracing",
+      ],
+    },
+    {
+      title: "Sensor & ECU Diagnostics",
+      desc:
+        "Advanced testing of vehicle sensors and electronic control units (ECUs).",
+      icon: FaMicrochip,
+      points: [
+        "Oxygen (O2) sensor testing",
+        "Mass airflow and temperature sensors",
+        "ECU communication checks",
+        "Live data analysis",
+      ],
+    },
+    {
+      title: "Pre-Repair & Post-Repair Diagnostics",
+      desc:
+        "Ensure accurate repairs and verify fault resolution.",
+      icon: FaCheckCircle,
+      points: [
+        "Pre-repair system scanning",
+        "Confirmation of successful repairs",
+        "System reset and recalibration",
+        "Road test verification",
+      ],
+    },
+  ],
+};
+
+export const majorServicesData = {
+  service_name: "Vehicle Diagnostics Services",
+
+  intro_description:
+    "Modern vehicles rely heavily on electronic systems. Professional diagnostics help pinpoint faults quickly, saving time and money while preventing unnecessary repairs.",
+
+  benefits: [
+    {
+      title: "Faster Fault Identification",
+      description:
+        "Advanced diagnostic tools allow us to quickly identify issues across your vehicle’s electronic and mechanical systems.",
+    },
+    {
+      title: "Reduced Repair Costs",
+      description:
+        "Accurate diagnostics prevent guesswork, helping avoid unnecessary part replacements and costly repairs.",
+    },
+    {
+      title: "Improved Vehicle Performance",
+      description:
+        "Identifying and resolving faults early helps restore optimal engine performance and drivability.",
+    },
+    {
+      title: "Better Fuel Efficiency",
+      description:
+        "Correctly diagnosed engine and sensor issues can significantly improve fuel economy.",
+    },
+    {
+      title: "Increased Reliability & Safety",
+      description:
+        "Professional diagnostics ensure critical systems are working correctly, improving reliability and overall vehicle safety.",
+    },
+    {
+      title: "Accurate, Data-Driven Repairs",
+      description:
+        "All repairs are based on precise diagnostic data, ensuring the right fix is applied the first time.",
+    },
+  ],
+
+  signs: [
+    "Warning lights on the dashboard",
+    "Reduced engine performance",
+    "Poor fuel economy",
+    "Starting or charging issues",
+    "Electrical faults or intermittent problems",
+    "Failed or upcoming MOT concerns",
+  ],
+};
+
+
+
+
+
 export const emergencyCtaData = {
   palette: {
-    primary: "#C8102E",
+    primary: "#317F21",
     fgOnPrimary: "#FFFFFF",
-    secondaryBg: "#FFB3B3",
+    secondaryBg: "#C6F0C2",
     secondaryText: "#3B0000",
     outline: "#FFFFFF",
     darkBg: "#9B0D24",
   },
 
-  heading: "Book Your Service or MOT Today",
+  heading: "Car Electric Specialists in Accrington, Lancashire",
 
   subheading:
-    "Professional automotive services from qualified technicians with over 50 years of experience.",
+    "Trust MA Auto Electrics for precise vehicle diagnostics using the latest technology and experienced technicians.",
 
   buttons: {
     call: {
@@ -59,108 +197,8 @@ export const emergencyCtaData = {
       icon: FaPhone,
     },
     book: {
-      text: "Book MOT Test",
+      text: "Book Diagnostics",
       href: "/contact",
     },
   },
-};
-
-
-export const automotiveServicesData = {
-  heading: {
-    title: "Professional Automotive Services",
-    subtitle:
-      "Comprehensive maintenance and repair solutions by certified automotive technicians at Naz Motors.",
-  },
-
-  services: [
-    {
-      title: "Full Car Service",
-      desc: "Comprehensive vehicle inspection and maintenance service.",
-      icon: FaCar,
-      points: [
-        "Engine oil & filter change",
-        "Brake system inspection",
-        "Suspension check",
-        "Battery & electrical test",
-        "Fluid level checks",
-        "Tyre condition assessment",
-      ],
-    },
-    {
-      title: "MOT Testing",
-      desc: "Official MOT testing by qualified MOT testers (Class 4 and Class 7).",
-      icon: FaWrench,
-      points: [
-        "Qualified MOT testers",
-        "Same-day results",
-        "Detailed failure report",
-        "Repair estimates",
-        "Re-test included",
-        "Digital certificate",
-      ],
-    },
-    {
-      title: "Brake Service",
-      desc: "Professional brake system maintenance and repair.",
-      icon: FaTools,
-      points: [
-        "Brake pad replacement",
-        "Disc inspection",
-        "Brake fluid change",
-        "Handbrake adjustment",
-        "Brake pipe inspection",
-        "Performance testing",
-      ],
-    },
-    {
-      title: "Exhaust Systems",
-      desc: "Complete exhaust system service and replacement.",
-      icon: FaClock,
-      points: [
-        "Exhaust inspection",
-        "Silencer replacement",
-        "Catalytic converter",
-        "Emission testing",
-        "Custom fabrication",
-        "Performance exhausts",
-      ],
-    },
-  ],
-};
-
-
-
-export const majorServicesData = {
-  heading: {
-    title: "Major Service & Repair Work",
-    subtitle:
-      "Specialist services for major components and critical vehicle systems",
-  },
-
-  cta: {
-    text: "Get Quote",
-    href: "/contact",
-  },
-
-  services: [
-    {
-      title: "Cambelt Replacement",
-      subtitle: "Critical timing belt replacement service",
-      description:
-        "Essential service to prevent catastrophic engine damage. Our qualified technicians use genuine parts and follow manufacturer specifications.",
-    },
-    {
-      title: "Clutch Repair & Replacement",
-      subtitle: "Complete clutch system service",
-      description:
-        "Professional clutch diagnosis, repair, and replacement. We service manual and automatic transmissions for all vehicle types.",
-    },
-    {
-      title: "Welding Work",
-      subtitle: "Professional automotive welding services",
-      description:
-        "Expert welding repairs for MOT failures, bodywork, and structural components. All work guaranteed and MOT compliant.",
-    },
-  ],
 };
