@@ -15,8 +15,8 @@ function InfoCard({ icon, title, subtitle, body, cta, delay }) {
       className="
         flex flex-col gap-4 md:gap-5 rounded-xl border py-6 md:py-5 text-center cursor-pointer
         transition-all duration-300 
-        bg-[#F7F7F7] dark:bg-neutral-900 
-        border-[#E6EAE7] dark:border-neutral-700 
+        bg-[#F7F7F7] 
+        border-[#E6EAE7] 
         hover:shadow-[0_8px_24px_rgba(47,125,51,0.35)] 
         hover:ring-2 hover:ring-[#317F21] hover:ring-offset-2
         focus:ring-2 focus:ring-[#317F21] focus:ring-offset-2
@@ -26,20 +26,20 @@ function InfoCard({ icon, title, subtitle, body, cta, delay }) {
         {/* ICON */}
         <div
           className="mx-auto mb-3 md:mb-4 flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-lg 
-                     bg-[#E7F3E9] dark:bg-green-950 
-                     text-[#317F21] dark:text-green-400"
+                     bg-[#E7F3E9]  
+                     text-[#317F21] "
         >
           {icon}
         </div>
 
         {/* TITLE */}
-        <div className="text-lg md:text-xl font-bold text-[#111827] dark:text-white">
+        <div className="text-lg md:text-xl font-bold text-[#111827] ">
           {title}
         </div>
 
         {/* SUBTITLE */}
         {subtitle && (
-          <div className="text-xs md:text-sm text-[#4B5563] dark:text-gray-400">
+          <div className="text-xs md:text-sm text-[#4B5563] ">
             {subtitle}
           </div>
         )}
@@ -48,7 +48,7 @@ function InfoCard({ icon, title, subtitle, body, cta, delay }) {
       {/* BODY + CTA */}
       <div className="px-4 md:px-5 space-y-3">
         {body && (
-          <p className="text-xs md:text-sm whitespace-pre-line text-[#111827] dark:text-gray-200">
+          <p className="text-xs md:text-sm whitespace-pre-line text-[#111827] ">
             {body}
           </p>
         )}
@@ -68,7 +68,7 @@ export default function ContactCards() {
   }, []);
 
   return (
-    <section className="py-12 md:py-14 lg:py-16 bg-white dark:bg-black">
+    <section className="py-12 md:py-14 lg:py-16 bg-white ">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-6 sm:gap-8 md:grid-cols-3">
           {/* Call Us */}
@@ -83,10 +83,10 @@ export default function ContactCards() {
                 <button
                   className="h-9 rounded-md border px-3 text-xs md:text-sm font-medium 
                              transition-all duration-300 
-                             border-[#E6EAE7] dark:border-neutral-700 
-                             text-[#111827] dark:text-white 
+                             border-[#E6EAE7] 
+                             text-[#111827] 
                              bg-transparent 
-                             hover:border-[#317F21] hover:text-green-700 dark:hover:text-green-400 
+                             hover:border-[#317F21] hover:text-green-700 
                              hover:shadow-[0_6px_18px_rgba(47,125,51,0.35)]
                              focus:border-[#317F21] focus:text-green-700 focus:shadow-[0_6px_18px_rgba(47,125,51,0.35)]
                 "
@@ -115,10 +115,10 @@ United Kingdom`}
                 <button
                   className="h-9 rounded-md border px-3 text-xs md:text-sm font-medium 
                              transition-all duration-300 
-                             border-[#E6EAE7] dark:border-neutral-700 
-                             text-[#111827] dark:text-white 
+                             border-[#E6EAE7] 
+                             text-[#111827] 
                              bg-transparent 
-                             hover:border-[#317F21] hover:text-green-700 dark:hover:text-green-400 
+                             hover:border-[#317F21] hover:text-green-700 
                              hover:shadow-[0_6px_18px_rgba(47,125,51,0.35)]
                              focus:border-[#317F21] focus:text-green-700 focus:shadow-[0_6px_18px_rgba(47,125,51,0.35)]
                 "
@@ -137,7 +137,7 @@ United Kingdom`}
             subtitle="We're here when you need us"
             body={`Mon–Sun: 9:00 AM – 6:00 PM`}
             cta={
-              <span className="text-xs md:text-sm text-[#4B5563] dark:text-gray-400">
+              <span className="text-xs md:text-sm text-[#4B5563] ">
                 No appointment needed
               </span>
             }
