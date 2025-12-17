@@ -1,56 +1,179 @@
-import { FaPhoneAlt , FaPhone , FaCar,
-  FaWrench,
+import {
+  FaPhoneAlt,
+  FaPhone,
+  FaCar,
+   FaBluetooth,
   FaTools,
-  FaClock,} from "react-icons/fa";
+   FaMobileAlt,
+  FaMusic,
+  
+  
+} from "react-icons/fa";
 
 export const motHeroData = {
-  badge: "Qualified Technicians",
+  badge: "Car Audio Specialists",
 
   title: {
-    before: "Car Service &",
-    highlight: "MOT Testing",
+    before: "Car Stereo",
+    highlight: "Installation Services",
   },
 
   description: {
-    beforeBold: "Trust ",
-    bold: "Naz Motors",
     afterBold:
-      " to keep you and your vehicle safe. Professional car servicing and MOT testing from certified motor technicians. We ensure your car is roadworthy, reliable, and ready to perform.",
+      "Upgrade your driving experience with professional car stereo supply and installation from MA Auto Electrics. We fit modern audio systems that deliver superior sound quality, connectivity, and reliability.",
   },
 
   buttons: {
     primary: {
-      text: "Book MOT: 0116 251 5961",
+      text: "Book: 0116 251 5961",
       href: "tel:01162515961",
       icon: FaPhoneAlt,
-      bg: "#C8102E",
+      bg: "#317F21",
       color: "#FFFFFF",
     },
     secondary: {
-      text: "Book Your MOT",
+      text: "Book Your Service",
       href: "/contact",
-      border: "#C8102E",
-      color: "#C8102E",
-      hoverBg: "#C8102E",
+      border: "#317F21",
+      color: "#317F21",
+      hoverBg: "#317F21",
       hoverColor: "#FFFFFF",
     },
   },
 };
 
+export const automotiveServicesData = {
+  heading: {
+    title: "Professional Car Stereo Services",
+    subtitle:
+      "Expert installation of car audio systems tailored to your vehicle and personal preferences",
+  },
+
+  services: [
+    {
+      title: "Car Stereo Installation",
+      desc:
+        "Professional fitting of car stereos to ensure seamless integration and optimal performance.",
+      icon: FaCar,
+      points: [
+        "Single DIN & Double DIN units",
+        "Factory stereo replacement",
+        "Secure wiring and mounting",
+        "Clean, factory-finish installation",
+      ],
+    },
+    {
+      title: "Bluetooth & Smart Connectivity",
+      desc:
+        "Stay connected on the road with modern Bluetooth-enabled stereo systems.",
+      icon: FaBluetooth,
+      points: [
+        "Bluetooth handsfree calling",
+        "Wireless music streaming",
+        "Smartphone integration",
+        "Voice control compatibility",
+      ],
+    },
+    {
+      title: "Apple CarPlay & Android Auto",
+      desc:
+        "Upgrade to smart infotainment systems for safer and more convenient driving.",
+      icon: FaMobileAlt,
+      points: [
+        "Apple CarPlay installation",
+        "Android Auto support",
+        "Touchscreen displays",
+        "Navigation and app integration",
+      ],
+    },
+    {
+      title: "Sound System Upgrades",
+      desc:
+        "Enhance your vehicle’s audio quality with professional sound upgrades.",
+      icon: FaMusic,
+      points: [
+        "Speaker upgrades",
+        "Amplifier installation",
+        "Subwoofer fitting",
+        "Improved sound clarity and bass",
+      ],
+    },
+    {
+      title: "Stereo Fault Diagnosis & Repairs",
+      desc:
+        "We diagnose and repair issues with existing car audio systems.",
+      icon: FaTools,
+      points: [
+        "No sound or distorted audio",
+        "Wiring faults",
+        "Screen or display issues",
+        "Bluetooth connection problems",
+      ],
+    },
+  ],
+};
+
+
+export const majorServicesData = {
+  service_name: "Car Stereo Services",
+
+  intro_description:
+    "Our experienced technicians ensure your car stereo is installed safely, professionally, and to the highest standard, using quality components and industry best practices.",
+
+  benefits: [
+    {
+      title: "Experienced Auto Electrical Specialists",
+      description:
+        "Our skilled technicians specialise in car audio installations, ensuring every stereo system is fitted correctly and safely.",
+    },
+    {
+      title: "High-Quality Branded Systems",
+      description:
+        "We supply and install trusted, high-quality stereo brands for excellent sound, reliability, and long-term performance.",
+    },
+    {
+      title: "Neat, Damage-Free Installation",
+      description:
+        "All installations are completed with clean wiring and secure mounting, leaving a factory-finish with no damage to your vehicle.",
+    },
+    {
+      title: "Wide Vehicle Compatibility",
+      description:
+        "Our stereo installations are compatible with most vehicle makes and models, from older cars to modern vehicles.",
+    },
+    {
+      title: "Honest Advice & Competitive Pricing",
+      description:
+        "We provide clear guidance on the best options for your needs, with fair pricing and no unnecessary upselling.",
+    },
+  ],
+
+  signs: [
+    "Poor or distorted sound quality",
+    "No Bluetooth or handsfree capability",
+    "Outdated or non-functional stereo unit",
+    "Screen or control buttons not working",
+    "Want modern features like Apple CarPlay or Android Auto",
+  ],
+};
+
+
+
+
 export const emergencyCtaData = {
   palette: {
-    primary: "#C8102E",
+    primary: "#317F21",
     fgOnPrimary: "#FFFFFF",
-    secondaryBg: "#FFB3B3",
+    secondaryBg: "#C6F0C2",
     secondaryText: "#3B0000",
     outline: "#FFFFFF",
     darkBg: "#9B0D24",
   },
 
-  heading: "Book Your Service or MOT Today",
+  heading: "Car Stereo Specialists in Accrington, Lancashire",
 
   subheading:
-    "Professional automotive services from qualified technicians with over 50 years of experience.",
+    "Contact MA Auto Electrics today for expert car stereo installation and upgrades.",
 
   buttons: {
     call: {
@@ -59,108 +182,8 @@ export const emergencyCtaData = {
       icon: FaPhone,
     },
     book: {
-      text: "Book MOT Test",
+      text: "Book Service",
       href: "/contact",
     },
   },
-};
-
-
-export const automotiveServicesData = {
-  heading: {
-    title: "Professional Automotive Services",
-    subtitle:
-      "Comprehensive maintenance and repair solutions by certified automotive technicians at Naz Motors.",
-  },
-
-  services: [
-    {
-      title: "Full Car Service",
-      desc: "Comprehensive vehicle inspection and maintenance service.",
-      icon: FaCar,
-      points: [
-        "Engine oil & filter change",
-        "Brake system inspection",
-        "Suspension check",
-        "Battery & electrical test",
-        "Fluid level checks",
-        "Tyre condition assessment",
-      ],
-    },
-    {
-      title: "MOT Testing",
-      desc: "Official MOT testing by qualified MOT testers (Class 4 and Class 7).",
-      icon: FaWrench,
-      points: [
-        "Qualified MOT testers",
-        "Same-day results",
-        "Detailed failure report",
-        "Repair estimates",
-        "Re-test included",
-        "Digital certificate",
-      ],
-    },
-    {
-      title: "Brake Service",
-      desc: "Professional brake system maintenance and repair.",
-      icon: FaTools,
-      points: [
-        "Brake pad replacement",
-        "Disc inspection",
-        "Brake fluid change",
-        "Handbrake adjustment",
-        "Brake pipe inspection",
-        "Performance testing",
-      ],
-    },
-    {
-      title: "Exhaust Systems",
-      desc: "Complete exhaust system service and replacement.",
-      icon: FaClock,
-      points: [
-        "Exhaust inspection",
-        "Silencer replacement",
-        "Catalytic converter",
-        "Emission testing",
-        "Custom fabrication",
-        "Performance exhausts",
-      ],
-    },
-  ],
-};
-
-
-
-export const majorServicesData = {
-  heading: {
-    title: "Major Service & Repair Work",
-    subtitle:
-      "Specialist services for major components and critical vehicle systems",
-  },
-
-  cta: {
-    text: "Get Quote",
-    href: "/contact",
-  },
-
-  services: [
-    {
-      title: "Cambelt Replacement",
-      subtitle: "Critical timing belt replacement service",
-      description:
-        "Essential service to prevent catastrophic engine damage. Our qualified technicians use genuine parts and follow manufacturer specifications.",
-    },
-    {
-      title: "Clutch Repair & Replacement",
-      subtitle: "Complete clutch system service",
-      description:
-        "Professional clutch diagnosis, repair, and replacement. We service manual and automatic transmissions for all vehicle types.",
-    },
-    {
-      title: "Welding Work",
-      subtitle: "Professional automotive welding services",
-      description:
-        "Expert welding repairs for MOT failures, bodywork, and structural components. All work guaranteed and MOT compliant.",
-    },
-  ],
 };
