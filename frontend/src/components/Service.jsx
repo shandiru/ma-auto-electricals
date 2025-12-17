@@ -1,13 +1,24 @@
 import React, { useState } from "react";
-import { Scissors, Phone, Camera, Shield, CheckSquare, MapPin, Wifi, ToolCase, ArrowRight } from "lucide-react";
+import {
+    Phone,
+    Camera,
+    Shield,
+    CheckSquare,
+    MapPin,
+    Music,
+    Cpu,
+    Settings,
+    ArrowRight,
+    Hammer
+} from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const ServiceCard = ({ service }) => {
     const [isHovered, setIsHovered] = useState(false);
-    const navigate = useNavigate(); // hook for navigation
+    const navigate = useNavigate();
 
     const handleSeeDetails = () => {
-        navigate(service.link); // navigate to the service link
+        navigate(service.link);
     };
 
     return (
@@ -16,10 +27,8 @@ const ServiceCard = ({ service }) => {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
-            {/* Background Image with smooth zoom */}
             <div
-                className={`absolute inset-0 transition-transform duration-700 ease-out ${isHovered ? "scale-110" : "scale-100"
-                    }`}
+                className={`absolute inset-0 transition-transform duration-700 ease-out ${isHovered ? "scale-110" : "scale-100"}`}
                 style={{
                     backgroundImage: `url(${service.image})`,
                     backgroundSize: "cover",
@@ -27,41 +36,28 @@ const ServiceCard = ({ service }) => {
                 }}
             />
 
-            {/* Overlay */}
             <div className="absolute inset-0 bg-black/40"></div>
 
-            {/* Front Content */}
             <div className="relative h-full flex flex-col justify-end p-6 sm:p-8">
                 <div className="bg-slate-900/90 backdrop-blur-sm rounded-2xl p-6 sm:p-7">
-
-                    {/* Icon */}
                     <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-4">
                         {service.icon}
                     </div>
 
-                    {/* Title */}
                     <h3 className="text-white text-2xl sm:text-3xl font-bold mb-3">
                         {service.title}
                     </h3>
 
-                    {/* Description */}
                     <div
-                        className={`transition-all duration-500 ease-out overflow-hidden ${isHovered
-                            ? "max-h-32 opacity-100 translate-y-0 mb-4"
-                            : "max-h-0 opacity-0 -translate-y-3 mb-0"
-                            }`}
+                        className={`transition-all duration-500 ease-out overflow-hidden ${isHovered ? "max-h-32 opacity-100 translate-y-0 mb-4" : "max-h-0 opacity-0 -translate-y-3 mb-0"}`}
                     >
                         <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
                             {service.description}
                         </p>
                     </div>
 
-                    {/* Button */}
                     <div
-                        className={`transition-all duration-500 ease-out overflow-hidden ${isHovered
-                            ? "max-h-20 opacity-100 translate-y-0"
-                            : "max-h-0 opacity-0 translate-y-3"
-                            }`}
+                        className={`transition-all duration-500 ease-out overflow-hidden ${isHovered ? "max-h-20 opacity-100 translate-y-0" : "max-h-0 opacity-0 translate-y-3"}`}
                     >
                         <button
                             onClick={handleSeeDetails}
@@ -73,7 +69,6 @@ const ServiceCard = ({ service }) => {
                             />
                         </button>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -86,7 +81,7 @@ export default function Service() {
             id: 1,
             title: "Car Stereos",
             description: "We supply and install high-quality car stereos to enhance your driving experience with better sound and modern features.",
-            icon: <Wifi className="w-6 h-6 text-[#317F21]" />,
+            icon: <Music className="w-6 h-6 text-[#317F21]" />,
             image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
             link: "/car-stereos"
         },
@@ -94,7 +89,7 @@ export default function Service() {
             id: 2,
             title: "Vehicle Diagnostics",
             description: "Using advanced diagnostic equipment, we quickly identify and fix electrical and engine faults in all vehicle makes and models.",
-            icon: <ToolCase className="w-6 h-6 text-[#317F21]" />,
+            icon: <Cpu className="w-6 h-6 text-[#317F21]" />,
             image: "https://images.unsplash.com/photo-1592492152545-8c2d0a29c0c8?w=800&q=80",
             link: "/diagnostics"
         },
@@ -102,7 +97,7 @@ export default function Service() {
             id: 3,
             title: "Car Repairs & Servicing",
             description: "Our comprehensive car repairs and servicing keep your vehicle running safely, efficiently, and reliably.",
-            icon: <Scissors className="w-6 h-6 text-[#317F21]" />,
+            icon: <Hammer className="w-6 h-6 text-[#317F21]" />,
             image: "https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?w=800&q=80",
             link: "/car-repair"
         },
@@ -150,7 +145,7 @@ export default function Service() {
             id: 9,
             title: "Installations & Fitting",
             description: "All installations and fittings are carried out by experienced technicians to ensure a professional, long-lasting finish.",
-            icon: <Shield className="w-6 h-6 text-[#317F21]" />,
+            icon: <Settings className="w-6 h-6 text-[#317F21]" />,
             image: "https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?w=800&q=80",
             link: "/installation"
         },
@@ -168,7 +163,6 @@ export default function Service() {
                     </p>
                 </div>
 
-                {/* Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {services.map((service) => (
                         <ServiceCard key={service.id} service={service} />
