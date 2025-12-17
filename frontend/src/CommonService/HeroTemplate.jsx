@@ -8,7 +8,7 @@ export default function MotHeroTemplate({ data }) {
   return (
     <section
       className="py-16 transition-colors duration-300 bg-gradient-to-b 
-      from-[#FAE8EA] to-[#FFFFFF]
+      from-[#C6F0C2] to-[#FFFFFF]
       dark:from-[#1A0004] dark:to-[#330009]"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

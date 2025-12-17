@@ -42,7 +42,7 @@ export const emergencyCtaData = {
   palette: {
     primary: "#317F21",
     fgOnPrimary: "#FFFFFF",
-    secondaryBg: "#312F21",
+    secondaryBg: "#C6F0C2",
     secondaryText: "#3B0000",
     outline: "#FFFFFF",
     darkBg: "#9B0D24",
