@@ -1,37 +1,34 @@
-import { FaPhoneAlt , FaPhone , FaCar,
-  FaWrench,
-  FaTools,
-  FaClock,} from "react-icons/fa";
+import { FaCamera, FaParking, FaRulerCombined, FaTools, FaPhoneAlt } from "react-icons/fa";
 
 export const motHeroData = {
   badge: "Qualified Technicians",
 
-  title: {
-    before: "Car Service &",
-    highlight: "MOT Testing",
+    title: {
+    before: "Parking Sensors &",
+    highlight: "Camera Installation",
   },
 
   description: {
-    beforeBold: "Trust ",
-    bold: "Naz Motors",
+    // beforeBold: "Trust ",
+    // bold: "Naz Motors",
     afterBold:
-      " to keep you and your vehicle safe. Professional car servicing and MOT testing from certified motor technicians. We ensure your car is roadworthy, reliable, and ready to perform.",
+      "Make parking easier and safer with professional parking sensor and camera installation from MA Auto Electrics. We provide high-quality systems that enhance visibility and prevent collisions.",
   },
 
   buttons: {
     primary: {
-      text: "Book MOT: 0116 251 5961",
+      text: "Book: 0116 251 5961",
       href: "tel:01162515961",
       icon: FaPhoneAlt,
-      bg: "#C8102E",
+      bg: "#317F21",
       color: "#FFFFFF",
     },
     secondary: {
-      text: "Book Your MOT",
+      text: "Book Your Service",
       href: "/contact",
-      border: "#C8102E",
-      color: "#C8102E",
-      hoverBg: "#C8102E",
+      border: "#317F21",
+      color: "#317F21",
+      hoverBg: "#317F21",
       hoverColor: "#FFFFFF",
     },
   },
@@ -39,91 +36,93 @@ export const motHeroData = {
 
 export const emergencyCtaData = {
   palette: {
-    primary: "#C8102E",
+    primary: "#317F21",
     fgOnPrimary: "#FFFFFF",
-    secondaryBg: "#FFB3B3",
+    secondaryBg: "#C6F0C2",
     secondaryText: "#3B0000",
     outline: "#FFFFFF",
     darkBg: "#9B0D24",
   },
 
-  heading: "Book Your Service or MOT Today",
+  heading: "Car Electric Specialists in Accrington, Lancashire",
 
   subheading:
-    "Professional automotive services from qualified technicians with over 50 years of experience.",
+    "Trust MA Auto Electrics for professional parking sensor and camera installation for safer and easier parking.",
 
   buttons: {
     call: {
       text: "Call 0116 251 5961",
       href: "tel:01162515961",
-      icon: FaPhone,
+      icon: FaPhoneAlt,
     },
     book: {
-      text: "Book MOT Test",
+      text: "Book Service",
       href: "/contact",
     },
   },
 };
 
-
 export const automotiveServicesData = {
   heading: {
-    title: "Professional Automotive Services",
+    title: "Professional Parking Sensor & Camera Services",
     subtitle:
-      "Comprehensive maintenance and repair solutions by certified automotive technicians at Naz Motors.",
+      "Expert installation and setup of parking assistance systems for all vehicle types",
   },
 
   services: [
     {
-      title: "Full Car Service",
-      desc: "Comprehensive vehicle inspection and maintenance service.",
-      icon: FaCar,
+      title: "Rear Parking Sensors",
+      desc: "Accurate sensors to alert you to obstacles while reversing.",
+      icon: FaParking,
       points: [
-        "Engine oil & filter change",
-        "Brake system inspection",
-        "Suspension check",
-        "Battery & electrical test",
-        "Fluid level checks",
-        "Tyre condition assessment",
+        "Audible warning system",
+        "Adjustable sensitivity levels",
+        "Easy-to-read alerts",
+        "Compatible with most vehicles",
       ],
     },
     {
-      title: "MOT Testing",
-      desc: "Official MOT testing by qualified MOT testers (Class 4 and Class 7).",
-      icon: FaWrench,
+      title: "Reversing Cameras",
+      desc: "Clear rear-view cameras for safe and precise maneuvering.",
+      icon: FaCamera,
       points: [
-        "Qualified MOT testers",
-        "Same-day results",
-        "Detailed failure report",
-        "Repair estimates",
-        "Re-test included",
-        "Digital certificate",
+        "High-definition camera installation",
+        "Wide-angle viewing",
+        "Night vision support",
+        "Dashboard or rear-view mirror display integration",
       ],
     },
     {
-      title: "Brake Service",
-      desc: "Professional brake system maintenance and repair.",
+      title: "Front & 360° Parking Sensors",
+      desc: "Advanced parking assistance for full vehicle awareness.",
+      icon: FaRulerCombined,
+      points: [
+        "Front and rear sensor coverage",
+        "Optional 360° surround view",
+        "Collision prevention alerts",
+        "Professional calibration for accuracy",
+      ],
+    },
+    {
+      title: "Professional Installation & Setup",
+      desc: "All systems installed by experienced technicians to ensure reliability and aesthetics.",
       icon: FaTools,
       points: [
-        "Brake pad replacement",
-        "Disc inspection",
-        "Brake fluid change",
-        "Handbrake adjustment",
-        "Brake pipe inspection",
-        "Performance testing",
+        "Neat wiring and mounting",
+        "Compatibility checks for all vehicle models",
+        "System testing and verification",
+        "User guidance and demonstration",
       ],
     },
     {
-      title: "Exhaust Systems",
-      desc: "Complete exhaust system service and replacement.",
-      icon: FaClock,
+      title: "Troubleshooting & Maintenance",
+      desc: "We diagnose and repair existing parking sensors and cameras.",
+      icon: FaTools,
       points: [
-        "Exhaust inspection",
-        "Silencer replacement",
-        "Catalytic converter",
-        "Emission testing",
-        "Custom fabrication",
-        "Performance exhausts",
+        "Sensor malfunctions",
+        "Camera display issues",
+        "Wiring or connection faults",
+        "Calibration and system reset",
       ],
     },
   ],
@@ -132,35 +131,43 @@ export const automotiveServicesData = {
 
 
 export const majorServicesData = {
-  heading: {
-    title: "Major Service & Repair Work",
-    subtitle:
-      "Specialist services for major components and critical vehicle systems",
-  },
+  service_name: "Professional Parking Sensors & Camera Services",
+  intro_description:
+    "Our professional installations improve safety, reduce parking stress, and protect your vehicle from damage.",
 
-  cta: {
-    text: "Get Quote",
-    href: "/contact",
-  },
+  benefits: [
+    {
+      title: "Experienced Auto Electrical Specialists",
+      description:
+        "Our skilled technicians have extensive experience installing parking sensors and camera systems with precision, reliability, and attention to detail.",
+    },
+    {
+      title: "Quality Sensors and Cameras",
+      description:
+        "We use high-quality, accurate sensors and cameras to provide reliable alerts and ensure safe parking.",
+    },
+    {
+      title: "Reliable and Accurate Alerts",
+      description:
+        "Our systems give precise distance warnings and visual guidance, reducing the risk of minor collisions.",
+    },
+    {
+      title: "Neat, Factory-Like Installation",
+      description:
+        "All installations are carried out neatly, preserving your vehicle’s aesthetics and providing a professional finish.",
+    },
+    {
+      title: "Suitable for All Makes & Models",
+      description:
+        "Our parking assistance solutions are compatible with every type of vehicle, from compact cars to larger or newer models.",
+    },
+  ],
 
-  services: [
-    {
-      title: "Cambelt Replacement",
-      subtitle: "Critical timing belt replacement service",
-      description:
-        "Essential service to prevent catastrophic engine damage. Our qualified technicians use genuine parts and follow manufacturer specifications.",
-    },
-    {
-      title: "Clutch Repair & Replacement",
-      subtitle: "Complete clutch system service",
-      description:
-        "Professional clutch diagnosis, repair, and replacement. We service manual and automatic transmissions for all vehicle types.",
-    },
-    {
-      title: "Welding Work",
-      subtitle: "Professional automotive welding services",
-      description:
-        "Expert welding repairs for MOT failures, bodywork, and structural components. All work guaranteed and MOT compliant.",
-    },
+  signs: [
+    "Difficulty judging distances while reversing",
+    "Frequent minor bumps or scrapes",
+    "Limited rear or side visibility",
+    "Desire for safer parking in tight spaces",
+    "Driving larger or newer vehicles",
   ],
 };
