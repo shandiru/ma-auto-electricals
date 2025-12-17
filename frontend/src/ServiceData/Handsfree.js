@@ -1,56 +1,187 @@
-import { FaPhoneAlt , FaPhone , FaCar,
-  FaWrench,
+import {
+  FaPhoneAlt,
+  FaPhone,
+  FaCar,
+ 
+   FaBluetooth,
+  FaMobileAlt,
+  
   FaTools,
-  FaClock,} from "react-icons/fa";
+  FaVolumeUp,
+  
+} from "react-icons/fa";
+
+
+
 
 export const motHeroData = {
-  badge: "Qualified Technicians",
+  badge: "Handsfree Car Kit Specialists",
 
   title: {
-    before: "Car Service &",
-    highlight: "MOT Testing",
+    before: "Professional",
+    highlight: "Handsfree Car Kit Installation",
   },
 
   description: {
-    beforeBold: "Trust ",
-    bold: "Naz Motors",
     afterBold:
-      " to keep you and your vehicle safe. Professional car servicing and MOT testing from certified motor technicians. We ensure your car is roadworthy, reliable, and ready to perform.",
+      "Enhance your driving safety and convenience with expertly installed handsfree car kits. MA Auto Electrics ensures seamless integration, crystal-clear calls, and reliable performance for your vehicle.",
   },
 
   buttons: {
     primary: {
-      text: "Book MOT: 0116 251 5961",
+      text: "Call: 0116 251 5961",
       href: "tel:01162515961",
       icon: FaPhoneAlt,
-      bg: "#C8102E",
+      bg: "#317F21",
       color: "#FFFFFF",
     },
     secondary: {
-      text: "Book Your MOT",
+      text: "Book Your Installation",
       href: "/contact",
-      border: "#C8102E",
-      color: "#C8102E",
-      hoverBg: "#C8102E",
+      border: "#317F21",
+      color: "#317F21",
+      hoverBg: "#317F21",
       hoverColor: "#FFFFFF",
     },
   },
 };
 
+
+
+
+
+export const automotiveServicesData = {
+  heading: {
+    title: "Professional Handsfree Car Kit Services",
+    subtitle:
+      "Expert installation and setup of handsfree systems for all vehicle makes and models",
+  },
+
+  services: [
+    {
+      title: "Bluetooth Handsfree Kits",
+      desc: "Stay connected on the road with reliable Bluetooth handsfree technology.",
+      icon: FaBluetooth,
+      points: [
+        "Wireless handsfree calling",
+        "Automatic phone pairing",
+        "Clear voice audio quality",
+        "Easy-to-use controls",
+      ],
+    },
+    {
+      title: "Integrated Steering Wheel Controls",
+      desc:
+        "Maintain safety and convenience while driving with steering wheel integration.",
+      icon: FaCar,
+      points: [
+        "Call answering and ending buttons",
+        "Music and volume control",
+        "Seamless integration with existing car controls",
+        "Minimal disruption to dashboard aesthetics",
+      ],
+    },
+    {
+      title: "Smartphone & Voice Control Integration",
+      desc:
+        "Control your phone safely while keeping your hands on the wheel.",
+      icon: FaMobileAlt,
+      points: [
+        "Voice-activated calling",
+        "Navigation and media control",
+        "Apple CarPlay & Android Auto compatibility",
+        "Smart assistant integration",
+      ],
+    },
+    {
+      title: "Professional Installation & Setup",
+      desc:
+        "All installations carried out by experienced technicians for a reliable, clean finish.",
+      icon: FaTools,
+      points: [
+        "Wiring and mounting concealed professionally",
+        "Compatibility checks for all vehicle models",
+        "System testing and verification",
+        "User guidance and support",
+      ],
+    },
+    {
+      title: "Troubleshooting & Repairs",
+      desc:
+        "We fix issues with existing handsfree kits to restore proper functionality.",
+      icon: FaVolumeUp,
+      points: [
+        "Connectivity problems",
+        "Audio quality issues",
+        "Button or control malfunctions",
+        "Software or pairing resets",
+      ],
+    },
+  ],
+};
+export const majorServicesData = {
+  service_name: "Handsfree Car Kit Services",
+
+  intro_description:
+    "Proper installation ensures maximum safety and performance. Our team provides expert fitting, modern systems, and professional advice.",
+
+  benefits: [
+    {
+      title: "Experienced Auto Electrical Specialists",
+      description:
+        "Our skilled technicians ensure every handsfree kit is installed correctly and safely.",
+    },
+    {
+      title: "Quality Handsfree Systems",
+      description:
+        "We supply and fit high-quality handsfree kits for reliable performance and clear audio.",
+    },
+    {
+      title: "Safe and Legal Driving Compliance",
+      description:
+        "Installation helps you comply with driving laws while keeping your hands on the wheel.",
+    },
+    {
+      title: "Neat, Damage-Free Installation",
+      description:
+        "All wiring and mounting are done professionally, leaving your vehicle in pristine condition.",
+    },
+    {
+      title: "Compatible with Most Vehicles",
+      description:
+        "Our handsfree kits and installations are suitable for most car makes and models.",
+    },
+  ],
+
+  signs: [
+    "Struggling to safely use your phone while driving",
+    "Frequent hands-on distractions",
+    "Poor or outdated audio system integration",
+    "Desire for voice control and modern connectivity features",
+    "Want safer and more convenient driving experience",
+  ],
+};
+
+
+
+
+
+
+
 export const emergencyCtaData = {
   palette: {
-    primary: "#C8102E",
+    primary: "#317F21",
     fgOnPrimary: "#FFFFFF",
-    secondaryBg: "#FFB3B3",
+    secondaryBg: "#C6F0C2",
     secondaryText: "#3B0000",
     outline: "#FFFFFF",
     darkBg: "#9B0D24",
   },
 
-  heading: "Book Your Service or MOT Today",
+  heading: "Car Electric Specialists in Accrington, Lancashire",
 
   subheading:
-    "Professional automotive services from qualified technicians with over 50 years of experience.",
+    "Contact MA Auto Electrics for professional handsfree car kit installation and upgrades.",
 
   buttons: {
     call: {
@@ -59,108 +190,8 @@ export const emergencyCtaData = {
       icon: FaPhone,
     },
     book: {
-      text: "Book MOT Test",
+      text: "Book Installation",
       href: "/contact",
     },
   },
-};
-
-
-export const automotiveServicesData = {
-  heading: {
-    title: "Professional Automotive Services",
-    subtitle:
-      "Comprehensive maintenance and repair solutions by certified automotive technicians at Naz Motors.",
-  },
-
-  services: [
-    {
-      title: "Full Car Service",
-      desc: "Comprehensive vehicle inspection and maintenance service.",
-      icon: FaCar,
-      points: [
-        "Engine oil & filter change",
-        "Brake system inspection",
-        "Suspension check",
-        "Battery & electrical test",
-        "Fluid level checks",
-        "Tyre condition assessment",
-      ],
-    },
-    {
-      title: "MOT Testing",
-      desc: "Official MOT testing by qualified MOT testers (Class 4 and Class 7).",
-      icon: FaWrench,
-      points: [
-        "Qualified MOT testers",
-        "Same-day results",
-        "Detailed failure report",
-        "Repair estimates",
-        "Re-test included",
-        "Digital certificate",
-      ],
-    },
-    {
-      title: "Brake Service",
-      desc: "Professional brake system maintenance and repair.",
-      icon: FaTools,
-      points: [
-        "Brake pad replacement",
-        "Disc inspection",
-        "Brake fluid change",
-        "Handbrake adjustment",
-        "Brake pipe inspection",
-        "Performance testing",
-      ],
-    },
-    {
-      title: "Exhaust Systems",
-      desc: "Complete exhaust system service and replacement.",
-      icon: FaClock,
-      points: [
-        "Exhaust inspection",
-        "Silencer replacement",
-        "Catalytic converter",
-        "Emission testing",
-        "Custom fabrication",
-        "Performance exhausts",
-      ],
-    },
-  ],
-};
-
-
-
-export const majorServicesData = {
-  heading: {
-    title: "Major Service & Repair Work",
-    subtitle:
-      "Specialist services for major components and critical vehicle systems",
-  },
-
-  cta: {
-    text: "Get Quote",
-    href: "/contact",
-  },
-
-  services: [
-    {
-      title: "Cambelt Replacement",
-      subtitle: "Critical timing belt replacement service",
-      description:
-        "Essential service to prevent catastrophic engine damage. Our qualified technicians use genuine parts and follow manufacturer specifications.",
-    },
-    {
-      title: "Clutch Repair & Replacement",
-      subtitle: "Complete clutch system service",
-      description:
-        "Professional clutch diagnosis, repair, and replacement. We service manual and automatic transmissions for all vehicle types.",
-    },
-    {
-      title: "Welding Work",
-      subtitle: "Professional automotive welding services",
-      description:
-        "Expert welding repairs for MOT failures, bodywork, and structural components. All work guaranteed and MOT compliant.",
-    },
-  ],
 };
