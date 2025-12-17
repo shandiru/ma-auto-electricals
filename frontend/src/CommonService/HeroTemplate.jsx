@@ -9,12 +9,12 @@ export default function MotHeroTemplate({ data }) {
     <section
       className="py-16 transition-colors duration-300 bg-gradient-to-b 
       from-[#C6F0C2] to-[#FFFFFF]
-      dark:from-[#1A0004] dark:to-[#330009]"
+      "
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           {/* Title */}
-          <h1 className="text-4xl lg:text-5xl font-black mb-6 mt-15 text-[#111827] dark:text-white">
+          <h1 className="text-4xl lg:text-5xl font-black mb-6 mt-15 text-[#111827] ">
             {data.title.before}{" "}
             <span style={{ color: "#317F21" }}>
               {data.title.highlight}
@@ -22,7 +22,7 @@ export default function MotHeroTemplate({ data }) {
           </h1>
 
           {/* Description */}
-          <p className="text-xl max-w-3xl mx-auto leading-relaxed text-[#4B5563] dark:text-gray-400">
+          <p className="text-xl max-w-3xl mx-auto leading-relaxed text-[#4B5563] ">
             {data.description.beforeBold}
             <strong>{data.description.bold}</strong>
             {data.description.afterBold}
