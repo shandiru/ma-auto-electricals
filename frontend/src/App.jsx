@@ -15,6 +15,15 @@ import CartPage from "./components/Product/CartPage";
 import SuccessPage from "./components/Product/SuccessPage";
 import Gumtree from "./page/Gumtree";
 import MotPage from "../src/page/mot"
+import ParkingPage from "./page/Parking";
+import InstallationPage from "./page/Installation";
+import HandfreePage from "./page/Handfree";
+import DiagnosticsPage from "./page/Diagnostics";
+import CarStereosPage from "./page/CarStereos";
+import CarSecurityPage from "./page/CarSecurity";
+import CarRepairPage from "./page/CarRepair";
+import VehicleTrackingPage from "./page/VehicleTracking";
+
 function App() {
   return (
     <Router>
@@ -29,8 +38,16 @@ function App() {
         <Route path="/products/:id" element={<ProductDetails />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/success" element={<SuccessPage />} />
-         <Route path="/gumtree" element={<Gumtree  />} />
-          <Route path="/motpage" element={<MotPage  />} />
+        <Route path="/gumtree" element={<Gumtree />} />
+        <Route path="/motpage" element={<MotPage />} />
+        <Route path="/parking" element={<ParkingPage />} />
+        <Route path="/installation" element={<InstallationPage />} />
+        <Route path="/handfree" element={<HandfreePage />} />
+        <Route path="/diagnostics" element={<DiagnosticsPage />} />
+        <Route path="/car-stereos" element={<CarStereosPage />} />
+        <Route path="/car-security" element={<CarSecurityPage />} />
+        <Route path="/car-repair" element={<CarRepairPage />} />
+        <Route path="/vehicle-tracking" element={<VehicleTrackingPage />} />
       </Routes>
       <Footer />
       <GDPRBanner />

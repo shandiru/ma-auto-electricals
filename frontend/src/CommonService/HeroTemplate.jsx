@@ -16,7 +16,7 @@ export default function MotHeroTemplate({ data }) {
 
           {/* Badge */}
           <span
-            className="inline-flex items-center justify-center rounded-md px-2 py-0.5 text-xs font-medium mb-4"
+            className="inline-flex items-center justify-center rounded-md px-2 mt-10 py-0.5 text-xs font-medium mb-4"
             style={{ backgroundColor: "#F5C7CB", color: "#7A0D1B" }}
           >
             {data.badge}

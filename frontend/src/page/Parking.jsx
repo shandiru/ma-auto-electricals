@@ -1,10 +1,10 @@
 import HeroTemplate from "../CommonService/HeroTemplate";
-import { motHeroData, emergencyCtaData, automotiveServicesData, majorServicesData } from "../ServiceData/motHeroData";
+import { motHeroData, emergencyCtaData, automotiveServicesData, majorServicesData } from "../ServiceData/ParkingData";
 import EmergencyCtaTemplate from "../CommonService/EmergencyCtaTemplate";
 import AutomotiveServicesTemplate from "../CommonService/AutomotiveServicesTemplate";
 import MajorServicesTemplate from "../CommonService/MajorServicesTemplate";
 
-export default function MotPage() {
+export default function ParkingPage() {
   return (
     <>
       <HeroTemplate data={motHeroData} />
