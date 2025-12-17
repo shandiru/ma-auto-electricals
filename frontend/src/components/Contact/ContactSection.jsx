@@ -100,11 +100,11 @@ export default function ContactSection() {
                        bg-white  py-6 shadow-sm box-border w-full"
           >
             <div className="px-6">
-              <div className="text-2xl font-bold flex items-center text-[#111827] dark:text-gray-100">
+              <div className="text-2xl font-bold flex items-center text-[#111827] ">
                 <FaCommentDots className="mr-2 h-5 w-5 text-[#2F7D33]" />
                 Send Us a Message
               </div>
-              <p className="text-sm mt-1 text-muted dark:text-gray-400">
+              <p className="text-sm mt-1 text-muted ">
                 Get in touch for quotes, bookings, or any questions about our services
               </p>
             </div>
@@ -151,13 +151,13 @@ export default function ContactSection() {
               />
 
               <div className="space-y-2">
-                <label htmlFor="service" className="text-sm font-medium dark:text-gray-200">
+                <label htmlFor="service" className="text-sm font-medium ">
                   Service Required
                 </label>
                 <select
                   id="service"
                   name="service"
-                  className="w-full px-3 py-2 rounded-md border bg-white dark:bg-[#1B1E24] text-[#111827] dark:text-white border-brand-border dark:border-white/10 hover:border-[#2F7D33] focus:border-[#2F7D33] focus:ring-[#2F7D33]"
+                  className="w-full px-3 py-2 rounded-md border bg-white  text-[#111827]  border-brand-border  hover:border-[#2F7D33] focus:border-[#2F7D33] focus:ring-[#2F7D33]"
                   value={formData.service}
                   onChange={handleChange}
                 >
@@ -176,7 +176,7 @@ export default function ContactSection() {
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="message" className="text-sm font-medium dark:text-gray-200">
+                <label htmlFor="message" className="text-sm font-medium ">
                   Message *
                 </label>
                 <textarea
@@ -184,7 +184,7 @@ export default function ContactSection() {
                   name="message"
                   rows={4}
                   placeholder="Please describe your requirements..."
-                  className="w-full rounded-md border px-3 py-2 bg-white dark:bg-[#1B1E24] text-[#111827] dark:text-white dark:border-white/10"
+                  className="w-full rounded-md border px-3 py-2 bg-white text-[#111827] "
                   value={formData.message}
                   onChange={handleChange}
                 />
@@ -198,7 +198,7 @@ export default function ContactSection() {
                 Send Message
               </button>
 
-              <p className="text-xs text-muted dark:text-gray-400">
+              <p className="text-xs text-muted ">
                 * Required fields. We'll get back to you within 24 hours.
               </p>
             </div>
@@ -223,7 +223,7 @@ export default function ContactSection() {
             <SideCard data-aos="fade-left" title="Find Us" icon={<FaMapMarkerAlt className="h-5 w-5" />}>
               <div className="space-y-1 mb-4">
                 <p className="font-semibold">Ma auto electrics</p>
-                <p className="text-sm text-muted dark:text-gray-400">
+                <p className="text-sm text-muted ">
                   13 laburnum drive oswaldtwistele accrington bb5 3aw
                 </p>
               </div>
@@ -233,7 +233,7 @@ export default function ContactSection() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <button className="h-9 w-full rounded-md border px-4 py-2 text-sm font-medium flex items-center justify-center bg-white dark:bg-[#1B1E24] text-[#111827]  border-brand-border dark:border-white/10 hover:shadow">
+                <button className="h-9 w-full rounded-md border px-4 py-2 text-sm font-medium flex items-center justify-center bg-white  text-[#111827]  border-brand-border hover:shadow">
                   <FaDirections className="mr-2 h-4 w-4" />
                   View on Google Maps
                 </button>
@@ -257,7 +257,7 @@ export default function ContactSection() {
 function FormInput({ id, label, placeholder, icon, value, onChange, type = "text", error }) {
   return (
     <div className="space-y-2">
-      <label htmlFor={id} className="text-sm font-medium dark:text-gray-200">
+      <label htmlFor={id} className="text-sm font-medium ">
         {label}
       </label>
       <div className="relative">
@@ -267,7 +267,7 @@ function FormInput({ id, label, placeholder, icon, value, onChange, type = "text
           name={id}
           type={type}
           placeholder={placeholder}
-          className={`h-9 w-full rounded-md border bg-white dark:bg-[#1B1E24] px-3 pl-10 text-[#111827] dark:text-white ${error ? "border-red-500" : "border-brand-border dark:border-white/10"
+          className={`h-9 w-full rounded-md border bg-white  px-3 pl-10 text-[#111827]  ${error ? "border-red-500" : "border-brand-border "
             }`}
           value={value}
           onChange={onChange}
@@ -282,10 +282,10 @@ function SideCard({ title, icon, children, ...props }) {
   return (
     <div
       {...props}
-      className="rounded-xl border border-brand-border dark:border-white/10 bg-white dark:bg-[#0F1115] py-6 shadow-sm box-border w-full"
+      className="rounded-xl border border-brand-border  bg-white  py-6 shadow-sm box-border w-full"
     >
       <div className="px-6 mb-2">
-        <div className="text-xl font-bold flex items-center text-[#111827] dark:text-white">
+        <div className="text-xl font-bold flex items-center text-[#111827] ">
           {icon && <span className="mr-2 text-[#2F7D33]">{icon}</span>}
           {title}
         </div>
@@ -298,8 +298,8 @@ function SideCard({ title, icon, children, ...props }) {
 function HoursRow({ day, time, muted }) {
   return (
     <div className="flex items-center justify-between py-1">
-      <span className="font-medium text-[#111827] dark:text-white">{day}</span>
-      <span className={`text-sm ${muted ? "text-gray-400" : "text-[#111827] dark:text-white"}`}>
+      <span className="font-medium text-[#111827] ">{day}</span>
+      <span className={`text-sm ${muted ? "text-gray-400" : "text-[#111827] "}`}>
         {time}
       </span>
     </div>

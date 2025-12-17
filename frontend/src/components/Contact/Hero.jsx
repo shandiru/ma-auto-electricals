@@ -25,7 +25,7 @@ export default function ContactHero() {
     <section
       className="py-16 transition-colors duration-300 bg-linear-to-b 
                  from-[var(--contact-grad-top)] to-[var(--contact-grad-bottom)] 
-                 dark:from-[var(--contact-grad-top-dark)] dark:to-[var(--contact-grad-bottom-dark)]"
+                  "
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
