@@ -1,7 +1,8 @@
 import { FaPhoneAlt , FaPhone , FaCar,
   FaWrench,
   FaTools,
-  FaClock,} from "react-icons/fa";
+  FaClock,
+  FaBolt,} from "react-icons/fa";
 
 export const motHeroData = {
   badge: "Qualified Technicians",
@@ -135,35 +136,35 @@ export const automotiveServicesData = {
 
 
 export const majorServicesData = {
-  heading: {
-    title: "Why Choose MA Auto Electrics for Installations & Fitting?",
-    subtitle:
-      "We deliver professional, reliable, and safe installations for all car systems and accessories. Every job is done to the highest standard for lasting performance.",
-  },
-
-  cta: {
-    text: "Get Quote",
-    href: "/contact",
-  },
-
-  services: [
+  service_name: "Installations & Fitting",
+  intro_description: "We deliver professional, reliable, and safe installations for all car systems and accessories. Every job is done to the highest standard for lasting performance.",
+  benefits: [
     {
-      title: "Cambelt Replacement",
-      subtitle: "Critical timing belt replacement service",
-      description:
-        "Essential service to prevent catastrophic engine damage. Our qualified technicians use genuine parts and follow manufacturer specifications.",
+      title: "Experienced Specialists",
+      description: "Our auto electrical specialists bring years of expertise to every installation, ensuring your systems are fitted correctly the first time."
     },
     {
-      title: "Clutch Repair & Replacement",
-      subtitle: "Complete clutch system service",
-      description:
-        "Professional clutch diagnosis, repair, and replacement. We service manual and automatic transmissions for all vehicle types.",
+      title: "Professional Fittings",
+      description: "We take pride in neat, professional, and secure fittings that look great and perform flawlessly for years to come."
     },
     {
-      title: "Welding Work",
-      subtitle: "Professional automotive welding services",
-      description:
-        "Expert welding repairs for MOT failures, bodywork, and structural components. All work guaranteed and MOT compliant.",
+      title: "Universal Compatibility",
+      description: "Compatible with all makes and models - whether you drive a compact car or luxury vehicle, we've got you covered."
     },
+    {
+      title: "Quality Guaranteed",
+      description: "We use only quality parts and deliver superior workmanship on every job, backed by our commitment to excellence."
+    },
+    {
+      title: "Thorough Testing",
+      description: "Full system testing and verification ensures everything works perfectly before we hand back your keys."
+    }
   ],
+  signs: [
+    "Installing new car electronics or accessories",
+    "Upgrading or replacing old systems",
+    "Experiencing faults or malfunctions in existing installations",
+    "Want safe and professional integration",
+    "Need expert guidance and support"
+  ]
 };
