@@ -39,7 +39,7 @@ function App() {
         <Route path="/cart" element={<CartPage />} />
         <Route path="/success" element={<SuccessPage />} />
         <Route path="/gumtree" element={<Gumtree />} />
-        <Route path="/motpage" element={<MotPage />} />
+        <Route path="/mot" element={<MotPage />} />
         <Route path="/parking" element={<ParkingPage />} />
         <Route path="/installation" element={<InstallationPage />} />
         <Route path="/handfree" element={<HandfreePage />} />

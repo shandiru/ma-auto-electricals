@@ -3,7 +3,10 @@ import { FaPhoneAlt , FaPhone , FaCar,
   FaTools,
   FaMapMarkerAlt,
   FaBell,
-  FaTruck,} from "react-icons/fa";
+  FaTruck,
+  FaClipboardCheck,
+  FaSearch,
+  FaCertificate,} from "react-icons/fa";
 
 export const motHeroData = {
   badge: "Qualified Technicians",
