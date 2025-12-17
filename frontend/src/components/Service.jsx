@@ -1,8 +1,14 @@
 import React, { useState } from "react";
 import { Scissors, Phone, Camera, Shield, CheckSquare, MapPin, Wifi, ToolCase, ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const ServiceCard = ({ service }) => {
     const [isHovered, setIsHovered] = useState(false);
+    const navigate = useNavigate(); // hook for navigation
+
+    const handleSeeDetails = () => {
+        navigate(service.link); // navigate to the service link
+    };
 
     return (
         <div
@@ -38,7 +44,7 @@ const ServiceCard = ({ service }) => {
                         {service.title}
                     </h3>
 
-                    {/* Description — smooth fade + slide */}
+                    {/* Description */}
                     <div
                         className={`transition-all duration-500 ease-out overflow-hidden ${isHovered
                             ? "max-h-32 opacity-100 translate-y-0 mb-4"
@@ -50,16 +56,18 @@ const ServiceCard = ({ service }) => {
                         </p>
                     </div>
 
-                    {/* Button — smooth fade-in */}
+                    {/* Button */}
                     <div
                         className={`transition-all duration-500 ease-out overflow-hidden ${isHovered
                             ? "max-h-20 opacity-100 translate-y-0"
                             : "max-h-0 opacity-0 translate-y-3"
                             }`}
                     >
-                        <button className="bg-[#317F21] hover:bg-emerald-500 text-slate-900 font-semibold px-6 py-3 rounded-full text-sm flex items-center gap-2 transition-all duration-300 group/button">
+                        <button
+                            onClick={handleSeeDetails}
+                            className="bg-[#317F21] hover:bg-emerald-500 text-slate-900 font-semibold px-6 py-3 rounded-full text-sm flex items-center gap-2 transition-all duration-300 group/button"
+                        >
                             See Details
-
                             <ArrowRight
                                 className="w-4 h-4 transition-transform duration-300 group-hover/button:translate-x-1"
                             />
@@ -73,83 +81,90 @@ const ServiceCard = ({ service }) => {
 };
 
 export default function Service() {
-
-const services = [
-    {
-        id: 1,
-        title: "Car Stereos",
-        description: "We supply and install high-quality car stereos to enhance your driving experience with better sound and modern features.",
-        icon: <Wifi className="w-6 h-6 text-[#317F21]" />,
-        image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
-    },
-    {
-        id: 2,
-        title: "Vehicle Diagnostics",
-        description: "Using advanced diagnostic equipment, we quickly identify and fix electrical and engine faults in all vehicle makes and models.",
-        icon: <ToolCase className="w-6 h-6 text-[#317F21]" />,
-        image: "https://images.unsplash.com/photo-1592492152545-8c2d0a29c0c8?w=800&q=80",
-    },
-    {
-        id: 3,
-        title: "Car Repairs & Servicing",
-        description: "Our comprehensive car repairs and servicing keep your vehicle running safely, efficiently, and reliably.",
-        icon: <Scissors className="w-6 h-6 text-[#317F21]" />, // can also use Tool
-        image: "https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?w=800&q=80",
-    },
-    {
-        id: 4,
-        title: "Handsfree Car Kits",
-        description: "We professionally install handsfree car kits to help you stay connected while driving safely and legally.",
-        icon: <Phone className="w-6 h-6 text-[#317F21]" />,
-        image: "https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?w=800&q=80",
-    },
-    {
-        id: 5,
-        title: "Parking Sensors/Cameras",
-        description: "Our parking sensors and reversing cameras make parking easier and safer by improving visibility and awareness.",
-        icon: <Camera className="w-6 h-6 text-[#317F21]" />,
-        image: "https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?w=800&q=80",
-    },
-    {
-        id: 6,
-        title: "Car Security",
-        description: "We install reliable car security systems to protect your vehicle from theft and unauthorized access.",
-        icon: <Shield className="w-6 h-6 text-[#317F21]" />,
-        image: "https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?w=800&q=80",
-    },
-    {
-        id: 7,
-        title: "MOT",
-        description: "We provide trusted MOT testing and preparation to ensure your vehicle meets all legal safety standards.",
-        icon: <CheckSquare className="w-6 h-6 text-[#317F21]" />,
-        image: "https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?w=800&q=80",
-    },
-    {
-        id: 8,
-        title: "Vehicle Tracking Systems",
-        description: "Our vehicle tracking systems give you real-time location monitoring for added security and peace of mind.",
-        icon: <MapPin className="w-6 h-6 text-[#317F21]" />,
-        image: "https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?w=800&q=80",
-    },
-    {
-        id: 9,
-        title: "Installations & Fitting",
-        description: "All installations and fittings are carried out by experienced technicians to ensure a professional, long-lasting finish.",
-        icon: <Shield className="w-6 h-6 text-[#317F21]" />,
-        image: "https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?w=800&q=80",
-    },
-];
-
+    const services = [
+        {
+            id: 1,
+            title: "Car Stereos",
+            description: "We supply and install high-quality car stereos to enhance your driving experience with better sound and modern features.",
+            icon: <Wifi className="w-6 h-6 text-[#317F21]" />,
+            image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
+            link: "/car-stereos"
+        },
+        {
+            id: 2,
+            title: "Vehicle Diagnostics",
+            description: "Using advanced diagnostic equipment, we quickly identify and fix electrical and engine faults in all vehicle makes and models.",
+            icon: <ToolCase className="w-6 h-6 text-[#317F21]" />,
+            image: "https://images.unsplash.com/photo-1592492152545-8c2d0a29c0c8?w=800&q=80",
+            link: "/diagnostics"
+        },
+        {
+            id: 3,
+            title: "Car Repairs & Servicing",
+            description: "Our comprehensive car repairs and servicing keep your vehicle running safely, efficiently, and reliably.",
+            icon: <Scissors className="w-6 h-6 text-[#317F21]" />,
+            image: "https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?w=800&q=80",
+            link: "/car-repair"
+        },
+        {
+            id: 4,
+            title: "Handsfree Car Kits",
+            description: "We professionally install handsfree car kits to help you stay connected while driving safely and legally.",
+            icon: <Phone className="w-6 h-6 text-[#317F21]" />,
+            image: "https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?w=800&q=80",
+            link: "/handfree"
+        },
+        {
+            id: 5,
+            title: "Parking Sensors/Cameras",
+            description: "Our parking sensors and reversing cameras make parking easier and safer by improving visibility and awareness.",
+            icon: <Camera className="w-6 h-6 text-[#317F21]" />,
+            image: "https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?w=800&q=80",
+            link: "/parking"
+        },
+        {
+            id: 6,
+            title: "Car Security",
+            description: "We install reliable car security systems to protect your vehicle from theft and unauthorized access.",
+            icon: <Shield className="w-6 h-6 text-[#317F21]" />,
+            image: "https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?w=800&q=80",
+            link: "/car-security"
+        },
+        {
+            id: 7,
+            title: "MOT",
+            description: "We provide trusted MOT testing and preparation to ensure your vehicle meets all legal safety standards.",
+            icon: <CheckSquare className="w-6 h-6 text-[#317F21]" />,
+            image: "https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?w=800&q=80",
+            link: "/mot"
+        },
+        {
+            id: 8,
+            title: "Vehicle Tracking Systems",
+            description: "Our vehicle tracking systems give you real-time location monitoring for added security and peace of mind.",
+            icon: <MapPin className="w-6 h-6 text-[#317F21]" />,
+            image: "https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?w=800&q=80",
+            link: "/vehicle-tracking"
+        },
+        {
+            id: 9,
+            title: "Installations & Fitting",
+            description: "All installations and fittings are carried out by experienced technicians to ensure a professional, long-lasting finish.",
+            icon: <Shield className="w-6 h-6 text-[#317F21]" />,
+            image: "https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?w=800&q=80",
+            link: "/installation"
+        },
+    ];
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 py-12 px-6">
             <div className="max-w-6xl mx-auto">
                 <div className="text-center mb-14">
                     <h1 className="text-4xl font-bold text-slate-900 mb-3">
-                        Our Lawn Care Services
+                        Our Services
                     </h1>
                     <p className="text-lg text-slate-600">
-                        Professional lawn care tailored to your needs
+                        Professional services tailored to your vehicle
                     </p>
                 </div>
 

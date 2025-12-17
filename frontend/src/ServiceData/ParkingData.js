@@ -17,7 +17,7 @@ export const motHeroData = {
 
   buttons: {
     primary: {
-      text: "Book: 0116 251 5961",
+      text: "Book: +44 7889 133123‬",
       href: "tel:01162515961",
       icon: FaPhoneAlt,
       bg: "#317F21",
@@ -51,7 +51,7 @@ export const emergencyCtaData = {
 
   buttons: {
     call: {
-      text: "Call 0116 251 5961",
+      text: "Call +44 7889 133123‬",
       href: "tel:01162515961",
       icon: FaPhoneAlt,
     },
