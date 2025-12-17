@@ -29,14 +29,14 @@ export default function AutomotiveServicesTemplate({ data }) {
                 className="flex flex-col gap-6 rounded-xl py-6 px-6 shadow-sm border transition-all duration-300 
                 bg-white dark:bg-[#111111] border-[#E6EAE7] dark:border-[#2A2A2A] 
                 hover:shadow-[0_8px_24px_rgba(200,16,46,0.25)] 
-                hover:ring-2 hover:ring-[#C8102E] hover:ring-offset-2 hover:ring-offset-white 
+                hover:ring-2 hover:ring-[#317F21] hover:ring-offset-2 hover:ring-offset-white 
                 dark:hover:ring-offset-[#0B0B0B]"
               >
                 {/* Header */}
                 <div className="grid auto-rows-min items-start gap-1.5">
                   <div className="flex items-center space-x-3 mb-2">
                     <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-[#FCE8EA] dark:bg-[#401017]">
-                      <Icon className="h-5 w-5 text-[#C8102E] dark:text-[#FF5C70]" />
+                      <Icon className="h-5 w-5 text-[#317F21] dark:text-[#FF5C70]" />
                     </div>
                     <div className="text-xl font-bold text-[#111827] dark:text-white">
                       {service.title}
@@ -55,7 +55,7 @@ export default function AutomotiveServicesTemplate({ data }) {
                       key={j}
                       className="flex items-center text-sm text-[#4B5563] dark:text-gray-300"
                     >
-                      <FaCheckCircle className="h-4 w-4 mr-2 flex-shrink-0 text-[#C8102E] dark:text-[#FF5C70]" />
+                      <FaCheckCircle className="h-4 w-4 mr-2 flex-shrink-0 text-[#317F21] dark:text-[#FF5C70]" />
                       {point}
                     </li>
                   ))}

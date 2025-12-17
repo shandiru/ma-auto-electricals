@@ -13,19 +13,10 @@ export default function MotHeroTemplate({ data }) {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-
-          {/* Badge */}
-          <span
-            className="inline-flex items-center justify-center rounded-md px-2 mt-10 py-0.5 text-xs font-medium mb-4"
-            style={{ backgroundColor: "#F5C7CB", color: "#7A0D1B" }}
-          >
-            {data.badge}
-          </span>
-
           {/* Title */}
-          <h1 className="text-4xl lg:text-5xl font-black mb-6 text-[#111827] dark:text-white">
+          <h1 className="text-4xl lg:text-5xl font-black mb-6 mt-15 text-[#111827] dark:text-white">
             {data.title.before}{" "}
-            <span style={{ color: "#C8102E" }}>
+            <span style={{ color: "#317F21" }}>
               {data.title.highlight}
             </span>
           </h1>

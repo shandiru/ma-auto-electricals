@@ -24,15 +24,15 @@ export const motHeroData = {
       text: "Book: 0116 251 5961",
       href: "tel:01162515961",
       icon: FaPhoneAlt,
-      bg: "#C8102E",
+      bg: "#317F21",
       color: "#FFFFFF",
     },
     secondary: {
       text: "Book Your Service",
       href: "/contact",
-      border: "#C8102E",
-      color: "#C8102E",
-      hoverBg: "#C8102E",
+      border: "#317F21",
+      color: "#317F21",
+      hoverBg: "#317F21",
       hoverColor: "#FFFFFF",
     },
   },
@@ -40,9 +40,9 @@ export const motHeroData = {
 
 export const emergencyCtaData = {
   palette: {
-    primary: "#C8102E",
+    primary: "#317F21",
     fgOnPrimary: "#FFFFFF",
-    secondaryBg: "#FFB3B3",
+    secondaryBg: "#312F21",
     secondaryText: "#3B0000",
     outline: "#FFFFFF",
     darkBg: "#9B0D24",
