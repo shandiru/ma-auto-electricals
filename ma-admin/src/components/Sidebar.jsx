@@ -1,7 +1,7 @@
 import React from "react";
 import { assets } from "../assets/assets";
 import { NavLink, useNavigate } from "react-router-dom";
-import { Plus, List, Car, Package, LogOut } from "lucide-react"; // ← added LogOut icon
+import { Plus, List, Car, Package, LogOut, Package2 } from "lucide-react"; // ← added LogOut icon
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -30,6 +30,12 @@ const Sidebar = () => {
       icon: <List size={20} />,
       label: "List Cars",
       color: "orange"
+    },
+    {
+      to: "/list/order",
+      icon: <Package2 size={20} />,
+      label: "Orders",
+      color: "blue"
     }
   ];
 
@@ -65,7 +71,7 @@ const Sidebar = () => {
   return (
     <div className="flex flex-col justify-between w-54 min-h-screen bg-linear-to-b from-slate-50 to-white border-r border-slate-200 
                     max-md:w-20 transition-all duration-300">
-      
+
       <div>
         {/* Logo/Header Section */}
         <div className="p-6 border-b border-slate-200 max-md:p-4">
@@ -90,10 +96,10 @@ const Sidebar = () => {
               className={({ isActive }) =>
                 `group flex items-center gap-3 px-4 py-3 rounded-xl 
                  border-2 transition-all duration-200
-                 ${isActive 
-                   ? `${colorClasses[item.color].active} shadow-md transform scale-[1.02]` 
-                   : `border-transparent ${colorClasses[item.color].hover}`
-                 }
+                 ${isActive
+                  ? `${colorClasses[item.color].active} shadow-md transform scale-[1.02]`
+                  : `border-transparent ${colorClasses[item.color].hover}`
+                }
                  max-md:justify-center max-md:px-3
                 `
               }

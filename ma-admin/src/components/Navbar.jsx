@@ -41,89 +41,8 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Center Section - Search (Hidden on Mobile) */}
-        {/* <div className="hidden lg:flex flex-1 max-w-md mx-8">
-          <div className="relative w-full">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400" size={20} />
-            <input
-              type="text"
-              placeholder="Search products, cars, orders..."
-              className="w-full pl-10 pr-4 py-2 border border-slate-300 rounded-lg 
-                       focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
-                       transition-all duration-200"
-            />
-          </div>
-        </div> */}
-
         {/* Right Section - Actions & Profile */}
         <div className="flex items-center gap-2 md:gap-4">
-          
-          {/* Search Icon (Mobile Only) */}
-          {/* <button className="lg:hidden p-2 hover:bg-slate-100 rounded-lg transition-colors relative">
-            <Search size={20} className="text-slate-600" />
-          </button> */}
-
-          {/* Notifications */}
-          <div className="relative">
-            <button 
-              onClick={() => {
-                setShowNotifications(!showNotifications);
-                setShowProfileMenu(false);
-              }}
-              className="p-2 hover:bg-slate-100 rounded-lg transition-colors relative"
-            >
-              <Bell size={20} className="text-slate-600" />
-              {unreadCount > 0 && (
-                <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white 
-                               text-xs font-bold rounded-full flex items-center justify-center
-                               animate-pulse">
-                  {unreadCount}
-                </span>
-              )}
-            </button>
-
-            {/* Notifications Dropdown */}
-            {showNotifications && (
-              <div className="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-xl 
-                            border border-slate-200 overflow-hidden z-50">
-                <div className="bg-gradient-to-r from-blue-600 to-purple-600 px-4 py-3">
-                  <h3 className="text-white font-semibold">Notifications</h3>
-                  <p className="text-blue-100 text-xs">{unreadCount} unread</p>
-                </div>
-                <div className="max-h-96 overflow-y-auto">
-                  {notifications.map((notif) => (
-                    <div 
-                      key={notif.id}
-                      className={`px-4 py-3 border-b border-slate-100 hover:bg-slate-50 
-                                transition-colors cursor-pointer
-                                ${notif.unread ? 'bg-blue-50/50' : ''}`}
-                    >
-                      <div className="flex items-start gap-3">
-                        {notif.unread && (
-                          <div className="w-2 h-2 bg-blue-600 rounded-full mt-1.5"></div>
-                        )}
-                        <div className="flex-1">
-                          <p className="text-sm text-slate-700">{notif.text}</p>
-                          <p className="text-xs text-slate-500 mt-1">{notif.time}</p>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <div className="px-4 py-3 bg-slate-50 text-center">
-                  <button className="text-sm text-blue-600 font-medium hover:text-blue-700">
-                    View all notifications
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Settings (Hidden on Mobile) */}
-          <button className="hidden md:block p-2 hover:bg-slate-100 rounded-lg transition-colors">
-            <Settings size={20} className="text-slate-600" />
-          </button>
-
           {/* Profile */}
           <div className="relative">
             <button 
@@ -153,7 +72,7 @@ const Navbar = () => {
             {showProfileMenu && (
               <div className="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-xl 
                             border border-slate-200 overflow-hidden z-50">
-                <div className="px-4 py-3 bg-gradient-to-r from-blue-600 to-purple-600">
+                <div className="px-4 py-3 bg-linear-to-r from-blue-600 to-purple-600">
                   <p className="text-white font-semibold">Admin User</p>
                   <p className="text-blue-100 text-xs">admin@example.com</p>
                 </div>

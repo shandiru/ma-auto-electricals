@@ -10,6 +10,7 @@ import AddCar from './pages/Add/AddCar';
 import AddProduct from './pages/Add/AddProduct';
 import Login from './components/Login';
 import Signup from './components/Signup';
+import OrdersTable from './pages/Order';
 
 const Layout = ({ children }) => {
   const location = useLocation();
@@ -29,7 +30,7 @@ const Layout = ({ children }) => {
 };
 
 const App = () => {
-  const url = "https://ma-auto-electricals.onrender.com";
+  const url = "http://localhost:4000";
 
   return (
     <BrowserRouter>
@@ -46,6 +47,7 @@ const App = () => {
                 <Route path="/list/car" element={<CarList url={url} />} />
                 <Route path="/add/car" element={<AddCar url={url} />} />
                 <Route path="/add/product" element={<AddProduct url={url} />} />
+                <Route path="/list/order" element={<OrdersTable url={url} />} />
               </Routes>
             </Layout>
           }
