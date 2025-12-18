@@ -23,6 +23,7 @@ import CarStereosPage from "./page/CarStereos";
 import CarSecurityPage from "./page/CarSecurity";
 import CarRepairPage from "./page/CarRepair";
 import VehicleTrackingPage from "./page/VehicleTracking";
+import Ford from "./page/Ford";
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
         <Route path="/car-security" element={<CarSecurityPage />} />
         <Route path="/car-repair" element={<CarRepairPage />} />
         <Route path="/vehicle-tracking" element={<VehicleTrackingPage />} />
+        <Route path="/ford" element={<Ford />} />
       </Routes>
       <Footer />
       <GDPRBanner />
