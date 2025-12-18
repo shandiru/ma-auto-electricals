@@ -3,8 +3,6 @@ import OrderModel from "../models/orderModel.js";
 
 const orderRouter = express.Router();
 
-
-
 orderRouter.get("/", async (req, res) => {
   try {
     const orders = await OrderModel.find().sort({ createdAt: -1 });

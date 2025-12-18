@@ -2,8 +2,10 @@ import Stripe from "stripe";
 import orderModel from "../models/orderModel.js";
 import { v4 as uuidv4 } from "uuid";
 import { sendEmail } from "../utils/sendEmail.js";
+import dotenv from "dotenv";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const FRONTEND_URL = process.env.CLIENT_URL;
 
 /**
  * CREATE STRIPE CHECKOUT SESSION
@@ -45,8 +47,8 @@ export const createCheckoutSession = async (req, res) => {
       mode: "payment",
       line_items,
       customer_email: email,
-      success_url: `http://localhost:5173/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `http://localhost:5173/cart`,
+      success_url: `${FRONTEND_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${FRONTEND_URL}/cart`,
       metadata: {
         user: name,
         email,

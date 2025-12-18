@@ -56,8 +56,6 @@ export const getCarById = async (req, res) => {
 export const updateCar = async (req, res) => {
   try {
     const carId = req.params.id;
-    console.log("Updating car with ID:", carId);
-    console.log("Request body:", req.body);
 
     const car = await carModel.findById(carId);
     if (!car) return res.status(404).json({ success: false, message: "Car not found" });
@@ -70,8 +68,6 @@ export const updateCar = async (req, res) => {
     if (price) car.price = Number(price);
     if (year) car.year = Number(year);
     if (model) car.model = model;
-
-    console.log(name, description, price, year, model, removeImages);
 
     // Remove selected images
     if (removeImages) {
@@ -93,7 +89,6 @@ export const updateCar = async (req, res) => {
     if (req.files && req.files.length > 0) {
       const newImages = req.files.map(file => file.filename);
       car.images = [...car.images, ...newImages];
-      console.log("Added images:", newImages);
     }
 
     await car.save();
