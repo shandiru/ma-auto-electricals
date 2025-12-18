@@ -24,6 +24,7 @@ import CarSecurityPage from "./page/CarSecurity";
 import CarRepairPage from "./page/CarRepair";
 import VehicleTrackingPage from "./page/VehicleTracking";
 import Ford from "./page/Ford";
+import Vauxhall from "./page/Vauxhall";
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
         <Route path="/car-repair" element={<CarRepairPage />} />
         <Route path="/vehicle-tracking" element={<VehicleTrackingPage />} />
         <Route path="/ford" element={<Ford />} />
+        <Route path="/vauxhall" element={<Vauxhall />} />
       </Routes>
       <Footer />
       <GDPRBanner />
