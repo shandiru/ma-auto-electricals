@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { assets } from "../assets/assets";
 import { Bell, Search, Settings, LogOut, User, Menu, X } from "lucide-react";
 
 const Navbar = () => {
@@ -60,7 +59,7 @@ const Navbar = () => {
                 <img 
                   className="w-10 h-10 object-cover rounded-full ring-2 ring-slate-200 
                            hover:ring-blue-500 transition-all" 
-                  src={assets.profile_image} 
+                  src="/profile_image.png"
                   alt="Profile" 
                 />
                 <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full 

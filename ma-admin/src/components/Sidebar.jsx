@@ -1,5 +1,4 @@
 import React from "react";
-import { assets } from "../assets/assets";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Plus, List, Car, Package, LogOut, Package2 } from "lucide-react"; // ← added LogOut icon
 

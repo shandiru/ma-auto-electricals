@@ -17,6 +17,8 @@ import {
   ArrowUpDown,
   ArrowUp,
   ArrowDown,
+  AlertTriangle,
+  X,
 } from "lucide-react";
 import EditProduct from "../Edit/EditProduct";
 
@@ -25,6 +27,7 @@ const ProductList = ({ url }) => {
   const [loading, setLoading] = useState(true);
   const [deleteId, setDeleteId] = useState(null);
   const [editingProduct, setEditingProduct] = useState(null);
+  const [productToDelete, setProductToDelete] = useState(null);
 
   // Data table states
   const [searchTerm, setSearchTerm] = useState("");
@@ -51,6 +54,7 @@ const ProductList = ({ url }) => {
       await axios.delete(`${url}/api/products/${productId}`);
       toast.success("Product deleted successfully");
       fetchList();
+      setProductToDelete(null);
     } catch (error) {
       console.error("Error deleting:", error);
       toast.error("Failed to delete product");
@@ -61,6 +65,8 @@ const ProductList = ({ url }) => {
 
   const openEdit = (product) => setEditingProduct(product);
   const closeModal = () => setEditingProduct(null);
+  const openDeleteConfirmation = (product) => setProductToDelete(product);
+  const closeDeleteConfirmation = () => setProductToDelete(null);
 
   useEffect(() => {
     fetchList();
@@ -314,16 +320,11 @@ const ProductList = ({ url }) => {
                             <Edit size={18} className="text-blue-500" />
                           </button>
                           <button
-                            onClick={() => removeProduct(item._id)}
-                            disabled={deleteId === item._id}
-                            className="p-2 bg-red-50 hover:bg-red-100 rounded-lg transition-colors disabled:opacity-50"
+                            onClick={() => openDeleteConfirmation(item)}
+                            className="p-2 bg-red-50 hover:bg-red-100 rounded-lg transition-colors"
                             title="Delete product"
                           >
-                            {deleteId === item._id ? (
-                              <div className="w-[18px] h-[18px] border-2 border-red-500 border-t-transparent rounded-full animate-spin"></div>
-                            ) : (
-                              <Trash2 size={18} className="text-red-500" />
-                            )}
+                            <Trash2 size={18} className="text-red-500" />
                           </button>
                         </div>
                       </td>
@@ -407,15 +408,10 @@ const ProductList = ({ url }) => {
                             <Edit size={18} className="text-blue-500" />
                           </button>
                           <button
-                            onClick={() => removeProduct(item._id)}
-                            disabled={deleteId === item._id}
-                            className="p-2 rounded-lg bg-red-50 hover:bg-red-100 transition-colors disabled:opacity-50"
+                            onClick={() => openDeleteConfirmation(item)}
+                            className="p-2 rounded-lg bg-red-50 hover:bg-red-100 transition-colors"
                           >
-                            {deleteId === item._id ? (
-                              <div className="w-[18px] h-[18px] border-2 border-red-500 border-t-transparent rounded-full animate-spin"></div>
-                            ) : (
-                              <Trash2 size={18} className="text-red-500" />
-                            )}
+                            <Trash2 size={18} className="text-red-500" />
                           </button>
                         </div>
                       </div>
@@ -532,6 +528,93 @@ const ProductList = ({ url }) => {
           )}
         </div>
 
+        {/* Delete Confirmation Modal */}
+        {productToDelete && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm animate-fadeIn">
+            <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden animate-scaleIn">
+              {/* Header */}
+              <div className="bg-linear-to-r from-red-500 to-red-600 p-6 text-white">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="bg-white/20 p-2 rounded-lg">
+                      <AlertTriangle size={24} />
+                    </div>
+                    <h3 className="text-xl font-bold">Confirm Delete</h3>
+                  </div>
+                  <button
+                    onClick={closeDeleteConfirmation}
+                    className="p-1 hover:bg-white/20 rounded-lg transition-colors"
+                    disabled={deleteId === productToDelete._id}
+                  >
+                    <X size={20} />
+                  </button>
+                </div>
+              </div>
+
+              {/* Content */}
+              <div className="p-6">
+                {/* Product Preview */}
+                <div className="flex items-center gap-4 mb-6 p-4 bg-slate-50 rounded-lg">
+                  <div className="w-16 h-16 rounded-lg overflow-hidden shadow-md bg-slate-100 shrink-0">
+                    <img
+                      src={`${url}/images/${productToDelete.images?.[0]}`}
+                      alt={productToDelete.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h4 className="font-bold text-slate-800 truncate">
+                      {productToDelete.name}
+                    </h4>
+                    <p className="text-sm text-slate-600">
+                      ${productToDelete.price?.toLocaleString()}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Warning Message */}
+                <div className="space-y-2 mb-6">
+                  <p className="text-slate-700 font-medium">
+                    Are you sure you want to delete this product?
+                  </p>
+                  <p className="text-sm text-slate-600">
+                    This action cannot be undone. The product will be permanently
+                    removed from your inventory.
+                  </p>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex flex-col-reverse sm:flex-row gap-3">
+                  <button
+                    onClick={closeDeleteConfirmation}
+                    disabled={deleteId === productToDelete._id}
+                    className="flex-1 px-4 py-3 border-2 border-slate-300 rounded-lg font-semibold text-slate-700 hover:bg-slate-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={() => removeProduct(productToDelete._id)}
+                    disabled={deleteId === productToDelete._id}
+                    className="flex-1 px-4 py-3 bg-linear-to-r from-red-500 to-red-600 rounded-lg font-semibold text-white hover:from-red-600 hover:to-red-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  >
+                    {deleteId === productToDelete._id ? (
+                      <>
+                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                        Deleting...
+                      </>
+                    ) : (
+                      <>
+                        <Trash2 size={18} />
+                        Delete Product
+                      </>
+                    )}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Edit Modal */}
         {editingProduct && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm">
@@ -549,6 +632,36 @@ const ProductList = ({ url }) => {
           </div>
         )}
       </div>
+
+      <style jsx>{`
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+
+        @keyframes scaleIn {
+          from {
+            transform: scale(0.95);
+            opacity: 0;
+          }
+          to {
+            transform: scale(1);
+            opacity: 1;
+          }
+        }
+
+        .animate-fadeIn {
+          animation: fadeIn 0.2s ease-out;
+        }
+
+        .animate-scaleIn {
+          animation: scaleIn 0.3s ease-out;
+        }
+      `}</style>
     </div>
   );
 };
