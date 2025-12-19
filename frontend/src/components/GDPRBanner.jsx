@@ -44,7 +44,7 @@ export default function GDPRConsent() {
             We use cookies to improve your experience.{" "}
             <Link
               to="/privacy-policy"
-              className="underline font-semibold text-[#00D4FF] hover:text-[#FF6B6B] transition-colors"
+              className="underline font-semibold text-[#317F21] hover:text-[#4cb338] transition-colors"
             >
               See our Privacy Policy
             </Link>
@@ -54,13 +54,13 @@ export default function GDPRConsent() {
               onClick={handleReject}
               className="px-5 py-2 rounded-md bg-gray-600 text-white text-sm hover:bg-gray-500 transition"
             >
-              ❌ Reject
+              Reject
             </button>
             <button
               onClick={handleAccept}
-              className="px-5 py-2 rounded-md text-sm text-white bg-gradient-to-r from-[#00D4FF] to-[#FF6B6B] hover:opacity-90 transition"
+              className="px-5 py-2 rounded-md text-sm text-white bg-[#317F21] hover:opacity-90 transition"
             >
-              🍪 Accept
+              Accept
             </button>
           </div>
         </div>
@@ -71,7 +71,7 @@ export default function GDPRConsent() {
         <div className="fixed bottom-6 right-6 z-40">
           <button
             onClick={handleIconClick}
-            className="w-10 h-10 rounded-full bg-[#FF6B6B] shadow-lg border border-white flex items-center justify-center hover:scale-105 transition cursor-pointer"
+            className="w-10 h-10 rounded-full bg-[#317F21] shadow-lg border border-white flex items-center justify-center hover:scale-105 transition cursor-pointer"
             title="Cookie Preferences"
           >
             <img
