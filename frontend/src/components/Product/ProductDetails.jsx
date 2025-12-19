@@ -9,13 +9,15 @@ export default function ProductDetails() {
   const [inCart, setInCart] = useState(false);
   const navigate = useNavigate();
 
+  const API_URL = import.meta.env.VITE_API_URL; // Use .env for backend
+
   // Fetch product details
   useEffect(() => {
-    fetch(`http://localhost:4000/api/products/${id}`)
+    fetch(`${API_URL}/api/products/${id}`)
       .then((res) => res.json())
       .then((data) => setProduct(data))
       .catch((err) => console.error(err));
-  }, [id]);
+  }, [id, API_URL]);
 
   // Check if product is already in cart
   useEffect(() => {
@@ -23,26 +25,31 @@ export default function ProductDetails() {
     setInCart(cart.some((item) => item._id === id));
   }, [id]);
 
-  if (!product) return <p className="text-center mt-20">Loading...</p>;
+  if (!product)
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 py-20">
+        <div className="flex flex-col items-center">
+          <div className="w-16 h-16 border-4 border-t-[#317F21] border-gray-200 rounded-full animate-spin mb-4"></div>
+          <p className="text-gray-600 text-lg font-medium">Loading product...</p>
+        </div>
+      </div>
+    );
 
   const handleCartToggle = () => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
     if (inCart) {
-      // Remove from cart
       const updatedCart = cart.filter((item) => item._id !== product._id);
       localStorage.setItem("cart", JSON.stringify(updatedCart));
       setInCart(false);
       toast.error(`${product.name} removed from cart`);
     } else {
-      // Add to cart
       cart.push({ ...product, quantity: 1 });
       localStorage.setItem("cart", JSON.stringify(cart));
       setInCart(true);
       toast.success(`${product.name} added to cart`);
     }
 
-    // Trigger storage event for Navbar
     window.dispatchEvent(new Event("storage"));
   };
 
@@ -61,26 +68,20 @@ export default function ProductDetails() {
 
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden grid md:grid-cols-2">
           {/* Product Image */}
-          <div className="h-96">
+          <div className="h-96 flex items-center justify-center bg-gray-100">
             <img
-              src={`http://localhost:4000/images/${product.images[0]}`}
+              src={`${API_URL}/images/${product.images[0]}`}
               alt={product.name}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover transform transition duration-500 hover:scale-105"
             />
           </div>
 
           {/* Product Details */}
           <div className="p-8 flex flex-col justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-gray-800 mb-4">
-                {product.name}
-              </h1>
-
+              <h1 className="text-3xl font-bold text-gray-800 mb-4">{product.name}</h1>
               <p className="text-gray-600 mb-6">{product.description}</p>
-
-              <p className="text-4xl font-extrabold text-[#317F21]">
-                £{product.price}
-              </p>
+              <p className="text-4xl font-extrabold text-[#317F21]">£{product.price}</p>
             </div>
 
             {/* Add/Remove Cart Button */}

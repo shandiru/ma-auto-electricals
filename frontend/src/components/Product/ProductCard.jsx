@@ -8,25 +8,20 @@ export default function ProductCard() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const navigate = useNavigate();
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   useEffect(() => {
-    fetch("http://localhost:4000/api/products")
+    fetch(`${API_URL}/api/products`)
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);
-
-        // Extract unique categories
         const uniqueCategories = [...new Set(data.map((p) => p.category))];
         setCategories(uniqueCategories);
-
-        // Set default category to the first one
-        if (uniqueCategories.length > 0) {
-          setSelectedCategory(uniqueCategories[0]);
-        }
+        if (uniqueCategories.length > 0) setSelectedCategory(uniqueCategories[0]);
       })
       .catch((err) => console.error(err));
-  }, []);
+  }, [API_URL]);
 
-  // Filtered products based on selected category
   const filteredProducts = selectedCategory
     ? products.filter((p) => p.category === selectedCategory)
     : [];
@@ -37,7 +32,6 @@ export default function ProductCard() {
         Products by Category
       </h1>
 
-      {/* Category Buttons */}
       <div className="flex flex-wrap justify-center gap-4 mb-10">
         {categories.map((category) => (
           <button
@@ -54,24 +48,21 @@ export default function ProductCard() {
         ))}
       </div>
 
-      {/* Products */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {filteredProducts.map((product) => (
           <div
             key={product._id}
             className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-2 overflow-hidden"
           >
-            {/* Image */}
             <div className="relative h-64 overflow-hidden">
               <img
-                src={`http://localhost:4000/images/${product.images[0]}`}
+                src={`${API_URL}/images/${product.images[0]}`}
                 alt={product.name}
                 className="w-full h-full object-cover hover:scale-110 transition duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
             </div>
 
-            {/* Content */}
             <div className="p-6">
               <h3 className="text-xl font-bold text-gray-800 mb-2 line-clamp-2">
                 {product.name}

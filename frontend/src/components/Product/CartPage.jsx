@@ -14,6 +14,7 @@ export default function CartPage() {
   });
 
   const navigate = useNavigate();
+  const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -50,7 +51,6 @@ export default function CartPage() {
     0
   );
 
-  // ✅ Form validation function
   const validateForm = () => {
     const { name, email, address, phone } = userDetails;
 
@@ -58,52 +58,40 @@ export default function CartPage() {
       toast.error("Name is required");
       return false;
     }
-
     if (!email.trim()) {
       toast.error("Email is required");
       return false;
     }
-
-    // Simple email regex
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       toast.error("Invalid email format");
       return false;
     }
-
     if (!address.trim()) {
       toast.error("Address is required");
       return false;
     }
-
     if (!phone.trim()) {
       toast.error("Phone is required");
       return false;
     }
-
-    // Optional: validate phone format (digits only)
     const phoneRegex = /^[0-9]{7,15}$/;
     if (!phoneRegex.test(phone)) {
       toast.error("Phone number is invalid");
       return false;
     }
-
     return true;
   };
 
   const handleContinueToPayment = async () => {
-    // ✅ Validate form before sending request
     if (!validateForm()) return;
 
     try {
-      const res = await fetch(
-        "http://localhost:4000/api/stripe/create-checkout-session",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ cart, userDetails }),
-        }
-      );
+      const res = await fetch(`${API_URL}/api/stripe/create-checkout-session`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ cart, userDetails }),
+      });
       const data = await res.json();
       if (data.url) window.location.href = data.url;
     } catch (err) {
@@ -132,7 +120,7 @@ export default function CartPage() {
                 className="bg-white rounded-2xl shadow-md p-6 flex flex-col md:flex-row items-center gap-6 hover:shadow-xl transition"
               >
                 <img
-                  src={`http://localhost:4000/images/${item.images[0]}`}
+                  src={`${API_URL}/images/${item.images[0]}`}
                   alt={item.name}
                   className="w-40 h-40 object-cover rounded-xl cursor-pointer"
                   onClick={() => navigate(`/product/${item._id}`)}
@@ -155,9 +143,7 @@ export default function CartPage() {
                     >
                       <Minus size={16} />
                     </button>
-                    <span className="px-3 py-1 border rounded">
-                      {item.quantity}
-                    </span>
+                    <span className="px-3 py-1 border rounded">{item.quantity}</span>
                     <button
                       onClick={() => handleIncrease(item._id)}
                       className="bg-gray-200 p-1 rounded hover:bg-gray-300 transition"
@@ -197,9 +183,7 @@ export default function CartPage() {
                   >
                     ✕
                   </button>
-                  <h2 className="text-2xl font-bold mb-4">
-                    Enter Your Details
-                  </h2>
+                  <h2 className="text-2xl font-bold mb-4">Enter Your Details</h2>
                   <div className="flex flex-col gap-4">
                     <input
                       type="text"
@@ -207,10 +191,7 @@ export default function CartPage() {
                       className="border p-3 rounded-md w-full"
                       value={userDetails.name}
                       onChange={(e) =>
-                        setUserDetails({
-                          ...userDetails,
-                          name: e.target.value,
-                        })
+                        setUserDetails({ ...userDetails, name: e.target.value })
                       }
                     />
                     <input
@@ -219,10 +200,7 @@ export default function CartPage() {
                       className="border p-3 rounded-md w-full"
                       value={userDetails.email}
                       onChange={(e) =>
-                        setUserDetails({
-                          ...userDetails,
-                          email: e.target.value,
-                        })
+                        setUserDetails({ ...userDetails, email: e.target.value })
                       }
                     />
                     <input
@@ -231,10 +209,7 @@ export default function CartPage() {
                       className="border p-3 rounded-md w-full"
                       value={userDetails.address}
                       onChange={(e) =>
-                        setUserDetails({
-                          ...userDetails,
-                          address: e.target.value,
-                        })
+                        setUserDetails({ ...userDetails, address: e.target.value })
                       }
                     />
                     <input
@@ -243,10 +218,7 @@ export default function CartPage() {
                       className="border p-3 rounded-md w-full"
                       value={userDetails.phone}
                       onChange={(e) =>
-                        setUserDetails({
-                          ...userDetails,
-                          phone: e.target.value,
-                        })
+                        setUserDetails({ ...userDetails, phone: e.target.value })
                       }
                     />
                     <button
