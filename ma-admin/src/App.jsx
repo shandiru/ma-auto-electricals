@@ -30,7 +30,7 @@ const Layout = ({ children }) => {
 };
 
 const App = () => {
-  const url = "http://localhost:4000";
+  const url = "https://ma-auto-electricals.onrender.com";
 
   return (
     <BrowserRouter>
