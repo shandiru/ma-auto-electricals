@@ -1,24 +1,25 @@
-import React, { useState, useEffect } from "react";
+"use client";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 import { ShoppingCart } from "lucide-react";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isServiceOpen, setIsServiceOpen] = useState(false);
   const [cartCount, setCartCount] = useState(0);
   const navigate = useNavigate();
+  const serviceRef = useRef(null);
 
   const waNumber = "447494481443";
   const waHref = `https://wa.me/${waNumber}`;
 
-  // Scroll offset function (accounts for fixed header height)
   const scrollWithOffset = (el) => {
-    const yOffset = -80; // adjust this to your header height
+    const yOffset = -80;
     const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
     window.scrollTo({ top: y, behavior: "smooth" });
   };
 
-  // Update cart count
   const updateCartCount = () => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
     setCartCount(cart.length);
@@ -31,27 +32,76 @@ export default function Navbar() {
     return () => window.removeEventListener("storage", handleStorage);
   }, []);
 
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (serviceRef.current && !serviceRef.current.contains(event.target)) {
+        setIsServiceOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const services = [
+    { title: "Car Stereos", link: "/car-stereos" },
+    { title: "Vehicle Diagnostics", link: "/diagnostics" },
+    { title: "Car Repairs & Servicing", link: "/car-repair" },
+    { title: "Handsfree Car Kits", link: "/handfree" },
+    { title: "Parking Sensors/Cameras", link: "/parking" },
+    { title: "Car Security", link: "/car-security" },
+    { title: "MOT", link: "/mot" },
+    { title: "Vehicle Tracking Systems", link: "/vehicle-tracking" },
+    { title: "Installations & Fitting", link: "/installation" },
+  ];
+
+  const handleServiceClick = () => setIsServiceOpen(false); // Close dropdown when a service is clicked
+
   return (
     <header className="fixed top-0 w-full bg-black/90 backdrop-blur-sm z-50 border-b border-gray-800">
       <div className="mx-auto max-w-7xl px-4 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <img
-              src="/logo.png"
-              alt="AF-MOK Logo"
-              className="w-35 h-14 flex-shrink-0"
-            />
+            <img src="/logo.png" alt="AF-MOK Logo" className="w-35 h-14 flex-shrink-0" />
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8 lg:gap-10">
+          <nav className="hidden md:flex items-center gap-8 lg:gap-10 relative">
             <HashLink smooth to="/#home" scroll={scrollWithOffset} className="text-gray-300 hover:text-white transition-colors">
               Home
             </HashLink>
-            <HashLink smooth to="/#services" scroll={scrollWithOffset} className="text-gray-300 hover:text-white transition-colors">
-              Services
-            </HashLink>
+
+            {/* Services Dropdown */}
+            <div ref={serviceRef} className="relative">
+              <button
+                onClick={() => setIsServiceOpen((prev) => !prev)}
+                className="text-gray-300 hover:text-white transition-colors flex items-center gap-1"
+              >
+                Services
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
+              {isServiceOpen && (
+                <div className="absolute left-0 mt-2 w-56 bg-black/90 border border-gray-800 rounded-md shadow-lg z-50">
+                  {services.map((s, index) => (
+                    <HashLink
+                      key={index}
+                      smooth
+                      to={s.link}
+                      scroll={scrollWithOffset}
+                      className="block px-4 py-2 text-gray-300 hover:bg-gray-800 hover:text-white"
+                      onClick={handleServiceClick}
+                    >
+                      {s.title}
+                    </HashLink>
+                  ))}
+                </div>
+              )}
+            </div>
+
             <HashLink smooth to="/#about" scroll={scrollWithOffset} className="text-gray-300 hover:text-white transition-colors">
               About
             </HashLink>
@@ -65,7 +115,6 @@ export default function Navbar() {
 
           {/* Right actions */}
           <div className="flex items-center gap-4">
-            {/* WhatsApp (Desktop) */}
             <a
               href={waHref}
               target="_blank"
@@ -76,11 +125,7 @@ export default function Navbar() {
               <span className="text-sm font-semibold whitespace-nowrap">WhatsApp</span>
             </a>
 
-            {/* Cart Icon */}
-            <div
-              className="relative cursor-pointer"
-              onClick={() => navigate("/cart")} // Navigate to Cart page
-            >
+            <div className="relative cursor-pointer" onClick={() => navigate("/cart")}>
               <ShoppingCart size={28} className="text-[#317F21]" />
               {cartCount > 0 && (
                 <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-2 rounded-full">
@@ -89,7 +134,6 @@ export default function Navbar() {
               )}
             </div>
 
-            {/* Mobile Menu Button */}
             <button
               type="button"
               aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -116,17 +160,41 @@ export default function Navbar() {
               <HashLink smooth to="/#home" scroll={scrollWithOffset} className="text-gray-300 hover:text-white transition-colors">
                 Home
               </HashLink>
-              <HashLink smooth to="/#services" scroll={scrollWithOffset} className="text-gray-300 hover:text-white transition-colors">
-                Services
-              </HashLink>
+
+              {/* Mobile Services Dropdown */}
+              <div>
+                <button
+                  className="w-full text-left text-gray-300 hover:text-white transition-colors flex justify-between items-center"
+                  onClick={() => setIsServiceOpen((v) => !v)}
+                >
+                  Services <span>{isServiceOpen ? "▲" : "▼"}</span>
+                </button>
+                {isServiceOpen && (
+                  <div className="flex flex-col ml-4 mt-2 space-y-2">
+                    {services.map((s, index) => (
+                      <HashLink
+                        key={index}
+                        smooth
+                        to={s.link}
+                        scroll={scrollWithOffset}
+                        className="text-gray-300 hover:text-white"
+                        onClick={() => setIsServiceOpen(false)}
+                      >
+                        {s.title}
+                      </HashLink>
+                    ))}
+                  </div>
+                )}
+              </div>
+
               <HashLink smooth to="/#about" scroll={scrollWithOffset} className="text-gray-300 hover:text-white transition-colors">
                 About
               </HashLink>
-              <HashLink smooth to="/#contact" scroll={scrollWithOffset} className="text-gray-300 hover:text-white transition-colors">
-                Contact
-              </HashLink>
               <HashLink smooth to="/product" scroll={scrollWithOffset} className="text-gray-300 hover:text-white transition-colors">
                 Product
+              </HashLink>
+              <HashLink smooth to="/contact" scroll={scrollWithOffset} className="text-gray-300 hover:text-white transition-colors">
+                Contact
               </HashLink>
             </div>
           </nav>

@@ -43,7 +43,7 @@ export default function ContactHero() {
           >
             Contact{" "}
             <span style={{ color: palette.primary }}>
-              Ma auto electrics
+              MA Auto electrics
             </span>
           </h1>
 

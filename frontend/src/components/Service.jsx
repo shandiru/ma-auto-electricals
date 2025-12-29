@@ -90,7 +90,7 @@ export default function Service() {
             title: "Vehicle Diagnostics",
             description: "Using advanced diagnostic equipment, we quickly identify and fix electrical and engine faults in all vehicle makes and models.",
             icon: <Cpu className="w-6 h-6 text-[#317F21]" />,
-            image: "https://images.unsplash.com/photo-1592492152545-8c2d0a29c0c8?w=800&q=80",
+            image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
             link: "/diagnostics"
         },
         {
@@ -98,7 +98,7 @@ export default function Service() {
             title: "Car Repairs & Servicing",
             description: "Our comprehensive car repairs and servicing keep your vehicle running safely, efficiently, and reliably.",
             icon: <Hammer className="w-6 h-6 text-[#317F21]" />,
-            image: "https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?w=800&q=80",
+            image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
             link: "/car-repair"
         },
         {
@@ -106,7 +106,7 @@ export default function Service() {
             title: "Handsfree Car Kits",
             description: "We professionally install handsfree car kits to help you stay connected while driving safely and legally.",
             icon: <Phone className="w-6 h-6 text-[#317F21]" />,
-            image: "https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?w=800&q=80",
+             image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
             link: "/handfree"
         },
         {
@@ -114,7 +114,7 @@ export default function Service() {
             title: "Parking Sensors/Cameras",
             description: "Our parking sensors and reversing cameras make parking easier and safer by improving visibility and awareness.",
             icon: <Camera className="w-6 h-6 text-[#317F21]" />,
-            image: "https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?w=800&q=80",
+             image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
             link: "/parking"
         },
         {
@@ -122,7 +122,7 @@ export default function Service() {
             title: "Car Security",
             description: "We install reliable car security systems to protect your vehicle from theft and unauthorized access.",
             icon: <Shield className="w-6 h-6 text-[#317F21]" />,
-            image: "https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?w=800&q=80",
+            image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
             link: "/car-security"
         },
         {
@@ -130,7 +130,7 @@ export default function Service() {
             title: "MOT",
             description: "We provide trusted MOT testing and preparation to ensure your vehicle meets all legal safety standards.",
             icon: <CheckSquare className="w-6 h-6 text-[#317F21]" />,
-            image: "https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?w=800&q=80",
+            image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
             link: "/mot"
         },
         {
@@ -138,7 +138,7 @@ export default function Service() {
             title: "Vehicle Tracking Systems",
             description: "Our vehicle tracking systems give you real-time location monitoring for added security and peace of mind.",
             icon: <MapPin className="w-6 h-6 text-[#317F21]" />,
-            image: "https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?w=800&q=80",
+            image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
             link: "/vehicle-tracking"
         },
         {
@@ -146,7 +146,7 @@ export default function Service() {
             title: "Installations & Fitting",
             description: "All installations and fittings are carried out by experienced technicians to ensure a professional, long-lasting finish.",
             icon: <Settings className="w-6 h-6 text-[#317F21]" />,
-            image: "https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?w=800&q=80",
+            image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
             link: "/installation"
         },
     ];
