@@ -1,30 +1,43 @@
 import React, { useEffect, useState } from "react";
 import { ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import Select from "react-select";
 
 export default function ProductCard() {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedCategories, setSelectedCategories] = useState([]);
   const navigate = useNavigate();
 
   const API_URL = import.meta.env.VITE_API_URL;
 
+  // Fetch products
   useEffect(() => {
     fetch(`${API_URL}/api/products`)
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);
+
+        // Extract unique categories
         const uniqueCategories = [...new Set(data.map((p) => p.category))];
-        setCategories(uniqueCategories);
-        if (uniqueCategories.length > 0) setSelectedCategory(uniqueCategories[0]);
+
+        // Format for react-select
+        const options = uniqueCategories.map((c) => ({ value: c, label: c }));
+        setCategories(options);
+
+        // Default: select only the first category
+        if (options.length > 0) setSelectedCategories([options[0]]);
       })
       .catch((err) => console.error(err));
   }, [API_URL]);
 
-  const filteredProducts = selectedCategory
-    ? products.filter((p) => p.category === selectedCategory)
-    : [];
+  // Filter products based on selected categories
+  const filteredProducts =
+    selectedCategories.length > 0
+      ? products.filter((p) =>
+          selectedCategories.some((c) => c.value === p.category)
+        )
+      : [];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
@@ -32,22 +45,20 @@ export default function ProductCard() {
         Products by Category
       </h1>
 
-      <div className="flex flex-wrap justify-center gap-4 mb-10">
-        {categories.map((category) => (
-          <button
-            key={category}
-            onClick={() => setSelectedCategory(category)}
-            className={`px-6 py-2 rounded-full font-semibold transition ${
-              selectedCategory === category
-                ? "bg-[#317F21] text-white"
-                : "bg-gray-200 text-gray-800 hover:bg-[#3ad81a] hover:text-white"
-            }`}
-          >
-            {category}
-          </button>
-        ))}
+      {/* Multi-select dropdown */}
+      <div className="max-w-md mx-auto mb-10">
+        <Select
+          options={categories}
+          value={selectedCategories}
+          onChange={(selected) => setSelectedCategories(selected || [])}
+          isMulti
+          closeMenuOnSelect={false}
+          placeholder="Select Categories..."
+          className="text-gray-700"
+        />
       </div>
 
+      {/* Products grid */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {filteredProducts.map((product) => (
           <div
@@ -84,6 +95,12 @@ export default function ProductCard() {
             </div>
           </div>
         ))}
+
+        {filteredProducts.length === 0 && (
+          <p className="text-center text-gray-500 col-span-full">
+            No products found in selected categories.
+          </p>
+        )}
       </div>
     </div>
   );
