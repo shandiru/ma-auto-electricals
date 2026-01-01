@@ -25,6 +25,15 @@ import CarRepairPage from "./page/CarRepair";
 import VehicleTrackingPage from "./page/VehicleTracking";
 import Ford from "./page/Ford";
 import Vauxhall from "./page/Vauxhall";
+import AdBluePage from "./page/AdBlue";
+import EGRPage from "./page/EGR";
+import ECUPage from "./page/ECU";
+import CarElectricsPage from "./page/CarElectrics";
+import CentralDoorMotorsPage from "./page/CentralDoorMotors";
+import WiperMotorsPage from "./page/WiperMotors";
+import WindowRegulatorsPage from "./page/WindowRegulators";
+import BrakePadsPage from "./page/BrakePads";
+import MechanicalPage from "./page/Mechanica";
 
 function App() {
   return (
@@ -50,6 +59,15 @@ function App() {
         <Route path="/car-security" element={<CarSecurityPage />} />
         <Route path="/car-repair" element={<CarRepairPage />} />
         <Route path="/vehicle-tracking" element={<VehicleTrackingPage />} />
+        <Route path="/AdBlue" element={<AdBluePage />} />
+        <Route path="/EGR" element={<EGRPage />} />
+        <Route path="/ECURepair&Services" element={<ECUPage />} />
+        <Route path="/Car-Electrics" element={<CarElectricsPage />} />
+        <Route path="/central-door-motors" element={<CentralDoorMotorsPage />} />
+        <Route path="/WiperMotors" element={<WiperMotorsPage />} />
+        <Route path="/WindowRegulators" element={<WindowRegulatorsPage />} />
+        <Route path="/BrakePads" element={<BrakePadsPage />} />
+        <Route path="/Mechanical" element={<MechanicalPage />} />
         <Route path="/ford" element={<Ford />} />
         <Route path="/vauxhall" element={<Vauxhall />} />
       </Routes>
