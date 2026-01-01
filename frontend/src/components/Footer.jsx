@@ -154,7 +154,7 @@ export default function Footer() {
 
         {/* Bottom */}
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; 2025 Ma auto electrics. All rights reserved.</p>
+          <p>&copy; 2025 MA Auto electrics. All rights reserved.</p>
         </div>
 
         {/* Bottom Bar */}
