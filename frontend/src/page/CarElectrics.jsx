@@ -1,5 +1,5 @@
 import HeroTemplate from "../CommonService/HeroTemplate";
-import { motHeroData, emergencyCtaData, automotiveServicesData, majorServicesData } from "../ServiceData/CarRepair";
+import { motHeroData, emergencyCtaData, automotiveServicesData, majorServicesData } from "../ServiceData/Car-Electrics";
 import EmergencyCtaTemplate from "../CommonService/EmergencyCtaTemplate";
 import AutomotiveServicesTemplate from "../CommonService/AutomotiveServicesTemplate";
 import MajorServicesTemplate from "../CommonService/MajorServicesTemplate";
