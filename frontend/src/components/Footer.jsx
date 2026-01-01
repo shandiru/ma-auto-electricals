@@ -2,13 +2,12 @@
 import React from "react";
 import { Facebook, Instagram } from "lucide-react";
 import { Link } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 
 export default function Footer() {
   const address =
     "13 laburnum drive oswaldtwistele accrington bb5 3aw";
-  const mapsUrl =
-    "https://maps.app.goo.gl/EPnqrDkCRBvqW38z8" +
-    encodeURIComponent(address);
+  const mapsUrl = "https://maps.app.goo.gl/kRTMxN6CGvHz1B548"
 
   return (
     <footer className="bg-gray-900 border-t border-gray-800 py-12">
@@ -77,30 +76,47 @@ export default function Footer() {
             <h3 className="font-bold mb-4 text-[#317F21]">Quick Link</h3>
             <ul className="space-y-2 text-gray-400">
               <li>
-                <a href="#services" className="hover:text-white transition-colors">
+                <HashLink
+                  smooth
+                  to="/#home"
+                  className="hover:text-white transition-colors"
+                >
                   Home
-                </a>
+                </HashLink>
               </li>
+
               <li>
-                <a href="#services" className="hover:text-white transition-colors">
+                <HashLink
+                  smooth
+                  to="/#about"
+                  className="hover:text-white transition-colors"
+                >
                   About
-                </a>
+                </HashLink>
               </li>
+
               <li>
-                <a href="#services" className="hover:text-white transition-colors">
-                  Service
-                </a>
+                <HashLink
+                  smooth
+                  to="/#services"
+                  className="hover:text-white transition-colors"
+                >
+                  Services
+                </HashLink>
               </li>
+
               <li>
-                <a href="/contact" className="hover:text-white transition-colors">
+                <Link to="/contact" className="hover:text-white transition-colors">
                   Contact
-                </a>
+                </Link>
               </li>
+
               <li>
                 <Link to="/privacy-policy" className="hover:text-gray-300">
                   Privacy Policy
                 </Link>
               </li>
+
               <li>
                 <Link to="/terms-conditions" className="hover:text-gray-300">
                   Terms & Conditions

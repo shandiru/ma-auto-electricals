@@ -152,7 +152,7 @@ export default function Service() {
     ];
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 py-12 px-6">
+        <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 py-12 px-6 scroll-m-5" id="services">
             <div className="max-w-6xl mx-auto">
                 <div className="text-center mb-14">
                     <h1 className="text-4xl font-bold text-slate-900 mb-3">
