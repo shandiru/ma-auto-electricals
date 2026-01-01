@@ -1,8 +1,13 @@
-"use client";
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
-import { ShoppingCart } from "lucide-react";
+import {
+  ShoppingCart,
+  Menu,
+  X,
+  ChevronDown,
+  ChevronUp,
+} from "lucide-react";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,28 +26,9 @@ export default function Navbar() {
     window.scrollTo({ top: y, behavior: "smooth" });
   };
 
-  const updateCartCount = () => {
+  useEffect(() => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
     setCartCount(cart.length);
-  };
-
-  useEffect(() => {
-    updateCartCount();
-    const handleStorage = () => updateCartCount();
-    window.addEventListener("storage", handleStorage);
-    return () => window.removeEventListener("storage", handleStorage);
-  }, []);
-
-  // Close dropdown on outside click
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (serviceRef.current && !serviceRef.current.contains(event.target)) {
-        setIsServiceOpen(false);
-        setOpenSubMenu(null);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const serviceCategories = [
@@ -91,72 +77,62 @@ export default function Navbar() {
     },
   ];
 
-  const handleServiceClick = () => {
+  const closeAll = () => {
+    setIsMenuOpen(false);
     setIsServiceOpen(false);
     setOpenSubMenu(null);
   };
 
   return (
     <header className="fixed top-0 w-full bg-black/90 backdrop-blur-sm z-50 border-b border-gray-800">
-      <div className="mx-auto max-w-7xl px-4 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="h-16 flex items-center justify-between">
+
           {/* Logo */}
-          <div className="flex items-center">
-            <img src="/logo.png" alt="AF-MOK Logo" className="w-35 h-14 flex-shrink-0" />
+          <div onClick={() => navigate("/")} className="cursor-pointer">
+            <img src="/logo.png" alt="Logo" className="h-12" />
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8 lg:gap-10 relative">
-            <HashLink smooth to="/#home" scroll={scrollWithOffset} className="text-gray-300 hover:text-white transition-colors">
+          <nav className="hidden md:flex items-center gap-8">
+            <HashLink smooth to="/#home" scroll={scrollWithOffset} className="text-gray-300 hover:text-white">
               Home
             </HashLink>
 
             {/* Services Dropdown */}
             <div ref={serviceRef} className="relative">
               <button
-                onClick={() => {
-                  setIsServiceOpen((prev) => !prev);
-                  setOpenSubMenu(null);
-                }}
-                className="text-gray-300 hover:text-white transition-colors flex items-center gap-1"
+                onClick={() => setIsServiceOpen((v) => !v)}
+                className="flex items-center gap-1 text-gray-300 hover:text-white"
               >
                 Services
-                <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
+                {isServiceOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
               </button>
 
               {isServiceOpen && (
-                <div className="absolute left-0 mt-2 w-64 bg-black/95 border border-gray-800 rounded-md shadow-xl z-50">
-                  {serviceCategories.map((category, catIndex) => (
-                    <div key={catIndex} className="relative border-b border-gray-800 last:border-b-0">
+                <div className="absolute left-0 mt-2 w-72 bg-black border border-gray-800 rounded-md shadow-xl">
+                  {serviceCategories.map((cat, i) => (
+                    <div key={i} className="border-b border-gray-800">
                       <button
-                        onClick={() => setOpenSubMenu(openSubMenu === catIndex ? null : catIndex)}
-                        className="w-full px-4 py-3 text-white font-semibold text-sm hover:bg-gray-800 cursor-pointer flex items-center justify-between text-left"
+                        onClick={() => setOpenSubMenu(openSubMenu === i ? null : i)}
+                        className="w-full px-4 py-3 flex items-center justify-between text-white font-semibold hover:bg-gray-800"
                       >
-                        {category.category}
-                        <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
+                        {cat.category}
+                        {openSubMenu === i ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
                       </button>
-                      
-                      {/* Sub-dropdown */}
-                      {openSubMenu === catIndex && (
-                        <div className="absolute left-full top-0 ml-1 w-64 bg-black/95 border border-gray-800 rounded-md shadow-xl z-50">
-                          <div className="py-2">
-                            {category.items.map((item, itemIndex) => (
-                              <HashLink
-                                key={itemIndex}
-                                smooth
-                                to={item.link}
-                                scroll={scrollWithOffset}
-                                className="block px-4 py-2 text-gray-400 hover:bg-gray-800 hover:text-white text-sm transition-colors"
-                                onClick={handleServiceClick}
-                              >
-                                {item.title}
-                              </HashLink>
-                            ))}
-                          </div>
+
+                      {openSubMenu === i && (
+                        <div className="bg-gray-900">
+                          {cat.items.map((item, j) => (
+                            <HashLink
+                              key={j}
+                              to={item.link}
+                              onClick={closeAll}
+                              className="block px-6 py-2 text-gray-400 hover:text-white hover:bg-gray-800 text-sm"
+                            >
+                              {item.title}
+                            </HashLink>
+                          ))}
                         </div>
                       )}
                     </div>
@@ -165,112 +141,99 @@ export default function Navbar() {
               )}
             </div>
 
-            <HashLink smooth to="/#about" scroll={scrollWithOffset} className="text-gray-300 hover:text-white transition-colors">
-              About
-            </HashLink>
-            <HashLink smooth to="/product" scroll={scrollWithOffset} className="text-gray-300 hover:text-white transition-colors">
-              Product
-            </HashLink>
-            <HashLink smooth to="/contact" scroll={scrollWithOffset} className="text-gray-300 hover:text-white transition-colors">
-              Contact
-            </HashLink>
+            <HashLink to="/#about" className="text-gray-300 hover:text-white">About</HashLink>
+            <HashLink to="/product" className="text-gray-300 hover:text-white">Product</HashLink>
+            <HashLink to="/contact" className="text-gray-300 hover:text-white">Contact</HashLink>
           </nav>
 
-          {/* Right actions */}
+          {/* Right Section */}
           <div className="flex items-center gap-4">
-            <a
-              href={waHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Chat on WhatsApp"
-              className="hidden md:inline-flex items-center gap-2 rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-3 py-2 text-emerald-300 hover:text-white hover:bg-emerald-500/20 transition-colors"
-            >
-              <span className="text-sm font-semibold whitespace-nowrap">WhatsApp</span>
-            </a>
-
-            <div className="relative cursor-pointer" onClick={() => navigate("/cart")}>
-              <ShoppingCart size={28} className="text-[#317F21]" />
+            <div onClick={() => navigate("/cart")} className="relative cursor-pointer">
+              <ShoppingCart size={26} className="text-green-500" />
               {cartCount > 0 && (
-                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-2 rounded-full">
+                <span className="absolute -top-2 -right-2 bg-red-500 text-xs text-white px-2 rounded-full">
                   {cartCount}
                 </span>
               )}
             </div>
 
+            {/* Mobile Menu Toggle */}
             <button
-              type="button"
-              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-              className="md:hidden ml-1 text-white inline-flex items-center justify-center p-2 rounded-lg hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/40"
-              onClick={() => setIsMenuOpen((v) => !v)}
+              className="md:hidden text-white"
+              onClick={() => {
+                setIsMenuOpen((v) => !v);
+                setIsServiceOpen(false);
+                setOpenSubMenu(null);
+              }}
             >
-              {isMenuOpen ? (
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  <path d="M18 6L6 18M6 6l12 12" />
-                </svg>
-              ) : (
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  <path d="M3 6h18M3 12h18M3 18h18" />
-                </svg>
-              )}
+              {isMenuOpen ? <X size={26} /> : <Menu size={26} />}
             </button>
           </div>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Menu */}
         {isMenuOpen && (
-          <nav className="md:hidden py-4 border-t border-gray-800">
-            <div className="flex flex-col space-y-4">
-              <HashLink smooth to="/#home" scroll={scrollWithOffset} className="text-gray-300 hover:text-white transition-colors">
-                Home
-              </HashLink>
+          <div className="md:hidden py-4 border-t border-gray-800 space-y-4">
 
-              {/* Mobile Services Dropdown */}
-              <div>
-                <button
-                  className="w-full text-left text-gray-300 hover:text-white transition-colors flex justify-between items-center"
-                  onClick={() => setIsServiceOpen((v) => !v)}
-                >
-                  Services <span>{isServiceOpen ? "▲" : "▼"}</span>
-                </button>
-                {isServiceOpen && (
-                  <div className="flex flex-col ml-2 mt-3 space-y-3">
-                    {serviceCategories.map((category, catIndex) => (
-                      <div key={catIndex}>
-                        <h3 className="text-white font-semibold text-sm mb-2">{category.category}</h3>
-                        <div className="flex flex-col ml-2 space-y-2">
-                          {category.items.map((item, itemIndex) => (
+            <HashLink to="/#home" onClick={closeAll} className="block text-gray-300">
+              Home
+            </HashLink>
+
+            {/* Mobile Services */}
+            <div>
+              <button
+                onClick={() => setIsServiceOpen((v) => !v)}
+                className="w-full flex justify-between items-center text-gray-300"
+              >
+                Services
+                {isServiceOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+              </button>
+
+              {isServiceOpen && (
+                <div className="mt-3 border-l border-gray-700 pl-3">
+                  {serviceCategories.map((cat, i) => (
+                    <div key={i} className="mb-3">
+                      <button
+                        onClick={() => setOpenSubMenu(openSubMenu === i ? null : i)}
+                        className="w-full flex justify-between items-center text-white font-semibold"
+                      >
+                        {cat.category}
+                        {openSubMenu === i ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+                      </button>
+
+                      {openSubMenu === i && (
+                        <div className="ml-3 mt-2 space-y-1">
+                          {cat.items.map((item, j) => (
                             <HashLink
-                              key={itemIndex}
-                              smooth
+                              key={j}
                               to={item.link}
-                              scroll={scrollWithOffset}
-                              className="text-gray-400 hover:text-white text-sm"
-                              onClick={() => {
-                                setIsServiceOpen(false);
-                                setIsMenuOpen(false);
-                              }}
+                              onClick={closeAll}
+                              className="block text-gray-400 hover:text-white text-sm"
                             >
-                              • {item.title}
+                              {item.title}
                             </HashLink>
                           ))}
                         </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              <HashLink smooth to="/#about" scroll={scrollWithOffset} className="text-gray-300 hover:text-white transition-colors">
-                About
-              </HashLink>
-              <HashLink smooth to="/product" scroll={scrollWithOffset} className="text-gray-300 hover:text-white transition-colors">
-                Product
-              </HashLink>
-              <HashLink smooth to="/contact" scroll={scrollWithOffset} className="text-gray-300 hover:text-white transition-colors">
-                Contact
-              </HashLink>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
-          </nav>
+
+            <HashLink to="/#about" onClick={closeAll} className="block text-gray-300">About</HashLink>
+            <HashLink to="/product" onClick={closeAll} className="block text-gray-300">Product</HashLink>
+            <HashLink to="/contact" onClick={closeAll} className="block text-gray-300">Contact</HashLink>
+
+            <a
+              href={waHref}
+              target="_blank"
+              rel="noreferrer"
+              className="block text-center bg-emerald-500/10 text-emerald-400 py-3 rounded-lg"
+            >
+              WhatsApp Us
+            </a>
+          </div>
         )}
       </div>
     </header>
