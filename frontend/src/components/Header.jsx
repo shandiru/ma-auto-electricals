@@ -59,7 +59,6 @@ export default function Navbar() {
       category: "Diagnostics & Electrical",
       items: [
         { title: "Vehicle Diagnostics", link: "/diagnostics" },
-        { title: "Fault Finding", link: "/diagnostics" },
         { title: "All Car Electrics", link: "/Car-Electrics" },
         { title: "ECU Repairs & Services", link: "/ECURepair&Services" },
         { title: "Window Regulators", link: "/WindowRegulators" },
