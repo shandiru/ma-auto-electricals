@@ -18,24 +18,44 @@ export default function ProductCard() {
       .then((data) => {
         setProducts(data);
 
-        // Extract unique categories
-        const uniqueCategories = [...new Set(data.map((p) => p.category))];
+        // ===== FIX DUPLICATE CATEGORIES =====
+        const categoryMap = new Map();
 
-        // Format for react-select
-        const options = uniqueCategories.map((c) => ({ value: c, label: c }));
+        data.forEach((p) => {
+          if (!p.category) return;
+
+          const normalized = p.category.trim().toLowerCase();
+
+          // keep only first occurrence
+          if (!categoryMap.has(normalized)) {
+            categoryMap.set(normalized, p.category.trim());
+          }
+        });
+
+        const options = Array.from(categoryMap.values()).map((c) => ({
+          value: c,
+          label: c,
+        }));
+
         setCategories(options);
 
-        // Default: select only the first category
-        if (options.length > 0) setSelectedCategories([options[0]]);
+        // default select first category
+        if (options.length > 0) {
+          setSelectedCategories([options[0]]);
+        }
       })
       .catch((err) => console.error(err));
   }, [API_URL]);
 
-  // Filter products based on selected categories
+  // Filter products
   const filteredProducts =
     selectedCategories.length > 0
       ? products.filter((p) =>
-          selectedCategories.some((c) => c.value === p.category)
+          selectedCategories.some(
+            (c) =>
+              c.value.trim().toLowerCase() ===
+              p.category.trim().toLowerCase()
+          )
         )
       : [];
 
@@ -45,7 +65,7 @@ export default function ProductCard() {
         Products by Category
       </h1>
 
-      {/* Multi-select dropdown */}
+      {/* CATEGORY MULTI SELECT */}
       <div className="max-w-md mx-auto mb-10">
         <Select
           options={categories}
@@ -58,7 +78,7 @@ export default function ProductCard() {
         />
       </div>
 
-      {/* Products grid */}
+      {/* PRODUCTS GRID */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {filteredProducts.map((product) => (
           <div
@@ -67,7 +87,7 @@ export default function ProductCard() {
           >
             <div className="relative h-64 overflow-hidden">
               <img
-                src={`${API_URL}/images/${product.images[0]}`}
+                src={`${API_URL}/images/${product.images?.[0]}`}
                 alt={product.name}
                 className="w-full h-full object-cover hover:scale-110 transition duration-500"
               />
@@ -83,15 +103,13 @@ export default function ProductCard() {
                 £{product.price}
               </p>
 
-              <div className="flex items-center justify-between">
-                <button
-                  onClick={() => navigate(`/products/${product._id}`)}
-                  className="flex items-center gap-2 text-[#317F21] font-semibold hover:text-[#3ad81a]"
-                >
-                  View Details
-                  <ChevronRight className="w-5 h-5" />
-                </button>
-              </div>
+              <button
+                onClick={() => navigate(`/products/${product._id}`)}
+                className="flex items-center gap-2 text-[#317F21] font-semibold hover:text-[#3ad81a]"
+              >
+                View Details
+                <ChevronRight className="w-5 h-5" />
+              </button>
             </div>
           </div>
         ))}
