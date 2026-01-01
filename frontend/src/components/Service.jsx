@@ -1,15 +1,24 @@
 import React, { useState } from "react";
 import {
-    Phone,
-    Camera,
-    Shield,
-    CheckSquare,
-    MapPin,
     Music,
     Cpu,
-    Settings,
+    Wrench,
+    PhoneCall,
+    Camera,
+    ShieldCheck,
+    ClipboardCheck,
+    MapPin,
     ArrowRight,
-    Hammer
+    Cog,
+    Disc,
+    Wind,
+    Lock,
+    Zap,
+    CircuitBoard,
+    Recycle,
+    Droplets,
+    Settings,
+    Sliders,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -80,146 +89,164 @@ export default function Service() {
         {
             id: 1,
             title: "Car Stereos",
-            description: "We supply and install high-quality car stereos to enhance your driving experience with better sound and modern features.",
+            description:
+                "We supply and install high-quality car stereos to enhance your driving experience with better sound and modern features.",
             icon: <Music className="w-6 h-6 text-[#317F21]" />,
             image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
-            link: "/car-stereos"
+            link: "/car-stereos",
         },
         {
             id: 2,
             title: "Vehicle Diagnostics",
-            description: "Using advanced diagnostic equipment, we quickly identify and fix electrical and engine faults in all vehicle makes and models.",
+            description:
+                "Using advanced diagnostic equipment, we quickly identify and fix electrical and engine faults.",
             icon: <Cpu className="w-6 h-6 text-[#317F21]" />,
             image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
-            link: "/diagnostics"
+            link: "/diagnostics",
         },
         {
             id: 3,
             title: "Car Repairs & Servicing",
-            description: "Our comprehensive car repairs and servicing keep your vehicle running safely, efficiently, and reliably.",
-            icon: <Hammer className="w-6 h-6 text-[#317F21]" />,
+            description:
+                "Our comprehensive car repairs and servicing keep your vehicle running safely.",
+            icon: <Wrench className="w-6 h-6 text-[#317F21]" />,
             image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
-            link: "/car-repair"
+            link: "/car-repair",
         },
         {
             id: 4,
             title: "Handsfree Car Kits",
-            description: "We professionally install handsfree car kits to help you stay connected while driving safely and legally.",
-            icon: <Phone className="w-6 h-6 text-[#317F21]" />,
+            description:
+                "We professionally install handsfree car kits to help you stay connected safely.",
+            icon: <PhoneCall className="w-6 h-6 text-[#317F21]" />,
             image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
-            link: "/handfree"
+            link: "/handfree",
         },
         {
             id: 5,
-            title: "Parking Sensors/Cameras",
-            description: "Our parking sensors and reversing cameras make parking easier and safer by improving visibility and awareness.",
+            title: "Parking Sensors / Cameras",
+            description:
+                "Parking sensors and reversing cameras improve visibility and safety.",
             icon: <Camera className="w-6 h-6 text-[#317F21]" />,
             image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
-            link: "/parking"
+            link: "/parking",
         },
         {
             id: 6,
             title: "Car Security",
-            description: "We install reliable car security systems to protect your vehicle from theft and unauthorized access.",
-            icon: <Shield className="w-6 h-6 text-[#317F21]" />,
+            description:
+                "We install reliable car security systems to protect your vehicle.",
+            icon: <ShieldCheck className="w-6 h-6 text-[#317F21]" />,
             image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
-            link: "/car-security"
+            link: "/car-security",
         },
         {
             id: 7,
             title: "MOT",
-            description: "We provide trusted MOT testing and preparation to ensure your vehicle meets all legal safety standards.",
-            icon: <CheckSquare className="w-6 h-6 text-[#317F21]" />,
+            description:
+                "Trusted MOT testing and preparation to meet legal safety standards.",
+            icon: <ClipboardCheck className="w-6 h-6 text-[#317F21]" />,
             image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
-            link: "/mot"
+            link: "/mot",
         },
         {
             id: 8,
             title: "Vehicle Tracking Systems",
-            description: "Our vehicle tracking systems give you real-time location monitoring for added security and peace of mind.",
+            description:
+                "Real-time vehicle tracking for security and peace of mind.",
             icon: <MapPin className="w-6 h-6 text-[#317F21]" />,
             image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
-            link: "/vehicle-tracking"
+            link: "/vehicle-tracking",
         },
         {
             id: 9,
             title: "Installations & Fitting",
-            description: "All installations and fittings are carried out by experienced technicians to ensure a professional, long-lasting finish.",
+            description:
+                "Professional installations carried out by experienced technicians.",
             icon: <Settings className="w-6 h-6 text-[#317F21]" />,
             image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
-            link: "/installation"
+            link: "/installation",
         },
         {
             id: 10,
             title: "Mechanical (All)",
-            description: "We carry out a full range of mechanical repairs to keep your vehicle running smoothly, safely, and reliably.",
-            icon: <Settings className="w-6 h-6 text-[#317F21]" />,
+            description:
+                "Complete mechanical repairs to keep your vehicle running smoothly.",
+            icon: <Cog className="w-6 h-6 text-[#317F21]" />,
             image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
-            link: "/installation"
+            link: "/mechanical",
         },
         {
             id: 11,
             title: "Brake Pads",
-            description: "We supply and fit high-quality brake pads to ensure strong, responsive braking and improved driving safety.",
-            icon: <Settings className="w-6 h-6 text-[#317F21]" />,
+            description:
+                "Supply and fitting of high-quality brake pads for maximum safety.",
+            icon: <Disc className="w-6 h-6 text-[#317F21]" />,
             image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
-            link: "/installation"
+            link: "/brake-pads",
         },
         {
             id: 12,
             title: "Window Regulators",
-            description: "We repair and replace faulty window regulators to restore smooth and reliable window operation.",
-            icon: <Settings className="w-6 h-6 text-[#317F21]" />,
+            description:
+                "Repair and replacement of faulty electric window regulators.",
+            icon: <Sliders className="w-6 h-6 text-[#317F21]" />,
             image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
-            link: "/installation"
+            link: "/window-regulators",
         },
         {
             id: 13,
             title: "Wiper Motors",
-            description: "Our wiper motor repairs ensure clear visibility in all weather conditions by restoring proper wiper function.",
-            icon: <Settings className="w-6 h-6 text-[#317F21]" />,
+            description:
+                "Wiper motor repairs for clear visibility in all weather.",
+            icon: <Wind className="w-6 h-6 text-[#317F21]" />,
             image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
-            link: "/installation"
+            link: "/wiper-motors",
         },
         {
             id: 14,
             title: "Central Door Motors",
-            description: "We diagnose and repair central door locking motors to ensure secure and reliable locking and unlocking.",
-            icon: <Settings className="w-6 h-6 text-[#317F21]" />,
+            description:
+                "Diagnosis and repair of central locking systems.",
+            icon: <Lock className="w-6 h-6 text-[#317F21]" />,
             image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
-            link: "/installation"
+            link: "/central-locking",
         },
         {
             id: 15,
             title: "All Car Electrics",
-            description: "We provide expert auto electrical repairs, resolving wiring, lighting, sensor, and electrical system faults.",
-            icon: <Settings className="w-6 h-6 text-[#317F21]" />,
+            description:
+                "Expert auto electrical repairs and fault finding.",
+            icon: <Zap className="w-6 h-6 text-[#317F21]" />,
             image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
-            link: "/installation"
+            link: "/car-electrics",
         },
         {
             id: 16,
             title: "ECU Repairs / Services",
-            description: "Using advanced diagnostics, we identify and resolve ECU-related faults to restore optimal engine performance.",
-            icon: <Settings className="w-6 h-6 text-[#317F21]" />,
+            description:
+                "Advanced ECU diagnostics and repairs for optimal performance.",
+            icon: <CircuitBoard className="w-6 h-6 text-[#317F21]" />,
             image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
-            link: "/installation"
+            link: "/ecu-repair",
         },
         {
             id: 17,
             title: "EGR",
-            description: "We diagnose, clean, and repair EGR system faults to improve engine efficiency and reduce emissions.",
-            icon: <Settings className="w-6 h-6 text-[#317F21]" />,
+            description:
+                "EGR diagnostics and cleaning to reduce emissions.",
+            icon: <Recycle className="w-6 h-6 text-[#317F21]" />,
             image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
-            link: "/installation"
+            link: "/egr",
         },
         {
             id: 18,
             title: "AdBlue",
-            description: " Our AdBlue diagnostics and repairs keep your diesel vehicle compliant and running smoothly without warning issues.",
-            icon: <Settings className="w-6 h-6 text-[#317F21]" />,
+            description:
+                "AdBlue system diagnostics and repairs for diesel vehicles.",
+            icon: <Droplets className="w-6 h-6 text-[#317F21]" />,
             image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
-            link: "/installation"
+            link: "/adblue",
         },
     ];
 

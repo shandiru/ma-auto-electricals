@@ -12,7 +12,7 @@ export default function Navbar() {
   const navigate = useNavigate();
   const serviceRef = useRef(null);
 
-  const waNumber = "447494481443";
+  const waNumber = "447889133123";
   const waHref = `https://wa.me/${waNumber}`;
 
   const scrollWithOffset = (el) => {
