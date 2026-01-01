@@ -222,7 +222,7 @@ export default function ContactSection() {
 
             <SideCard data-aos="fade-left" title="Find Us" icon={<FaMapMarkerAlt className="h-5 w-5" />}>
               <div className="space-y-1 mb-4">
-                <p className="font-semibold">Ma auto electrics</p>
+                <p className="font-semibold">MA Auto Electrics</p>
                 <p className="text-sm text-muted ">
                   13 laburnum drive oswaldtwistele accrington bb5 3aw
                 </p>
@@ -240,7 +240,7 @@ export default function ContactSection() {
               </a>
             </SideCard>
 
-            <SideCard data-aos="fade-left" title="Ma auto electrics">
+            <SideCard data-aos="fade-left" title="MA Auto Electrics">
               <p className="text-sm text-muted  leading-relaxed">
                 MA Auto Electrics specialise in supplying and fitting of in car audio & car DVD / navigation solutions, vehicle security, diagnostics and dashcams. Get in touch for further details
               </p>
