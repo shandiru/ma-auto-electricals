@@ -41,13 +41,13 @@ export default function ProductSellers() {
           <h2 className="text-2xl font-bold">OUR BEST SELLERS</h2>
 
           {/* View All with Lucide Arrow */}
-          <a
+          {/* <a
             href="#"
             className="text-sm font-medium flex items-center gap-1 text-gray-600 hover:text-gray-900 transition-colors"
           >
             VIEW ALL
             <ArrowRight className="w-4 h-4" />
-          </a>
+          </a> */}
         </div>
 
         {/* Products Grid */}

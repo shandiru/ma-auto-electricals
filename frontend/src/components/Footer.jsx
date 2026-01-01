@@ -18,7 +18,7 @@ export default function Footer() {
           <div>
             <div className="flex items-center space-x-3">
               <span className="text-2xl font-bold text-[#317F21]">
-                Ma auto electrics
+                MA Auto electrics
               </span>
             </div>
             <p className="text-gray-400 mb-4 mt-2">
@@ -113,7 +113,7 @@ export default function Footer() {
           <div>
             <h3 className="font-bold mb-4 text-[#317F21]">Contact Info</h3>
             <ul className="space-y-2 text-gray-400">
-              <li>Ma auto electrics</li>
+              <li>MA Auto electrics</li>
               <li>
                 <a
                   href={mapsUrl}

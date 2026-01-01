@@ -1,8 +1,9 @@
 import { Car, Wrench, Clock } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function HeroSection() {
   return (
-    <section className="relative w-full h-[120vh] flex items-center text-white">
+    <section className="relative w-full h-[120vh] flex items-center text-white" id="home">
       <div className="max-w-6xl mx-auto">
 
         {/* Background */}
@@ -28,13 +29,17 @@ export default function HeroSection() {
             </p>
 
             <div className="flex gap-4 mb-20">
-              <button className="px-6 py-3 bg-[#317F21] text-black font-semibold rounded-lg hover:bg-lime-400 transition">
+              <a 
+                href="#contact"
+                className="px-6 py-3 bg-[#317F21] text-black font-semibold rounded-lg hover:bg-lime-400 transition">
                 Contact us
-              </button>
+              </a>
 
-              <button className="px-6 py-3 border border-white/40 rounded-lg backdrop-blur-sm hover:bg-white/10 transition">
+              <Link 
+                to="/product"
+                className="px-6 py-3 border border-white/40 rounded-lg backdrop-blur-sm hover:bg-white/10 transition">
                 See Products
-              </button>
+              </Link>
             </div>
           </div>
 

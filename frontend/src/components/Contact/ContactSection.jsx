@@ -90,7 +90,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section className="py-16 bg-[#F3F6F4]  overflow-x-hidden">
+    <section className="py-16 bg-[#F3F6F4]  overflow-x-hidden scroll-m-10" id="contact">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12">
           {/* FORM */}

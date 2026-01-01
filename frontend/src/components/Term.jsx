@@ -28,7 +28,7 @@ const TermsConditions = () => {
                   <section>
                       <h2 className="text-2xl font-medium">3. Intellectual Property</h2>
                       <p className="text-white">
-                          All content on this website (including text, images, graphics, and logos) is owned by or licensed to AF-MOK Performance.
+                          All content on this website (including text, images, graphics, and logos) is owned by or licensed to MA Auto electrics.
                           You may view, download, and print content for personal use only.
                           You must not copy, reproduce, or distribute our website content without prior written consent.
                       </p>
@@ -77,10 +77,10 @@ const TermsConditions = () => {
                           If you have any questions about these Terms of Use, please contact us:
                       </p>
                       <div className="text-white">
-                          <p><strong>AF-MOK Performance</strong></p>
-                          <p>Email: <a href="mailto:afmok.performance@outlook.com" className="text-cyan-400 hover:underline">afmok.performance@outlook.com</a></p>
-                          <p>Phone: +44 7494 481443</p>
-                          <p>Address: Unit 6, Spon Lane Trading Estate, Varney Ave, West Bromwich B70 6AE, United Kingdom</p>
+                          <p><strong>MA Auto electrics</strong></p>
+                          <p>Email: <a href="mailto:maautoelectrics@gmail.com" className="text-[#317F21] hover:underline">maautoelectrics@gmail.com</a></p>
+                          <p>Phone: +44 7889 133123</p>
+                          <p>Address: 13 laburnum drive oswaldtwistele, accrington bb5 3aw,United Kingdom</p>
                       </div>
                   </section>
               </div>

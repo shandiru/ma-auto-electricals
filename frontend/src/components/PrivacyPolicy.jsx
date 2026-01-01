@@ -110,18 +110,18 @@ const PrivacyPolicy = () => {
                         If you have any questions about this Privacy Policy or how we handle your personal data, please contact us:
                     </p>
                     <div className="text-white">
-                        <p><strong>AF-MOK Performance</strong></p>
-                        <p>Email: <a href="mailto:afmok.performance@outlook.com" className="text-cyan-400 hover:underline">afmok.performance@outlook.com</a></p>
-                        <p>Phone: +44 7494 481443</p>
-                        <p>Address: Unit 6, Spon Lane Trading Estate, Varney Ave, West Bromwich B70 6AE, United Kingdom</p>
-                    </div>
-                    <p className="mt-2 text-white">
+                        <p><strong>MA Auto electrics</strong></p>
+                        <p>Email: <a href="mailto:maautoelectrics@gmail.com" className="text-[#317F21] hover:underline">maautoelectrics@gmail.com</a></p>
+                        <p>Phone: +44 7889 133123</p>
+                        <p>Address: 13 laburnum drive oswaldtwistele, accrington bb5 3aw,United Kingdom</p>
+                        </div>
+                        <p className="mt-2 text-white">
                         If you are not satisfied with our response, you have the right to lodge a complaint with the{' '}
                         <a
                             href="https://ico.org.uk/"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-cyan-400 hover:underline"
+                            className="text-[#317F21] hover:underline"
                         >
                             Information Commissioner’s Office (ICO)
                         </a>.
