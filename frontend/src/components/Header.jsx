@@ -7,6 +7,7 @@ import { ShoppingCart } from "lucide-react";
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isServiceOpen, setIsServiceOpen] = useState(false);
+  const [openSubMenu, setOpenSubMenu] = useState(null);
   const [cartCount, setCartCount] = useState(0);
   const navigate = useNavigate();
   const serviceRef = useRef(null);
@@ -37,6 +38,7 @@ export default function Navbar() {
     const handleClickOutside = (event) => {
       if (serviceRef.current && !serviceRef.current.contains(event.target)) {
         setIsServiceOpen(false);
+        setOpenSubMenu(null);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -90,7 +92,10 @@ export default function Navbar() {
     },
   ];
 
-  const handleServiceClick = () => setIsServiceOpen(false);
+  const handleServiceClick = () => {
+    setIsServiceOpen(false);
+    setOpenSubMenu(null);
+  };
 
   return (
     <header className="fixed top-0 w-full bg-black/90 backdrop-blur-sm z-50 border-b border-gray-800">
@@ -110,7 +115,10 @@ export default function Navbar() {
             {/* Services Dropdown */}
             <div ref={serviceRef} className="relative">
               <button
-                onClick={() => setIsServiceOpen((prev) => !prev)}
+                onClick={() => {
+                  setIsServiceOpen((prev) => !prev);
+                  setOpenSubMenu(null);
+                }}
                 className="text-gray-300 hover:text-white transition-colors flex items-center gap-1"
               >
                 Services
@@ -120,24 +128,38 @@ export default function Navbar() {
               </button>
 
               {isServiceOpen && (
-                <div className="absolute left-0 mt-2 w-72 bg-black/95 border border-gray-800 rounded-md shadow-xl z-50 max-h-[80vh] overflow-y-auto">
+                <div className="absolute left-0 mt-2 w-64 bg-black/95 border border-gray-800 rounded-md shadow-xl z-50">
                   {serviceCategories.map((category, catIndex) => (
-                    <div key={catIndex} className="py-3 px-4 border-b border-gray-800 last:border-b-0">
-                      <h3 className="text-white font-semibold text-sm mb-2">{category.category}</h3>
-                      <div className="space-y-1">
-                        {category.items.map((item, itemIndex) => (
-                          <HashLink
-                            key={itemIndex}
-                            smooth
-                            to={item.link}
-                            scroll={scrollWithOffset}
-                            className="block px-3 py-1.5 text-gray-400 hover:bg-gray-800 hover:text-white rounded text-sm transition-colors"
-                            onClick={handleServiceClick}
-                          >
-                            • {item.title}
-                          </HashLink>
-                        ))}
-                      </div>
+                    <div key={catIndex} className="relative border-b border-gray-800 last:border-b-0">
+                      <button
+                        onClick={() => setOpenSubMenu(openSubMenu === catIndex ? null : catIndex)}
+                        className="w-full px-4 py-3 text-white font-semibold text-sm hover:bg-gray-800 cursor-pointer flex items-center justify-between text-left"
+                      >
+                        {category.category}
+                        <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </button>
+                      
+                      {/* Sub-dropdown */}
+                      {openSubMenu === catIndex && (
+                        <div className="absolute left-full top-0 ml-1 w-64 bg-black/95 border border-gray-800 rounded-md shadow-xl z-50">
+                          <div className="py-2">
+                            {category.items.map((item, itemIndex) => (
+                              <HashLink
+                                key={itemIndex}
+                                smooth
+                                to={item.link}
+                                scroll={scrollWithOffset}
+                                className="block px-4 py-2 text-gray-400 hover:bg-gray-800 hover:text-white text-sm transition-colors"
+                                onClick={handleServiceClick}
+                              >
+                                {item.title}
+                              </HashLink>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>
