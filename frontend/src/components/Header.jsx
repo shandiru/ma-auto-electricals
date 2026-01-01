@@ -43,19 +43,54 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const services = [
-    { title: "Car Stereos", link: "/car-stereos" },
-    { title: "Vehicle Diagnostics", link: "/diagnostics" },
-    { title: "Car Repairs & Servicing", link: "/car-repair" },
-    { title: "Handsfree Car Kits", link: "/handfree" },
-    { title: "Parking Sensors/Cameras", link: "/parking" },
-    { title: "Car Security", link: "/car-security" },
-    { title: "MOT", link: "/mot" },
-    { title: "Vehicle Tracking Systems", link: "/vehicle-tracking" },
-    { title: "Installations & Fitting", link: "/installation" },
+  const serviceCategories = [
+    {
+      category: "Mechanical & Servicing",
+      items: [
+        { title: "Mechanical Repairs (All)", link: "/Mechanical" },
+        { title: "Car Repairs & Servicing", link: "/car-repair" },
+        { title: "Brake Pads", link: "/BrakePads" },
+        { title: "MOT", link: "/mot" },
+      ],
+    },
+    {
+      category: "Diagnostics & Electrical",
+      items: [
+        { title: "Vehicle Diagnostics", link: "/diagnostics" },
+        { title: "Fault Finding", link: "/diagnostics" },
+        { title: "All Car Electrics", link: "/Car-Electrics" },
+        { title: "ECU Repairs & Services", link: "/ECURepair&Services" },
+        { title: "Window Regulators", link: "/WindowRegulators" },
+        { title: "Wiper Motors", link: "/WiperMotors" },
+        { title: "Central Door Motors", link: "/central-door-motors" },
+      ],
+    },
+    {
+      category: "Emissions & Engine Systems",
+      items: [
+        { title: "EGR Services", link: "/EGR" },
+        { title: "AdBlue Services", link: "/AdBlue" },
+      ],
+    },
+    {
+      category: "Safety, Security & Tracking",
+      items: [
+        { title: "Car Security", link: "/car-security" },
+        { title: "Vehicle Tracking Systems", link: "/vehicle-tracking" },
+      ],
+    },
+    {
+      category: "Accessories & Installations",
+      items: [
+        { title: "Car Stereos", link: "/car-stereos" },
+        { title: "Handsfree Car Kits", link: "/handfree" },
+        { title: "Parking Sensors / Cameras", link: "/parking" },
+        { title: "Installations & Fitting", link: "/installation" },
+      ],
+    },
   ];
 
-  const handleServiceClick = () => setIsServiceOpen(false); // Close dropdown when a service is clicked
+  const handleServiceClick = () => setIsServiceOpen(false);
 
   return (
     <header className="fixed top-0 w-full bg-black/90 backdrop-blur-sm z-50 border-b border-gray-800">
@@ -85,18 +120,25 @@ export default function Navbar() {
               </button>
 
               {isServiceOpen && (
-                <div className="absolute left-0 mt-2 w-56 bg-black/90 border border-gray-800 rounded-md shadow-lg z-50">
-                  {services.map((s, index) => (
-                    <HashLink
-                      key={index}
-                      smooth
-                      to={s.link}
-                      scroll={scrollWithOffset}
-                      className="block px-4 py-2 text-gray-300 hover:bg-gray-800 hover:text-white"
-                      onClick={handleServiceClick}
-                    >
-                      {s.title}
-                    </HashLink>
+                <div className="absolute left-0 mt-2 w-72 bg-black/95 border border-gray-800 rounded-md shadow-xl z-50 max-h-[80vh] overflow-y-auto">
+                  {serviceCategories.map((category, catIndex) => (
+                    <div key={catIndex} className="py-3 px-4 border-b border-gray-800 last:border-b-0">
+                      <h3 className="text-white font-semibold text-sm mb-2">{category.category}</h3>
+                      <div className="space-y-1">
+                        {category.items.map((item, itemIndex) => (
+                          <HashLink
+                            key={itemIndex}
+                            smooth
+                            to={item.link}
+                            scroll={scrollWithOffset}
+                            className="block px-3 py-1.5 text-gray-400 hover:bg-gray-800 hover:text-white rounded text-sm transition-colors"
+                            onClick={handleServiceClick}
+                          >
+                            • {item.title}
+                          </HashLink>
+                        ))}
+                      </div>
+                    </div>
                   ))}
                 </div>
               )}
@@ -170,18 +212,28 @@ export default function Navbar() {
                   Services <span>{isServiceOpen ? "▲" : "▼"}</span>
                 </button>
                 {isServiceOpen && (
-                  <div className="flex flex-col ml-4 mt-2 space-y-2">
-                    {services.map((s, index) => (
-                      <HashLink
-                        key={index}
-                        smooth
-                        to={s.link}
-                        scroll={scrollWithOffset}
-                        className="text-gray-300 hover:text-white"
-                        onClick={() => setIsServiceOpen(false)}
-                      >
-                        {s.title}
-                      </HashLink>
+                  <div className="flex flex-col ml-2 mt-3 space-y-3">
+                    {serviceCategories.map((category, catIndex) => (
+                      <div key={catIndex}>
+                        <h3 className="text-white font-semibold text-sm mb-2">{category.category}</h3>
+                        <div className="flex flex-col ml-2 space-y-2">
+                          {category.items.map((item, itemIndex) => (
+                            <HashLink
+                              key={itemIndex}
+                              smooth
+                              to={item.link}
+                              scroll={scrollWithOffset}
+                              className="text-gray-400 hover:text-white text-sm"
+                              onClick={() => {
+                                setIsServiceOpen(false);
+                                setIsMenuOpen(false);
+                              }}
+                            >
+                              • {item.title}
+                            </HashLink>
+                          ))}
+                        </div>
+                      </div>
                     ))}
                   </div>
                 )}
