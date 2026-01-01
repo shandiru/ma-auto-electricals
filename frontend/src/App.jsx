@@ -33,7 +33,7 @@ import CentralDoorMotorsPage from "./page/CentralDoorMotors";
 import WiperMotorsPage from "./page/WiperMotors";
 import WindowRegulatorsPage from "./page/WindowRegulators";
 import BrakePadsPage from "./page/BrakePads";
-import MechanicalPage from "./page/Mechanica";
+import MechanicalPage from "./page/Mechanical";
 
 function App() {
   return (
