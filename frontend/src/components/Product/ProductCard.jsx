@@ -22,6 +22,7 @@ export default function ProductCard() {
     });
 
     socket.on("updateProduct", (product) => {
+      console.log("Received updated product via socket:", product);
       setProducts((prev) =>
         prev.map((p) => (p._id === product._id ? product : p))
       );
@@ -58,6 +59,7 @@ export default function ProductCard() {
 
   // --- Update categories dynamically ---
   const updateCategories = (product) => {
+    console.log("Updating categories with product:", product);
     if (product.category) {
       setCategories((prev) => {
         const exists = prev.some(
