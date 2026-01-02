@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Select from "react-select";
+import { io } from "socket.io-client";
 
 export default function ProductCard() {
   const [products, setProducts] = useState([]);
@@ -11,55 +12,84 @@ export default function ProductCard() {
 
   const API_URL = import.meta.env.VITE_API_URL;
 
-  // Fetch products
+  // --- Socket.io setup ---
+  useEffect(() => {
+    const socket = io(API_URL);
+
+    socket.on("newProduct", (product) => {
+      setProducts((prev) => [...prev, product]);
+      updateCategories(product);
+    });
+
+    socket.on("updateProduct", (product) => {
+      setProducts((prev) =>
+        prev.map((p) => (p._id === product._id ? product : p))
+      );
+      updateCategories(product);
+    });
+
+    socket.on("deleteProduct", (id) => {
+      setProducts((prev) => prev.filter((p) => p._id !== id));
+    });
+
+    return () => socket.disconnect();
+  }, [API_URL]);
+
+  // --- Fetch initial products ---
   useEffect(() => {
     fetch(`${API_URL}/api/products`)
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);
 
-        // ===== FIX DUPLICATE CATEGORIES =====
-        const categoryMap = new Map();
-
+        const catMap = new Map();
         data.forEach((p) => {
           if (!p.category) return;
-          const normalized = p.category.trim().toLowerCase();
-          if (!categoryMap.has(normalized)) {
-            categoryMap.set(normalized, p.category.trim());
-          }
+          const norm = p.category.trim().toLowerCase();
+          if (!catMap.has(norm)) catMap.set(norm, p.category.trim());
         });
 
-        const options = Array.from(categoryMap.values()).map((c) => ({
-          value: c,
-          label: c,
-        }));
-
+        const options = [{ value: "All", label: "All Categories" }, ...Array.from(catMap.values()).map((c) => ({ value: c, label: c }))];
         setCategories(options);
-
-        if (options.length > 0) {
-          setSelectedCategories([options[0]]);
-        }
+        setSelectedCategories([options[0]]);
       })
       .catch(console.error);
   }, [API_URL]);
 
-  // Filter products
+  // --- Update categories dynamically ---
+  const updateCategories = (product) => {
+    if (product.category) {
+      setCategories((prev) => {
+        const exists = prev.some(
+          (c) => c.value.toLowerCase() === product.category.toLowerCase()
+        );
+        if (!exists) return [...prev, { value: product.category, label: product.category }];
+        return prev;
+      });
+    }
+  };
+
+  // --- Filter products by selected categories ---
   const filteredProducts =
-    selectedCategories.length > 0
-      ? products.filter((p) =>
+    selectedCategories.some(c => c.value === "All")
+      ? products
+      : products.filter((p) =>
           selectedCategories.some(
             (c) =>
-              c.value.trim().toLowerCase() ===
-              p.category.trim().toLowerCase()
+              c.value.trim().toLowerCase() === p.category.trim().toLowerCase()
           )
-        )
-      : [];
+        );
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
-      <h1 className="text-4xl mt-20 font-bold text-center text-[#317F21] mb-10">
+      <h1 className="text-4xl mt-20 font-bold text-center text-[#317F21] mb-2">
         Products by Category
       </h1>
+
+      {/* PRODUCT COUNT */}
+      <p className="text-center text-gray-600 mb-10">
+        Total Products: {filteredProducts.length}
+      </p>
 
       {/* CATEGORY MULTI SELECT */}
       <div className="max-w-md mx-auto mb-10">
@@ -120,10 +150,7 @@ export default function ProductCard() {
 
                 <button
                   disabled={isOutOfStock}
-                  onClick={() =>
-                    !isOutOfStock &&
-                    navigate(`/products/${product._id}`)
-                  }
+                  onClick={() => !isOutOfStock && navigate(`/products/${product._id}`)}
                   className={`flex items-center gap-2 font-semibold transition
                     ${
                       isOutOfStock

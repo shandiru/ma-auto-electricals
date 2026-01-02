@@ -1,6 +1,5 @@
 import productModel from "../models/ProductModel.js";
 import fs from "fs";
-// CREATE product
 import multer from "multer";
 import path from "path";
 
@@ -13,9 +12,9 @@ const storage = multer.diskStorage({
     cb(null, Date.now() + path.extname(file.originalname));
   },
 });
-
 export const upload = multer({ storage });
 
+// --- CREATE product ---
 export const createProduct = async (req, res) => {
   try {
     const { name, description, price, count, category } = req.body;
@@ -27,18 +26,21 @@ export const createProduct = async (req, res) => {
       price,
       count,
       images,
-      category: category || "Default", // fallback if category not provided
+      category: category || "Default",
     });
 
     const savedProduct = await product.save();
+
+    // --- SOCKET.IO EMIT ---
+    req.app.get("io").emit("newProduct", savedProduct);
+
     res.status(201).json({ success: true, message: "Product created", data: savedProduct });
   } catch (error) {
     res.status(400).json({ success: false, message: error.message });
   }
 };
 
-
-// GET all products
+// --- GET all products ---
 export const getProducts = async (req, res) => {
   try {
     const products = await productModel.find();
@@ -48,20 +50,18 @@ export const getProducts = async (req, res) => {
   }
 };
 
-// GET product by ID
+// --- GET product by ID ---
 export const getProductById = async (req, res) => {
   try {
     const product = await productModel.findById(req.params.id);
-
     if (!product) return res.status(404).json({ error: "Product not found" });
-
     res.status(200).json(product);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
-// UPDATE product
+// --- UPDATE product ---
 export const updateProduct = async (req, res) => {
   try {
     const product = await productModel.findById(req.params.id);
@@ -91,21 +91,27 @@ export const updateProduct = async (req, res) => {
       product.images = [...product.images, ...newImages];
     }
 
-    await product.save();
-    res.status(200).json({ success: true, message: "Product updated", data: product });
+    const updatedProduct = await product.save();
+
+    // --- SOCKET.IO EMIT ---
+    req.app.get("io").emit("updateProduct", updatedProduct);
+
+    res.status(200).json({ success: true, message: "Product updated", data: updatedProduct });
   } catch (err) {
     console.error(err);
     res.status(400).json({ success: false, message: err.message });
   }
 };
 
-// DELETE product
+// --- DELETE product ---
 export const deleteProduct = async (req, res) => {
   try {
     const deletedProduct = await productModel.findByIdAndDelete(req.params.id);
-
     if (!deletedProduct)
       return res.status(404).json({ error: "Product not found" });
+
+    // --- SOCKET.IO EMIT ---
+    req.app.get("io").emit("deleteProduct", deletedProduct._id);
 
     res.status(200).json({ message: "Product deleted successfully" });
   } catch (error) {
