@@ -15,7 +15,8 @@ export default function ProductCard() {
   // --- Socket.io setup ---
   useEffect(() => {
     const socket = io(API_URL);
-
+     console.log("Connecting to socket.io at", API_URL);
+     console.log("hi dirushan");
     socket.on("newProduct", (product) => {
       setProducts((prev) => [...prev, product]);
       updateCategories(product);
