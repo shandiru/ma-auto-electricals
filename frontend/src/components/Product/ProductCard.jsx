@@ -86,7 +86,7 @@ export default function ProductCard() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
       <h1 className="text-4xl mt-20 font-bold text-center text-[#317F21] mb-2">
-        Products by Category
+        Products by Categorys
       </h1>
 
       {/* PRODUCT COUNT */}
