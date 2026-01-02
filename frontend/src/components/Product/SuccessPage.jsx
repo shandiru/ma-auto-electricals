@@ -27,6 +27,7 @@ export default function SuccessPage() {
       if (!session_id) return;
 
       try {
+        const API_URL = import.meta.env.VITE_API_URL;
         const res = await fetch(
           `${API_URL}/api/stripe/checkout-success?session_id=${session_id}`
         );
