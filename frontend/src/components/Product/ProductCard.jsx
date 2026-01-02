@@ -15,15 +15,13 @@ export default function ProductCard() {
   // --- Socket.io setup ---
   useEffect(() => {
     const socket = io(API_URL);
-     console.log("Connecting to socket.io at", API_URL);
-     console.log("hi dirushan");
+
     socket.on("newProduct", (product) => {
       setProducts((prev) => [...prev, product]);
       updateCategories(product);
     });
 
     socket.on("updateProduct", (product) => {
-      console.log("Received updated product via socket:", product);
       setProducts((prev) =>
         prev.map((p) => (p._id === product._id ? product : p))
       );
@@ -60,7 +58,6 @@ export default function ProductCard() {
 
   // --- Update categories dynamically ---
   const updateCategories = (product) => {
-    console.log("Updating categories with product:", product);
     if (product.category) {
       setCategories((prev) => {
         const exists = prev.some(
@@ -86,7 +83,7 @@ export default function ProductCard() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
       <h1 className="text-4xl mt-20 font-bold text-center text-[#317F21] mb-2">
-        Products by Categorys
+        Products by Category
       </h1>
 
       {/* PRODUCT COUNT */}
