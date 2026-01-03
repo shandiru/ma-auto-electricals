@@ -27,9 +27,18 @@ export const createCheckoutSession = async (req, res) => {
     // 🔴 STOCK CHECK BEFORE PAYMENT
     for (const item of cart) {
       const product = await productModel.findById(item._id);
-      if (!product || product.count < item.quantity) {
+
+      if (!product) {
+        return res.status(404).json({
+          error: `Product not found: ${item.name}`,
+        });
+      }
+
+      if (item.quantity > product.count) {
         return res.status(400).json({
-          error: `Insufficient stock for ${item.name}`,
+          error: `Only ${product.count} item(s) available for ${item.name}`,
+          availableStock: product.count,
+          productId: product._id,
         });
       }
     }
@@ -101,7 +110,7 @@ export const checkoutSuccess = async (req, res) => {
       return res.json({ success: true, order: exists });
     }
 
-    // 🔴 DECREMENT PRODUCT COUNT
+    // 🔴 DECREMENT STOCK (TRANSACTION SAFE)
     for (const item of products) {
       const product = await productModel
         .findById(item._id)
@@ -112,14 +121,15 @@ export const checkoutSuccess = async (req, res) => {
       }
 
       if (product.count < item.quantity) {
-        throw new Error(`Insufficient stock for ${item.name}`);
+        throw new Error(
+          `Only ${product.count} item(s) available for ${item.name}`
+        );
       }
 
       product.count -= item.quantity;
       await product.save({ session });
     }
 
-    // ✅ SAVE ORDER
     const order = new orderModel({
       orderId: uuidv4(),
       stripeSessionId: stripeSession.id,
@@ -137,9 +147,12 @@ export const checkoutSuccess = async (req, res) => {
     await session.commitTransaction();
     session.endSession();
 
-    // 🔔 SOCKET EVENT
+    // 🔔 SOCKET UPDATE
     const io = req.app.get("io");
-    io.emit("stockUpdated");
+    const updatedProducts = await productModel.find({
+      _id: { $in: products.map((p) => p._id) },
+    });
+    updatedProducts.forEach((p) => io.emit("stockUpdated", p));
 
     // 📧 EMAILS
     await sendEmail({
