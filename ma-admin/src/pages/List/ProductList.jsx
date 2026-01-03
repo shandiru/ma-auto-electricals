@@ -5,36 +5,24 @@ import React, {
   useCallback,
   useMemo,
 } from "react";
-import axios from "axios";
 import { toast } from "react-toastify";
 import { io } from "socket.io-client";
 import {
   Trash2,
-  Package,
-  Tag,
-  DollarSign,
-  Layers,
   Edit,
-  Search,
-  ChevronLeft,
-  ChevronRight,
-  ChevronsLeft,
-  ChevronsRight,
   ArrowUpDown,
   ArrowUp,
   ArrowDown,
-  AlertTriangle,
-  X,
 } from "lucide-react";
 import EditProduct from "../Edit/EditProduct";
 
-const ProductList = ({ url }) => {
+const API_URL = "https://ma-auto-electricals.onrender.com";
+
+const ProductList = () => {
   const [list, setList] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [deleteId, setDeleteId] = useState(null);
-  const [editingProduct, setEditingProduct] = useState(null);
   const [productToDelete, setProductToDelete] = useState(null);
-
+  const [editingProduct, setEditingProduct] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
@@ -43,50 +31,52 @@ const ProductList = ({ url }) => {
     direction: "asc",
   });
 
-  // 🔄 FETCH PRODUCTS
-  const fetchList = useCallback(async () => {
+  // 🔹 FETCH PRODUCTS (used by socket and initial load)
+  const fetchProducts = useCallback(async () => {
     try {
       setLoading(true);
-      const res = await axios.get(`${url}/api/products`);
-      setList(res.data);
+      const res = await fetch(`${API_URL}/api/products`);
+      const data = await res.json();
+      setList(data);
     } catch (err) {
       console.error(err);
       toast.error("Failed to fetch products");
     } finally {
       setLoading(false);
     }
-  }, [url]);
+  }, []);
 
-  // 🔥 REAL-TIME STOCK UPDATE (Socket.io)
+  // 🔥 SOCKET.IO REAL-TIME UPDATE
   useEffect(() => {
-    const socket = io(url);
+    const socket = io(API_URL);
 
     socket.on("stockUpdated", () => {
-      fetchList();
+      fetchProducts(); // ✅ update products only, no page reload
     });
 
     return () => socket.disconnect();
-  }, [url, fetchList]);
+  }, [fetchProducts]);
 
+  // 🔹 INITIAL LOAD
   useEffect(() => {
-    fetchList();
-  }, [fetchList]);
+    fetchProducts();
+  }, [fetchProducts]);
 
   // 🗑 DELETE PRODUCT
   const removeProduct = async (id) => {
     try {
-      setDeleteId(id);
-      await axios.delete(`${url}/api/products/${id}`);
+      await fetch(`${API_URL}/api/products/${id}`, {
+        method: "DELETE",
+      });
       toast.success("Product deleted");
-      fetchList();
+      fetchProducts(); // update list after delete
       setProductToDelete(null);
     } catch (err) {
       toast.error("Delete failed");
-    } finally {
-      setDeleteId(null);
     }
   };
 
+  // 🔽 SORTING
   const handleSort = (key) => {
     let direction = "asc";
     if (sortConfig.key === key && sortConfig.direction === "asc") {
@@ -130,9 +120,7 @@ const ProductList = ({ url }) => {
   }, [list, searchTerm, sortConfig]);
 
   // 📄 PAGINATION
-  const totalPages = Math.ceil(
-    filteredAndSortedData.length / itemsPerPage
-  );
+  const totalPages = Math.ceil(filteredAndSortedData.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentData = filteredAndSortedData.slice(
     startIndex,
@@ -175,23 +163,14 @@ const ProductList = ({ url }) => {
         <thead>
           <tr className="bg-gray-800 text-white">
             <th className="p-3">Image</th>
-            <th
-              className="p-3 cursor-pointer"
-              onClick={() => handleSort("name")}
-            >
+            <th className="p-3 cursor-pointer" onClick={() => handleSort("name")}>
               Name <SortIcon columnKey="name" />
             </th>
             <th className="p-3">Description</th>
-            <th
-              className="p-3 cursor-pointer"
-              onClick={() => handleSort("count")}
-            >
+            <th className="p-3 cursor-pointer" onClick={() => handleSort("count")}>
               Stock <SortIcon columnKey="count" />
             </th>
-            <th
-              className="p-3 cursor-pointer"
-              onClick={() => handleSort("price")}
-            >
+            <th className="p-3 cursor-pointer" onClick={() => handleSort("price")}>
               Price <SortIcon columnKey="price" />
             </th>
             <th className="p-3">Actions</th>
@@ -203,7 +182,7 @@ const ProductList = ({ url }) => {
             <tr key={item._id} className="border-t hover:bg-gray-50">
               <td className="p-3">
                 <img
-                  src={`${url}/images/${item.images?.[0]}`}
+                  src={`${API_URL}/images/${item.images?.[0]}`}
                   className="w-14 h-14 object-cover rounded"
                 />
               </td>
@@ -220,9 +199,7 @@ const ProductList = ({ url }) => {
                   {item.count}
                 </span>
               </td>
-              <td className="p-3 font-bold">
-                £{item.price.toLocaleString()}
-              </td>
+              <td className="p-3 font-bold">£{item.price.toLocaleString()}</td>
               <td className="p-3 flex gap-2">
                 <button
                   onClick={() => setEditingProduct(item)}
@@ -269,10 +246,9 @@ const ProductList = ({ url }) => {
       {/* EDIT MODAL */}
       {editingProduct && (
         <EditProduct
-          url={url}
           existingData={editingProduct}
           onSuccess={() => {
-            fetchList();
+            fetchProducts();
             setEditingProduct(null);
           }}
           onClose={() => setEditingProduct(null)}
