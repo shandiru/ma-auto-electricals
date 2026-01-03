@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import Stripe from "stripe";
 import orderModel from "../models/orderModel.js";
-import productModel from "../models/productModel.js";
+import productModel from "../models/ProductModel.js";
 import { v4 as uuidv4 } from "uuid";
 import { sendEmail } from "../utils/sendEmail.js";
 
