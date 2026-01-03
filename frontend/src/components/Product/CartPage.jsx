@@ -16,9 +16,15 @@ export default function CartPage() {
   const navigate = useNavigate();
   const API_URL = import.meta.env.VITE_API_URL;
 
+  // Load cart from localStorage and ensure count is included
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
-    setCart(storedCart);
+    // Add default count if missing
+    const updatedCart = storedCart.map((item) => ({
+      ...item,
+      count: item.count ?? 0, // stock count from backend
+    }));
+    setCart(updatedCart);
   }, []);
 
   const updateCart = (updatedCart) => {
@@ -27,23 +33,38 @@ export default function CartPage() {
     window.dispatchEvent(new Event("storage"));
   };
 
-  const handleIncrease = (id) =>
+  const handleIncrease = (id) => {
+    const item = cart.find((c) => c._id === id);
+    if (!item) return;
+
+    if (item.count === 0) {
+      toast.error(`${item.name} is out of stock`, { duration: 2000 });
+      return;
+    }
+
+    if (item.quantity >= item.count) {
+      toast.error(`Only ${item.count} item(s) available`, { duration: 2000 });
+      return;
+    }
+
     updateCart(
       cart.map((c) =>
         c._id === id ? { ...c, quantity: c.quantity + 1 } : c
       )
     );
+  };
 
-  const handleDecrease = (id) =>
+  const handleDecrease = (id) => {
     updateCart(
       cart.map((c) =>
         c._id === id ? { ...c, quantity: Math.max(1, c.quantity - 1) } : c
       )
     );
+  };
 
   const handleRemove = (id) => {
     updateCart(cart.filter((c) => c._id !== id));
-    toast.error("Removed from cart");
+    toast.error("Removed from cart", { duration: 1500 });
   };
 
   const totalPrice = cart.reduce(
@@ -53,33 +74,14 @@ export default function CartPage() {
 
   const validateForm = () => {
     const { name, email, address, phone } = userDetails;
-
-    if (!name.trim()) {
-      toast.error("Name is required");
-      return false;
-    }
-    if (!email.trim()) {
-      toast.error("Email is required");
-      return false;
-    }
+    if (!name.trim()) return toast.error("Name is required", { duration: 1500 }) && false;
+    if (!email.trim()) return toast.error("Email is required", { duration: 1500 }) && false;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      toast.error("Invalid email format");
-      return false;
-    }
-    if (!address.trim()) {
-      toast.error("Address is required");
-      return false;
-    }
-    if (!phone.trim()) {
-      toast.error("Phone is required");
-      return false;
-    }
+    if (!emailRegex.test(email)) return toast.error("Invalid email format", { duration: 1500 }) && false;
+    if (!address.trim()) return toast.error("Address is required", { duration: 1500 }) && false;
+    if (!phone.trim()) return toast.error("Phone is required", { duration: 1500 }) && false;
     const phoneRegex = /^[0-9]{7,15}$/;
-    if (!phoneRegex.test(phone)) {
-      toast.error("Phone number is invalid");
-      return false;
-    }
+    if (!phoneRegex.test(phone)) return toast.error("Phone number is invalid", { duration: 1500 }) && false;
     return true;
   };
 
@@ -93,10 +95,16 @@ export default function CartPage() {
         body: JSON.stringify({ cart, userDetails }),
       });
       const data = await res.json();
+
+      if (!res.ok) {
+        toast.error(data.error || "Checkout failed", { duration: 2000 });
+        return;
+      }
+
       if (data.url) window.location.href = data.url;
     } catch (err) {
       console.error(err);
-      toast.error("Payment failed");
+      toast.error("Payment failed", { duration: 2000 });
     }
   };
 
@@ -120,15 +128,15 @@ export default function CartPage() {
                 className="bg-white rounded-2xl shadow-md p-6 flex flex-col md:flex-row items-center gap-6 hover:shadow-xl transition"
               >
                 <img
-                  src={`${API_URL}/images/${item.images[0]}`}
+                  src={`${API_URL}/images/${item.images?.[0]}`}
                   alt={item.name}
                   className="w-40 h-40 object-cover rounded-xl cursor-pointer"
-                  onClick={() => navigate(`/product/${item._id}`)}
+                  onClick={() => navigate(`/products/${item._id}`)}
                 />
                 <div className="flex-1 flex flex-col gap-2 w-full">
                   <h2
                     className="text-xl font-semibold text-gray-800 cursor-pointer hover:text-[#317F21]"
-                    onClick={() => navigate(`/product/${item._id}`)}
+                    onClick={() => navigate(`/products/${item._id}`)}
                   >
                     {item.name}
                   </h2>
@@ -136,6 +144,7 @@ export default function CartPage() {
                   <p className="text-2xl font-bold text-[#317F21]">
                     £{item.price}
                   </p>
+
                   <div className="flex items-center gap-3 mt-2">
                     <button
                       onClick={() => handleDecrease(item._id)}
@@ -146,7 +155,10 @@ export default function CartPage() {
                     <span className="px-3 py-1 border rounded">{item.quantity}</span>
                     <button
                       onClick={() => handleIncrease(item._id)}
-                      className="bg-gray-200 p-1 rounded hover:bg-gray-300 transition"
+                      className={`bg-gray-200 p-1 rounded hover:bg-gray-300 transition ${
+                        item.quantity >= item.count ? "opacity-50 cursor-not-allowed" : ""
+                      }`}
+                      disabled={item.quantity >= item.count || item.count === 0}
                     >
                       <Plus size={16} />
                     </button>
@@ -157,6 +169,15 @@ export default function CartPage() {
                       <Trash2 size={20} />
                     </button>
                   </div>
+
+                  {item.count === 0 && (
+                    <p className="text-red-600 font-semibold mt-2">Out of stock</p>
+                  )}
+                  {item.quantity > item.count && item.count > 0 && (
+                    <p className="text-red-600 font-semibold mt-2">
+                      Only {item.count} item(s) available
+                    </p>
+                  )}
                 </div>
               </div>
             ))}
