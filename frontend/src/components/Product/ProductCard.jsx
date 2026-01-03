@@ -12,6 +12,17 @@ export default function ProductCard() {
 
   const API_URL = import.meta.env.VITE_API_URL;
 
+  // 🔹 Fetch products (USED ONLY for stockUpdated)
+  const fetchProducts = async () => {
+    try {
+      const res = await fetch(`${API_URL}/api/products`);
+      const data = await res.json();
+      setProducts(data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   // --- Socket.io setup ---
   useEffect(() => {
     const socket = io(API_URL);
@@ -28,13 +39,9 @@ export default function ProductCard() {
       updateCategories(product);
     });
 
-    // 🔥 LISTEN FOR STOCK CHANGES FROM ORDERS
-    socket.on("stockUpdated", (updatedProduct) => {
-      setProducts((prev) =>
-        prev.map((p) =>
-          p._id === updatedProduct._id ? updatedProduct : p
-        )
-      );
+    // 🔥 ONLY HERE → API CALL (NO PAGE RELOAD)
+    socket.on("stockUpdated", () => {
+      fetchProducts();
     });
 
     socket.on("deleteProduct", (id) => {
@@ -44,8 +51,7 @@ export default function ProductCard() {
     return () => socket.disconnect();
   }, [API_URL]);
 
-
-  // --- Fetch initial products ---
+  // --- Initial fetch ---
   useEffect(() => {
     fetch(`${API_URL}/api/products`)
       .then((res) => res.json())
@@ -59,7 +65,14 @@ export default function ProductCard() {
           if (!catMap.has(norm)) catMap.set(norm, p.category.trim());
         });
 
-        const options = [{ value: "All", label: "All Categories" }, ...Array.from(catMap.values()).map((c) => ({ value: c, label: c }))];
+        const options = [
+          { value: "All", label: "All Categories" },
+          ...Array.from(catMap.values()).map((c) => ({
+            value: c,
+            label: c,
+          })),
+        ];
+
         setCategories(options);
         setSelectedCategories([options[0]]);
       })
@@ -73,22 +86,28 @@ export default function ProductCard() {
         const exists = prev.some(
           (c) => c.value.toLowerCase() === product.category.toLowerCase()
         );
-        if (!exists) return [...prev, { value: product.category, label: product.category }];
+        if (!exists) {
+          return [
+            ...prev,
+            { value: product.category, label: product.category },
+          ];
+        }
         return prev;
       });
     }
   };
 
-  // --- Filter products by selected categories ---
+  // --- Filter products ---
   const filteredProducts =
-    selectedCategories.some(c => c.value === "All")
+    selectedCategories.some((c) => c.value === "All")
       ? products
       : products.filter((p) =>
-        selectedCategories.some(
-          (c) =>
-            c.value.trim().toLowerCase() === p.category.trim().toLowerCase()
-        )
-      );
+          selectedCategories.some(
+            (c) =>
+              c.value.trim().toLowerCase() ===
+              p.category.trim().toLowerCase()
+          )
+        );
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
@@ -96,12 +115,10 @@ export default function ProductCard() {
         Products by Category
       </h1>
 
-      {/* PRODUCT COUNT */}
       <p className="text-center text-gray-600 mb-10">
         Total Products: {filteredProducts.length}
       </p>
 
-      {/* CATEGORY MULTI SELECT */}
       <div className="max-w-md mx-auto mb-10">
         <Select
           options={categories}
@@ -110,11 +127,9 @@ export default function ProductCard() {
           isMulti
           closeMenuOnSelect={false}
           placeholder="Select Categories..."
-          className="text-gray-700"
         />
       </div>
 
-      {/* PRODUCTS GRID */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {filteredProducts.map((product) => {
           const isOutOfStock = product.count === 0;
@@ -122,48 +137,44 @@ export default function ProductCard() {
           return (
             <div
               key={product._id}
-              className={`bg-white rounded-2xl overflow-hidden transition transform
-                ${isOutOfStock
-                  ? "opacity-70 cursor-not-allowed"
-                  : "shadow-lg hover:shadow-2xl hover:-translate-y-2"
+              className={`bg-white rounded-2xl overflow-hidden transition
+                ${
+                  isOutOfStock
+                    ? "opacity-70 cursor-not-allowed"
+                    : "shadow-lg hover:shadow-2xl hover:-translate-y-2"
                 }`}
             >
-              {/* IMAGE */}
               <div className="relative h-64 overflow-hidden">
                 <img
                   src={`${API_URL}/images/${product.images?.[0]}`}
                   alt={product.name}
-                  className={`w-full h-full object-cover transition duration-500
-                    ${!isOutOfStock && "hover:scale-110"}`}
+                  className="w-full h-full object-cover"
                 />
 
-                {/* OUT OF STOCK BADGE */}
                 {isOutOfStock && (
-                  <span className="absolute top-4 left-4 bg-red-600 text-white text-xs sm:text-sm font-bold px-3 py-1 rounded-full shadow-lg">
+                  <span className="absolute top-4 left-4 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full">
                     OUT OF STOCK
                   </span>
                 )}
-
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
               </div>
 
-              {/* CONTENT */}
               <div className="p-6">
-                <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-2 line-clamp-2">
-                  {product.name}
-                </h3>
-
-                <p className="text-xl sm:text-2xl font-extrabold text-[#317F21] mb-4">
+                <h3 className="text-lg font-bold mb-2">{product.name}</h3>
+                <p className="text-2xl font-extrabold text-[#317F21] mb-4">
                   £{product.price}
                 </p>
 
                 <button
                   disabled={isOutOfStock}
-                  onClick={() => !isOutOfStock && navigate(`/products/${product._id}`)}
-                  className={`flex items-center gap-2 font-semibold transition
-                    ${isOutOfStock
-                      ? "text-gray-400 cursor-not-allowed"
-                      : "text-[#317F21] hover:text-[#3ad81a]"
+                  onClick={() =>
+                    !isOutOfStock &&
+                    navigate(`/products/${product._id}`)
+                  }
+                  className={`flex items-center gap-2 font-semibold
+                    ${
+                      isOutOfStock
+                        ? "text-gray-400"
+                        : "text-[#317F21] hover:text-[#3ad81a]"
                     }`}
                 >
                   {isOutOfStock ? "Unavailable" : "View Details"}
