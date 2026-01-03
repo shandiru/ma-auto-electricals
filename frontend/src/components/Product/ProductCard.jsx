@@ -28,12 +28,22 @@ export default function ProductCard() {
       updateCategories(product);
     });
 
+    // 🔥 LISTEN FOR STOCK CHANGES FROM ORDERS
+    socket.on("stockUpdated", (updatedProduct) => {
+      setProducts((prev) =>
+        prev.map((p) =>
+          p._id === updatedProduct._id ? updatedProduct : p
+        )
+      );
+    });
+
     socket.on("deleteProduct", (id) => {
       setProducts((prev) => prev.filter((p) => p._id !== id));
     });
 
     return () => socket.disconnect();
   }, [API_URL]);
+
 
   // --- Fetch initial products ---
   useEffect(() => {
@@ -74,11 +84,11 @@ export default function ProductCard() {
     selectedCategories.some(c => c.value === "All")
       ? products
       : products.filter((p) =>
-          selectedCategories.some(
-            (c) =>
-              c.value.trim().toLowerCase() === p.category.trim().toLowerCase()
-          )
-        );
+        selectedCategories.some(
+          (c) =>
+            c.value.trim().toLowerCase() === p.category.trim().toLowerCase()
+        )
+      );
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
@@ -113,10 +123,9 @@ export default function ProductCard() {
             <div
               key={product._id}
               className={`bg-white rounded-2xl overflow-hidden transition transform
-                ${
-                  isOutOfStock
-                    ? "opacity-70 cursor-not-allowed"
-                    : "shadow-lg hover:shadow-2xl hover:-translate-y-2"
+                ${isOutOfStock
+                  ? "opacity-70 cursor-not-allowed"
+                  : "shadow-lg hover:shadow-2xl hover:-translate-y-2"
                 }`}
             >
               {/* IMAGE */}
@@ -152,10 +161,9 @@ export default function ProductCard() {
                   disabled={isOutOfStock}
                   onClick={() => !isOutOfStock && navigate(`/products/${product._id}`)}
                   className={`flex items-center gap-2 font-semibold transition
-                    ${
-                      isOutOfStock
-                        ? "text-gray-400 cursor-not-allowed"
-                        : "text-[#317F21] hover:text-[#3ad81a]"
+                    ${isOutOfStock
+                      ? "text-gray-400 cursor-not-allowed"
+                      : "text-[#317F21] hover:text-[#3ad81a]"
                     }`}
                 >
                   {isOutOfStock ? "Unavailable" : "View Details"}
