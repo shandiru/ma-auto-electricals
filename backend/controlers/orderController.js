@@ -1,8 +1,9 @@
+import mongoose from "mongoose";
 import Stripe from "stripe";
 import orderModel from "../models/orderModel.js";
+import productModel from "../models/productModel.js";
 import { v4 as uuidv4 } from "uuid";
 import { sendEmail } from "../utils/sendEmail.js";
-import dotenv from "dotenv";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const FRONTEND_URL = process.env.CLIENT_URL;
@@ -22,6 +23,16 @@ export const createCheckoutSession = async (req, res) => {
     const email = userDetails.email || "noemail@example.com";
     const phone = userDetails.phone || "";
     const address = userDetails.address || "";
+
+    // 🔴 STOCK CHECK BEFORE PAYMENT
+    for (const item of cart) {
+      const product = await productModel.findById(item._id);
+      if (!product || product.count < item.quantity) {
+        return res.status(400).json({
+          error: `Insufficient stock for ${item.name}`,
+        });
+      }
+    }
 
     const line_items = cart.map((item) => ({
       price_data: {
@@ -58,91 +69,96 @@ export const createCheckoutSession = async (req, res) => {
       },
     });
 
-    res.status(200).json({ url: session.url });
+    res.json({ url: session.url });
   } catch (error) {
-    console.error("Stripe checkout error:", error);
+    console.error("Stripe error:", error);
     res.status(500).json({ error: "Stripe checkout failed" });
   }
 };
 
 /**
- * CHECKOUT SUCCESS
+ * CHECKOUT SUCCESS → SAVE ORDER + DECREMENT STOCK
  */
 export const checkoutSuccess = async (req, res) => {
   const { session_id } = req.query;
+  const session = await mongoose.startSession();
+  session.startTransaction();
 
   try {
-    if (!session_id)
-      return res.status(400).json({ error: "No session_id provided" });
-
-    const session = await stripe.checkout.sessions.retrieve(session_id);
-    const metadata = session.metadata || {};
-    const products = JSON.parse(metadata.cart || "[]");
-
-    // 🔹 Prevent duplicate save using stripeSessionId
-    const existingOrder = await orderModel.findOne({
-      stripeSessionId: session.id,
-    });
-
-    if (existingOrder) {
-      return res.json({
-        success: true,
-        message: "Order already processed",
-        order: existingOrder,
-      });
+    if (!session_id) {
+      return res.status(400).json({ error: "Missing session_id" });
     }
 
+    const stripeSession = await stripe.checkout.sessions.retrieve(session_id);
+    const metadata = stripeSession.metadata || {};
+    const products = JSON.parse(metadata.cart || "[]");
+
+    // 🔒 Prevent duplicate order
+    const exists = await orderModel.findOne({
+      stripeSessionId: stripeSession.id,
+    });
+    if (exists) {
+      return res.json({ success: true, order: exists });
+    }
+
+    // 🔴 DECREMENT PRODUCT COUNT
+    for (const item of products) {
+      const product = await productModel
+        .findById(item._id)
+        .session(session);
+
+      if (!product) {
+        throw new Error(`Product not found: ${item.name}`);
+      }
+
+      if (product.count < item.quantity) {
+        throw new Error(`Insufficient stock for ${item.name}`);
+      }
+
+      product.count -= item.quantity;
+      await product.save({ session });
+    }
+
+    // ✅ SAVE ORDER
     const order = new orderModel({
       orderId: uuidv4(),
-      stripeSessionId: session.id,
+      stripeSessionId: stripeSession.id,
       user: metadata.user || "Guest",
-      email: metadata.email || session.customer_email || "noemail@example.com",
+      email: metadata.email || stripeSession.customer_email,
       phone: metadata.phone || "",
       address: metadata.address || "",
       products,
-      amount: session.amount_total / 100,
-      payment_status: session.payment_status,
+      amount: stripeSession.amount_total / 100,
+      payment_status: stripeSession.payment_status,
     });
 
-    await order.save();
+    await order.save({ session });
 
-    // Send email to admin
-    const adminEmail = process.env.ADMIN_EMAIL;
-    const adminSubject = `New Order Received - ${order.orderId}`;
-    const adminHtml = `
-      <h2>New Order Received</h2>
-      <p><strong>Order ID:</strong> ${order.orderId}</p>
-      <p><strong>Customer Name:</strong> ${order.user}</p>
-      <p><strong>Email:</strong> ${order.email}</p>
-      <p><strong>Phone:</strong> ${order.phone}</p>
-      <p><strong>Address:</strong> ${order.address}</p>
-      <h3>Products:</h3>
-      <ul>
-        ${products.map(p => `<li>${p.name} × ${p.quantity} - £${p.price}</li>`).join("")}
-      </ul>
-      <p><strong>Total Amount:</strong> £${order.amount}</p>
-      <p><strong>Payment Status:</strong> ${order.payment_status}</p>
-    `;
-    await sendEmail({ to: adminEmail, subject: adminSubject, html: adminHtml });
+    await session.commitTransaction();
+    session.endSession();
 
-    // Send email to user
-    const userSubject = `Your Order Confirmation - ${order.orderId}`;
-    const userHtml = `
-      <h2>Thank you for your order, ${order.user}!</h2>
-      <p><strong>Order ID:</strong> ${order.orderId}</p>
-      <h3>Order Details:</h3>
-      <ul>
-        ${products.map(p => `<li>${p.name} × ${p.quantity} - £${p.price}</li>`).join("")}
-      </ul>
-      <p><strong>Total Amount:</strong> £${order.amount}</p>
-      <p>Your order will be processed and shipped to:</p>
-      <p>${order.address}</p>
-    `;
-    await sendEmail({ to: order.email, subject: userSubject, html: userHtml });
+    // 🔔 SOCKET EVENT
+    const io = req.app.get("io");
+    io.emit("stockUpdated");
+
+    // 📧 EMAILS
+    await sendEmail({
+      to: process.env.ADMIN_EMAIL,
+      subject: `New Order ${order.orderId}`,
+      html: `<h3>New order placed</h3>`,
+    });
+
+    await sendEmail({
+      to: order.email,
+      subject: `Order Confirmation ${order.orderId}`,
+      html: `<h3>Thank you for your order</h3>`,
+    });
 
     res.json({ success: true, order });
   } catch (err) {
-    console.error("Order Save Error:", err);
-    res.status(500).json({ error: "Failed to save order" });
+    await session.abortTransaction();
+    session.endSession();
+    console.error(err);
+    res.status(400).json({ error: err.message });
   }
 };
