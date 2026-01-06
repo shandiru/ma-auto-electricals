@@ -183,7 +183,7 @@ export default function Service() {
                 "Supply and fitting of high-quality brake pads for maximum safety.",
             icon: <Disc className="w-6 h-6 text-[#317F21]" />,
             image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
-            link: "/brake-pads",
+            link: "/BrakePads",
         },
         {
             id: 12,
@@ -192,7 +192,7 @@ export default function Service() {
                 "Repair and replacement of faulty electric window regulators.",
             icon: <Sliders className="w-6 h-6 text-[#317F21]" />,
             image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
-            link: "/window-regulators",
+            link: "/WindowRegulators",
         },
         {
             id: 13,
@@ -201,7 +201,7 @@ export default function Service() {
                 "Wiper motor repairs for clear visibility in all weather.",
             icon: <Wind className="w-6 h-6 text-[#317F21]" />,
             image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
-            link: "/wiper-motors",
+            link: "/WiperMotors",
         },
         {
             id: 14,
@@ -210,7 +210,7 @@ export default function Service() {
                 "Diagnosis and repair of central locking systems.",
             icon: <Lock className="w-6 h-6 text-[#317F21]" />,
             image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
-            link: "/central-locking",
+            link: "/central-door-motors",
         },
         {
             id: 15,
@@ -219,7 +219,7 @@ export default function Service() {
                 "Expert auto electrical repairs and fault finding.",
             icon: <Zap className="w-6 h-6 text-[#317F21]" />,
             image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
-            link: "/car-electrics",
+            link: "/Car-Electrics",
         },
         {
             id: 16,
@@ -228,7 +228,7 @@ export default function Service() {
                 "Advanced ECU diagnostics and repairs for optimal performance.",
             icon: <CircuitBoard className="w-6 h-6 text-[#317F21]" />,
             image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
-            link: "/ecu-repair",
+            link: "/ECURepair&Services",
         },
         {
             id: 17,
@@ -237,7 +237,7 @@ export default function Service() {
                 "EGR diagnostics and cleaning to reduce emissions.",
             icon: <Recycle className="w-6 h-6 text-[#317F21]" />,
             image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
-            link: "/egr",
+            link: "/EGR",
         },
         {
             id: 18,
@@ -246,7 +246,7 @@ export default function Service() {
                 "AdBlue system diagnostics and repairs for diesel vehicles.",
             icon: <Droplets className="w-6 h-6 text-[#317F21]" />,
             image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
-            link: "/adblue",
+            link: "/AdBlue",
         },
     ];
 

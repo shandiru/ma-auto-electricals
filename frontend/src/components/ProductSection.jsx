@@ -9,26 +9,26 @@ const products = [
     name: "Active JR",
     oldPrice: 80.0,
     price: 64.0,
-    image: "/images/shoe1.png",
+    image: "/1.jpg",
   },
   {
     id: 2,
     name: "Bio Original",
     price: 119.0,
-    image: "/images/shoe2.png",
+    image: "/2.png",
   },
   {
     id: 3,
     name: "Bio Perform",
     oldPrice: 119.0,
     price: 99.0,
-    image: "/images/shoe3.png",
+    image: "/3.jpg",
   },
   {
     id: 4,
     name: "Limited DL",
     price: 129.0,
-    image: "/images/shoe4.png",
+    image: "/4.png",
   },
 ];
 
@@ -78,11 +78,11 @@ export default function ProductSellers() {
 
               {/* Price */}
               <div className="text-sm text-gray-600">
-                {product.oldPrice && (
+                {/* {product.oldPrice && (
                   <span className="line-through mr-2">
                     ${product.oldPrice.toFixed(2)}
                   </span>
-                )}
+                )} */}
                 <span className="font-bold text-gray-900">
                   ${product.price.toFixed(2)}
                 </span>
