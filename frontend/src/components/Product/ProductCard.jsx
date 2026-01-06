@@ -161,7 +161,7 @@ export default function ProductCard() {
               <div className="p-6">
                 <h3 className="text-lg font-bold mb-2">{product.name}</h3>
                 <p className="text-2xl font-extrabold text-[#317F21] mb-4">
-                  £{product.price}
+                  £{Number(product.price).toFixed(2)}
                 </p>
 
                 <button
