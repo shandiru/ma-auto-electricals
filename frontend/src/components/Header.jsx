@@ -81,7 +81,7 @@ export default function Navbar() {
   const carPages = [
     { title: "Ford", link: "/ford" },
     { title: "Vauxhall", link: "/vauxhall" },
-    { title: "Gumtree", link: "/gumtree" },
+    { title: "Nissan", link: "/gumtree" },
   ];
 
   const closeAll = () => {
