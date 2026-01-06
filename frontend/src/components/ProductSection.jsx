@@ -6,27 +6,27 @@ import { ArrowRight } from "lucide-react";
 const products = [
   {
     id: 1,
-    name: "Active JR",
+    name: "SPEAKERS JVC CS-J1720X",
     oldPrice: 80.0,
     price: 64.0,
     image: "/1.jpg",
   },
   {
     id: 2,
-    name: "Bio Original",
+    name: "Road Angel RA-X622BT",
     price: 119.0,
     image: "/2.png",
   },
   {
     id: 3,
-    name: "Bio Perform",
+    name: "SUBWOOFER Pioneer – TS-WX306B",
     oldPrice: 119.0,
     price: 99.0,
     image: "/3.jpg",
   },
   {
     id: 4,
-    name: "Limited DL",
+    name: "Halo View Rear Cam",
     price: 129.0,
     image: "/4.png",
   },
