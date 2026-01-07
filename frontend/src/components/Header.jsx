@@ -78,11 +78,7 @@ export default function Navbar() {
     },
   ];
 
-  const carPages = [
-    { title: "Ford", link: "/ford" },
-    { title: "Vauxhall", link: "/vauxhall" },
-    { title: "Nissan", link: "/gumtree" },
-  ];
+ 
 
   const closeAll = () => {
     setIsMenuOpen(false);
@@ -150,31 +146,8 @@ export default function Navbar() {
             </div>
 
             {/* Cars Dropdown */}
-            <div className="relative">
-              <button
-                onClick={() => setOpenSubMenu(openSubMenu === "cars" ? null : "cars")}
-                className="flex items-center gap-1 text-gray-300 hover:text-white"
-              >
-                Cars
-                {openSubMenu === "cars" ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-              </button>
-
-              {openSubMenu === "cars" && (
-                <div className="absolute left-0 mt-2 w-48 bg-black border border-gray-800 rounded-md shadow-xl">
-                  {carPages.map((car, i) => (
-                    <HashLink
-                      key={i}
-                      to={car.link}
-                      onClick={closeAll}
-                      className="block px-4 py-3 text-gray-400 hover:text-white hover:bg-gray-800"
-                    >
-                      {car.title}
-                    </HashLink>
-                  ))}
-                </div>
-              )}
-            </div>
-
+            
+            <HashLink to="/car" className="text-gray-300 hover:text-white">Car</HashLink>
             <HashLink to="/product" className="text-gray-300 hover:text-white">Product</HashLink>
             <HashLink to="/#about" className="text-gray-300 hover:text-white">About</HashLink>
             <HashLink to="/contact" className="text-gray-300 hover:text-white">Contact</HashLink>
@@ -253,31 +226,8 @@ export default function Navbar() {
             </div>
 
             {/* Cars Mobile */}
-            <div>
-              <button
-                onClick={() => setOpenSubMenu(openSubMenu === "cars" ? null : "cars")}
-                className="w-full flex justify-between items-center text-gray-300"
-              >
-                Cars
-                {openSubMenu === "cars" ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-              </button>
-
-              {openSubMenu === "cars" && (
-                <div className="mt-3 border-l border-gray-700 pl-3 space-y-2">
-                  {carPages.map((car, i) => (
-                    <HashLink
-                      key={i}
-                      to={car.link}
-                      onClick={closeAll}
-                      className="block text-gray-400 hover:text-white text-sm"
-                    >
-                      {car.title}
-                    </HashLink>
-                  ))}
-                </div>
-              )}
-            </div>
-
+           
+              <HashLink to="/car" onClick={closeAll} className="block text-gray-300">Car</HashLink>
             <HashLink to="/product" onClick={closeAll} className="block text-gray-300">Product</HashLink>
             <HashLink to="/#about" onClick={closeAll} className="block text-gray-300">About</HashLink>
             <HashLink to="/contact" onClick={closeAll} className="block text-gray-300">Contact</HashLink>

@@ -13,7 +13,7 @@ import ProductPage from "./page/ProductPage";
 import ProductDetails from "./components/Product/ProductDetails";
 import CartPage from "./components/Product/CartPage";
 import SuccessPage from "./components/Product/SuccessPage";
-import Gumtree from "./page/Gumtree";
+import Nissan from "./page/Nissan";
 import MotPage from "../src/page/mot"
 import ParkingPage from "./page/Parking";
 import InstallationPage from "./page/Installation";
@@ -34,7 +34,7 @@ import WiperMotorsPage from "./page/WiperMotors";
 import WindowRegulatorsPage from "./page/WindowRegulators";
 import BrakePadsPage from "./page/BrakePads";
 import MechanicalPage from "./page/Mechanical";
-
+import CarPage from "./page/CarPage"
 function App() {
   return (
     <Router>
@@ -49,7 +49,7 @@ function App() {
         <Route path="/products/:id" element={<ProductDetails />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/success" element={<SuccessPage />} />
-        <Route path="/gumtree" element={<Gumtree />} />
+        <Route path="/nissan" element={<Nissan />} />
         <Route path="/mot" element={<MotPage />} />
         <Route path="/parking" element={<ParkingPage />} />
         <Route path="/installation" element={<InstallationPage />} />
@@ -70,6 +70,7 @@ function App() {
         <Route path="/Mechanical" element={<MechanicalPage />} />
         <Route path="/ford" element={<Ford />} />
         <Route path="/vauxhall" element={<Vauxhall />} />
+        <Route path="/car" element={<CarPage />} />
       </Routes>
       <Footer />
       <GDPRBanner />
