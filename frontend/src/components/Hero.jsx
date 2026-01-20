@@ -7,7 +7,7 @@ export default function HeroSection() {
   return (
     <section
       className="relative w-full min-h-[120vh] flex items-center text-white"
-      id="home"
+      id="#"
     >
       <div className="max-w-6xl mx-auto">
 

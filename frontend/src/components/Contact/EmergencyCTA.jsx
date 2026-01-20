@@ -64,7 +64,7 @@ export default function EmergencyCTA() {
           </a>
 
           {/* Emergency Service Button */}
-          <button
+          {/* <button
             onClick={() => window.open('tel:+44 7889 133123', '_self')}
             className="
               inline-flex items-center justify-center gap-2 h-10 rounded-md px-6 font-semibold border
@@ -78,7 +78,7 @@ export default function EmergencyCTA() {
             }}
           >
             Emergency Service
-          </button>
+          </button> */}
         </div>
       </div>
     </section>

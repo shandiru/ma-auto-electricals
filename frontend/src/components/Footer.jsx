@@ -78,7 +78,7 @@ export default function Footer() {
               <li>
                 <HashLink
                   smooth
-                  to="/#home"
+                  to="/#"
                   className="hover:text-white transition-colors"
                 >
                   Home
@@ -112,14 +112,14 @@ export default function Footer() {
               </li>
 
               <li>
-                <Link to="/privacy-policy" className="hover:text-gray-300">
-                  Privacy Policy
+                <Link to="/product" className="hover:text-gray-300">
+                  Product
                 </Link>
               </li>
 
               <li>
-                <Link to="/terms-conditions" className="hover:text-gray-300">
-                  Terms & Conditions
+                <Link to="/car" className="hover:text-gray-300">
+                  Car
                 </Link>
               </li>
             </ul>
@@ -174,8 +174,26 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-2 text-center font-semibold text-gray-400">
-          <p>
+        <div className="mt-2 flex flex-col sm:flex-row justify-center items-center gap-3 text-center font-semibold text-gray-400">
+          {/* Left: Terms & Privacy */}
+          <div className="flex gap-4 text-sm">
+            <Link
+              to="/terms"
+              className="text-gray-400 hover:text-[#317F21] transition duration-300"
+            >
+              Terms & Conditions
+            </Link>
+            <span className="text-gray-500">|</span>
+            <Link
+              to="/privacy"
+              className="text-gray-400 hover:text-[#317F21] transition duration-300"
+            >
+              Privacy Policy
+            </Link>
+          </div>
+
+          {/* Center: Powered by Ansely (unchanged) */}
+          <p className="text-center font-semibold text-gray-400">
             Powered by{" "}
             <a
               href="https://www.ansely.co.uk/"

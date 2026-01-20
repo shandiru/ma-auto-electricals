@@ -99,7 +99,7 @@ export default function Navbar() {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
 
-            <HashLink smooth to="/#home" scroll={scrollWithOffset} className="text-gray-300 hover:text-white">
+            <HashLink smooth to="/#" scroll={scrollWithOffset} className="text-gray-300 hover:text-white">
               Home
             </HashLink>
 
@@ -181,7 +181,7 @@ export default function Navbar() {
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t border-gray-800 space-y-4">
 
-            <HashLink to="/#home" onClick={closeAll} className="block text-gray-300">Home</HashLink>
+            <HashLink to="/#" onClick={closeAll} className="block text-gray-300">Home</HashLink>
 
             {/* Services Mobile */}
             <div>
