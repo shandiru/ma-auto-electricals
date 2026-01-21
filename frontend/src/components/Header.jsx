@@ -27,10 +27,28 @@ export default function Navbar() {
     window.scrollTo({ top: y, behavior: "smooth" });
   };
 
-  useEffect(() => {
+  // Navbar.jsx
+useEffect(() => {
+  // Function to update state from localStorage
+  const updateCount = () => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    setCartCount(cart.length);
-  }, []);
+    // If you want total items (sum of quantities), use reduce. 
+    // If you want unique items count, use cart.length.
+    const totalItems = cart.reduce((acc, item) => acc + (item.quantity || 1), 0);
+    setCartCount(totalItems);
+  };
+
+  // Initial call on mount
+  updateCount();
+
+  // Listen for the custom event
+  window.addEventListener("cartUpdated", updateCount);
+
+  // Clean up listener when component unmounts
+  return () => {
+    window.removeEventListener("cartUpdated", updateCount);
+  };
+}, []);
 
   const serviceCategories = [
     {
