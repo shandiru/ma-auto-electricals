@@ -118,7 +118,7 @@ useEffect(() => {
           <nav className="hidden md:flex items-center gap-8">
 
             <HashLink smooth to="/#" scroll={scrollWithOffset} className="text-gray-300 hover:text-white">
-              Home
+              Homes
             </HashLink>
 
             {/* Services Dropdown */}
