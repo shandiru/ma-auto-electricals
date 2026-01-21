@@ -16,7 +16,6 @@ export default function AddToCartButton({ product }) {
 
     // Save back to localStorage
     localStorage.setItem("cart", JSON.stringify(cart));
-    window.dispatchEvent(new Event("cartUpdated"));
     alert(`${product.name} added to cart!`);
   };
 

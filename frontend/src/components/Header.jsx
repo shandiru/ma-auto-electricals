@@ -27,28 +27,10 @@ export default function Navbar() {
     window.scrollTo({ top: y, behavior: "smooth" });
   };
 
-  // Navbar.jsx
-useEffect(() => {
-  // Function to update state from localStorage
-  const updateCount = () => {
+  useEffect(() => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    // If you want total items (sum of quantities), use reduce. 
-    // If you want unique items count, use cart.length.
-    const totalItems = cart.reduce((acc, item) => acc + (item.quantity || 1), 0);
-    setCartCount(totalItems);
-  };
-
-  // Initial call on mount
-  updateCount();
-
-  // Listen for the custom event
-  window.addEventListener("cartUpdated", updateCount);
-
-  // Clean up listener when component unmounts
-  return () => {
-    window.removeEventListener("cartUpdated", updateCount);
-  };
-}, []);
+    setCartCount(cart.length);
+  }, []);
 
   const serviceCategories = [
     {
@@ -118,7 +100,7 @@ useEffect(() => {
           <nav className="hidden md:flex items-center gap-8">
 
             <HashLink smooth to="/#" scroll={scrollWithOffset} className="text-gray-300 hover:text-white">
-              Homes
+              Home
             </HashLink>
 
             {/* Services Dropdown */}
