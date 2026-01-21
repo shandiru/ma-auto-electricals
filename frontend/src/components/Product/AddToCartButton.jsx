@@ -21,7 +21,7 @@ export default function AddToCartButton({ product }) {
     // --- FIX: Navbar-ku notification anuppa ---
     window.dispatchEvent(new Event("cartUpdated"));
 
-    alert(`${product.name} added to cart dirushan!`);
+    alert(`${product.name} added to cart `);
   };
 
   return (
