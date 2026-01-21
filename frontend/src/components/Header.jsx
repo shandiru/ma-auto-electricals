@@ -16,21 +16,37 @@ export default function Navbar() {
   const [cartCount, setCartCount] = useState(0);
 
   const navigate = useNavigate();
-  const serviceRef = useRef(null);
-
   const waNumber = "447889133123";
   const waHref = `https://wa.me/${waNumber}`;
+
+  // Cart count-ai update seiyyum function
+  const updateCount = () => {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    // Cart-la irukka moththa items count (Total quantity venum endal reduce use pannalam)
+    setCartCount(cart.length);
+  };
+
+  useEffect(() => {
+    // Page load aagum pothu count-ai edukka
+    updateCount();
+
+    // Button click pannum pothu varum signal-ai listen panna
+    window.addEventListener("cartUpdated", updateCount);
+
+    // Vera tab-la cart update aanalum ithu vela seiyyum
+    window.addEventListener("storage", updateCount);
+
+    return () => {
+      window.removeEventListener("cartUpdated", updateCount);
+      window.removeEventListener("storage", updateCount);
+    };
+  }, []);
 
   const scrollWithOffset = (el) => {
     const yOffset = -80;
     const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
     window.scrollTo({ top: y, behavior: "smooth" });
   };
-
-  useEffect(() => {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    setCartCount(cart.length);
-  }, []);
 
   const serviceCategories = [
     {
@@ -78,8 +94,6 @@ export default function Navbar() {
     },
   ];
 
- 
-
   const closeAll = () => {
     setIsMenuOpen(false);
     setIsServiceOpen(false);
@@ -90,7 +104,7 @@ export default function Navbar() {
     <header className="fixed top-0 w-full bg-black/90 backdrop-blur-sm z-50 border-b border-gray-800">
       <div className="max-w-7xl mx-auto px-4">
         <div className="h-16 flex items-center justify-between">
-
+          
           {/* Logo */}
           <div onClick={() => navigate("/")} className="cursor-pointer">
             <img src="/logo.png" alt="Logo" className="h-12" />
@@ -98,9 +112,8 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
-
             <HashLink smooth to="/#" scroll={scrollWithOffset} className="text-gray-300 hover:text-white">
-              Home
+              Homed
             </HashLink>
 
             {/* Services Dropdown */}
@@ -145,8 +158,6 @@ export default function Navbar() {
               )}
             </div>
 
-            {/* Cars Dropdown */}
-            
             <HashLink to="/car" className="text-gray-300 hover:text-white">Car</HashLink>
             <HashLink to="/product" className="text-gray-300 hover:text-white">Product</HashLink>
             <HashLink to="/#about" className="text-gray-300 hover:text-white">About</HashLink>
@@ -158,7 +169,7 @@ export default function Navbar() {
             <div onClick={() => navigate("/cart")} className="relative cursor-pointer">
               <ShoppingCart size={26} className="text-green-500" />
               {cartCount > 0 && (
-                <span className="absolute -top-2 -right-2 bg-red-500 text-xs text-white px-2 rounded-full">
+                <span className="absolute -top-2 -right-2 bg-red-500 text-[10px] text-white h-5 w-5 flex items-center justify-center rounded-full font-bold animate-pulse">
                   {cartCount}
                 </span>
               )}
@@ -180,9 +191,8 @@ export default function Navbar() {
         {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t border-gray-800 space-y-4">
-
             <HashLink to="/#" onClick={closeAll} className="block text-gray-300">Home</HashLink>
-
+            
             {/* Services Mobile */}
             <div>
               <button
@@ -204,7 +214,6 @@ export default function Navbar() {
                         {cat.category}
                         {openSubMenu === i ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
                       </button>
-
                       {openSubMenu === i && (
                         <div className="ml-3 mt-2 space-y-1">
                           {cat.items.map((item, j) => (
@@ -225,9 +234,7 @@ export default function Navbar() {
               )}
             </div>
 
-            {/* Cars Mobile */}
-           
-              <HashLink to="/car" onClick={closeAll} className="block text-gray-300">Car</HashLink>
+            <HashLink to="/car" onClick={closeAll} className="block text-gray-300">Car</HashLink>
             <HashLink to="/product" onClick={closeAll} className="block text-gray-300">Product</HashLink>
             <HashLink to="/#about" onClick={closeAll} className="block text-gray-300">About</HashLink>
             <HashLink to="/contact" onClick={closeAll} className="block text-gray-300">Contact</HashLink>
