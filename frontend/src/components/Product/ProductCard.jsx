@@ -144,11 +144,11 @@ export default function ProductCard() {
                     : "shadow-lg hover:shadow-2xl hover:-translate-y-2"
                 }`}
             >
-              <div className="relative h-54 w-75 mx-auto overflow-hidden">
+              <div className="relative h-50 w-60 mx-auto    overflow-hidden">
                 <img
                   src={`${API_URL}/images/${product.images?.[0]}`}
                   alt={product.name}
-                  className="w-full h-full object-cover"
+                  className="h-33 w-48 mx-auto mt-10 object-cover"
                 />
 
                 {isOutOfStock && (
