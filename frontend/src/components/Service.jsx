@@ -92,7 +92,7 @@ export default function Service() {
             description:
                 "We supply and install high-quality car stereos to enhance your driving experience with better sound and modern features.",
             icon: <Music className="w-6 h-6 text-[#317F21]" />,
-            image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
+            image: "stero.jpeg",
             link: "/car-stereos",
         },
         {
@@ -101,7 +101,7 @@ export default function Service() {
             description:
                 "Using advanced diagnostic equipment, we quickly identify and fix electrical and engine faults.",
             icon: <Cpu className="w-6 h-6 text-[#317F21]" />,
-            image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
+            image: "diagnostics.jpeg",
             link: "/diagnostics",
         },
         {
@@ -110,7 +110,7 @@ export default function Service() {
             description:
                 "Our comprehensive car repairs and servicing keep your vehicle running safely.",
             icon: <Wrench className="w-6 h-6 text-[#317F21]" />,
-            image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
+            image: "repair.jpeg",
             link: "/car-repair",
         },
         {
@@ -119,7 +119,7 @@ export default function Service() {
             description:
                 "We professionally install handsfree car kits to help you stay connected safely.",
             icon: <PhoneCall className="w-6 h-6 text-[#317F21]" />,
-            image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
+            image: "Hands.jpeg",
             link: "/handfree",
         },
         {
@@ -128,7 +128,7 @@ export default function Service() {
             description:
                 "Parking sensors and reversing cameras improve visibility and safety.",
             icon: <Camera className="w-6 h-6 text-[#317F21]" />,
-            image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
+            image: "Parking.jpeg",
             link: "/parking",
         },
         {
@@ -137,7 +137,7 @@ export default function Service() {
             description:
                 "We install reliable car security systems to protect your vehicle.",
             icon: <ShieldCheck className="w-6 h-6 text-[#317F21]" />,
-            image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
+            image: "Car.jpeg",
             link: "/car-security",
         },
         {
@@ -146,7 +146,7 @@ export default function Service() {
             description:
                 "Trusted MOT testing and preparation to meet legal safety standards.",
             icon: <ClipboardCheck className="w-6 h-6 text-[#317F21]" />,
-            image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
+            image: "MOT.jpeg",
             link: "/mot",
         },
         {
@@ -155,7 +155,7 @@ export default function Service() {
             description:
                 "Real-time vehicle tracking for security and peace of mind.",
             icon: <MapPin className="w-6 h-6 text-[#317F21]" />,
-            image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
+            image: "Vehicle.jpeg",
             link: "/vehicle-tracking",
         },
         {
@@ -164,7 +164,7 @@ export default function Service() {
             description:
                 "Professional installations carried out by experienced technicians.",
             icon: <Settings className="w-6 h-6 text-[#317F21]" />,
-            image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
+            image: "Installations.jpg",
             link: "/installation",
         },
         {
@@ -173,7 +173,7 @@ export default function Service() {
             description:
                 "Complete mechanical repairs to keep your vehicle running smoothly.",
             icon: <Cog className="w-6 h-6 text-[#317F21]" />,
-            image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
+            image: "/Mechanical.jpeg",
             link: "/mechanical",
         },
         {
@@ -182,7 +182,7 @@ export default function Service() {
             description:
                 "Supply and fitting of high-quality brake pads for maximum safety.",
             icon: <Disc className="w-6 h-6 text-[#317F21]" />,
-            image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
+            image: "/Break.jpeg",
             link: "/BrakePads",
         },
         {
@@ -191,7 +191,7 @@ export default function Service() {
             description:
                 "Repair and replacement of faulty electric window regulators.",
             icon: <Sliders className="w-6 h-6 text-[#317F21]" />,
-            image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
+            image: "/Window.jpg",
             link: "/WindowRegulators",
         },
         {
@@ -200,7 +200,7 @@ export default function Service() {
             description:
                 "Wiper motor repairs for clear visibility in all weather.",
             icon: <Wind className="w-6 h-6 text-[#317F21]" />,
-            image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
+            image: "/Wiper.jpg",
             link: "/WiperMotors",
         },
         {
@@ -209,7 +209,7 @@ export default function Service() {
             description:
                 "Diagnosis and repair of central locking systems.",
             icon: <Lock className="w-6 h-6 text-[#317F21]" />,
-            image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
+            image: "/Central.jpg",
             link: "/central-door-motors",
         },
         {
@@ -218,7 +218,7 @@ export default function Service() {
             description:
                 "Expert auto electrical repairs and fault finding.",
             icon: <Zap className="w-6 h-6 text-[#317F21]" />,
-            image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
+            image: "/electrics.jpeg",
             link: "/Car-Electrics",
         },
         {
@@ -227,7 +227,7 @@ export default function Service() {
             description:
                 "Advanced ECU diagnostics and repairs for optimal performance.",
             icon: <CircuitBoard className="w-6 h-6 text-[#317F21]" />,
-            image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
+            image: "/ECU.jpg",
             link: "/ECURepair&Services",
         },
         {
@@ -236,7 +236,7 @@ export default function Service() {
             description:
                 "EGR diagnostics and cleaning to reduce emissions.",
             icon: <Recycle className="w-6 h-6 text-[#317F21]" />,
-            image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
+            image: "/EGR.jpg",
             link: "/EGR",
         },
         {
@@ -245,7 +245,7 @@ export default function Service() {
             description:
                 "AdBlue system diagnostics and repairs for diesel vehicles.",
             icon: <Droplets className="w-6 h-6 text-[#317F21]" />,
-            image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80",
+            image: "/Adblue.jpg",
             link: "/AdBlue",
         },
     ];

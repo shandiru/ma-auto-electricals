@@ -115,9 +115,9 @@ const VehicleDetailsPage = ({ vehicle }) => {
                 <div className="text-4xl font-bold text-[#317F21] mb-3">
                   £{vehicle.monthlyPayment}
                 </div>
-                <button className="bg-[#317F21] text-white px-6 py-2 rounded-full font-semibold hover:opacity-90 transition">
+                {/* <button className="bg-[#317F21] text-white px-6 py-2 rounded-full font-semibold hover:opacity-90 transition">
                   Apply for Finance
-                </button>
+                </button> */}
               </div>
 
               {/* Buy Card */}
