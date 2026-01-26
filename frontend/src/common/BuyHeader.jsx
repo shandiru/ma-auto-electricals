@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import {
   ChevronLeft,
   ChevronRight,
-  Heart,
-  Share2,
 } from "lucide-react";
 
 const VehicleDetailsPage = ({ vehicle }) => {
@@ -53,14 +51,14 @@ const VehicleDetailsPage = ({ vehicle }) => {
                   onClick={prevImage}
                   className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/70 hover:bg-[#317F21]/80 p-3 rounded-full transition"
                 >
-                  <ChevronLeft className="w-6 h-6 text-[#317F21]" />
+                  <ChevronLeft className="w-6 h-6 text-[#317F21] hover:text-white" />
                 </button>
 
                 <button
                   onClick={nextImage}
                   className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/70 hover:bg-[#317F21]/80 p-3 rounded-full transition"
                 >
-                  <ChevronRight className="w-6 h-6 text-[#317F21]" />
+                  <ChevronRight className="w-6 h-6 text-[#317F21] hover:text-white" />
                 </button>
 
                 {/* Image Counter */}
@@ -106,20 +104,6 @@ const VehicleDetailsPage = ({ vehicle }) => {
                 </h1>
                 <p className="opacity-70 mt-1">{vehicle.variant}</p>
               </div>
-
-              {/* Finance Card */}
-              <div className="bg-[#317F21]/10 rounded-2xl p-6 text-center border border-[#317F21]/30 shadow">
-                <div className="text-sm opacity-80 mb-2">
-                  Finance from
-                </div>
-                <div className="text-4xl font-bold text-[#317F21] mb-3">
-                  £{vehicle.monthlyPayment}
-                </div>
-                {/* <button className="bg-[#317F21] text-white px-6 py-2 rounded-full font-semibold hover:opacity-90 transition">
-                  Apply for Finance
-                </button> */}
-              </div>
-
               {/* Buy Card */}
               <div className="bg-white rounded-2xl p-6 border border-[#317F21]/20 shadow text-center">
                 <div className="text-sm opacity-80 mb-2">
@@ -132,9 +116,6 @@ const VehicleDetailsPage = ({ vehicle }) => {
                 <div className="flex flex-col gap-3">
                   <button className="bg-[#317F21] text-white py-3 rounded-full font-semibold hover:opacity-90 transition">
                     Contact Seller
-                  </button>
-                  <button className="border border-[#317F21] text-[#317F21] py-3 rounded-full hover:bg-[#317F21]/10 transition">
-                    Save Vehicle
                   </button>
                   <p className="text-xs opacity-60">
                     Trusted Gumtree-style listing
