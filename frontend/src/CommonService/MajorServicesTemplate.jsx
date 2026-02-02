@@ -15,9 +15,9 @@ const MajorServicesTemplate = ({ data }) => {
           <h2 className="text-3xl md:text-4xl font-bold text-[#317F21] text-center mb-6">
             Why Choose MA Auto Electrics for {service_name}?
           </h2>
-          <p className="text-lg text-gray-600 text-center max-w-3xl mx-auto mb-12">
+          {/* <p className="text-lg text-gray-600 text-center max-w-3xl mx-auto mb-12">
             {intro_description}
-          </p>
+          </p> */}
 
           {/* Benefits Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">

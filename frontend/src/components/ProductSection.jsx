@@ -68,7 +68,7 @@ export default function ProductSellers() {
 
               {/* Price */}
               <span className="text-sm font-bold text-gray-900">
-                ${product.price.toFixed(2)}
+                £{product.price.toFixed(2)}
               </span>
             </div>
           ))}

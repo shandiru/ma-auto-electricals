@@ -6,13 +6,13 @@ export default function MenuPage() {
     maki: [
       {
         title: "Spicy Tuna Maki",
-        price: "$5",
+        price: "£5",
         desc: "A tantalizing blend of spicy tuna, cucumber, and avocado.",
         img: "https://framerusercontent.com/images/QAnUAEBWAkCE4NM4Ja4aQy9Tu4.webp",
       },
       {
         title: "Mango Maki",
-        price: "$5",
+        price: "£5",
         desc: "Tempura-fried shrimp, cucumber, and cream cheese.",
         img: "https://framerusercontent.com/images/fhMMbGkmrMBjUIswKIN5x3w.webp",
       },
@@ -20,7 +20,7 @@ export default function MenuPage() {
     uramaki: [
       {
         title: "Volcano Delight",
-        price: "$12",
+        price: "£12",
         desc: "Creamy crab salad topped with spicy tuna & sriracha.",
         img: "https://framerusercontent.com/images/quqbVpcYdgH65rZqF71BSohYQ.webp",
       },
@@ -28,7 +28,7 @@ export default function MenuPage() {
     special: [
       {
         title: "Sunrise Bliss",
-        price: "$16",
+        price: "£16",
         desc: "Fresh salmon, cream cheese & asparagus wrapped in tobiko.",
         img: "https://framerusercontent.com/images/27vE5qIMgg0IarFBK9fDPTLr9ZA.webp",
       },
