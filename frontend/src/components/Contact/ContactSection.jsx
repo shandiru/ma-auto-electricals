@@ -89,20 +89,20 @@ export default function ContactSection() {
   };
 
   return (
-    <section className="py-16 bg-[#F3F6F4] dark:bg-[#0B0F0C] overflow-x-hidden">
+    <section className="py-16 bg-[#F3F6F4] overflow-x-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12">
           {/* FORM */}
           <div
             data-aos="fade-right"
-            className="flex flex-col gap-6 rounded-2xl bg-white dark:bg-[#0F1115] py-6 shadow-lg hover:shadow-xl transition-shadow duration-300 w-full"
+            className="flex flex-col gap-6 rounded-2xl bg-white  py-6 shadow-lg hover:shadow-xl transition-shadow duration-300 w-full"
           >
             <div className="px-6">
-              <div className="text-2xl font-bold flex items-center text-[#111827] dark:text-gray-100">
+              <div className="text-2xl font-bold flex items-center text-[#111827] ">
                 <FaCommentDots className="mr-2 h-5 w-5 text-[#2F7D33]" />
                 Send Us a Message
               </div>
-              <p className="text-sm mt-1 text-gray-500 dark:text-gray-400">
+              <p className="text-sm mt-1 text-gray-500 ">
                 Get in touch for quotes, bookings, or any questions about our services
               </p>
             </div>
@@ -149,13 +149,13 @@ export default function ContactSection() {
               />
 
               <div className="space-y-2">
-                <label htmlFor="service" className="text-sm font-medium text-[#111827] dark:text-gray-200">
+                <label htmlFor="service" className="text-sm font-medium text-[#111827] ">
                   Service Required
                 </label>
                 <select
                   id="service"
                   name="service"
-                  className="w-full px-3 py-2 rounded-lg bg-gray-50 dark:bg-[#1B1E24] text-[#111827] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#2F7D33] transition-colors"
+                  className="w-full px-3 py-2 rounded-lg bg-gray-50  text-[#111827]  focus:outline-none focus:ring-2 focus:ring-[#2F7D33] transition-colors"
                   value={formData.service}
                   onChange={handleChange}
                 >
@@ -174,7 +174,7 @@ export default function ContactSection() {
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="message" className="text-sm font-medium text-[#111827] dark:text-gray-200">
+                <label htmlFor="message" className="text-sm font-medium text-[#111827] ">
                   Message *
                 </label>
                 <textarea
@@ -182,7 +182,7 @@ export default function ContactSection() {
                   name="message"
                   rows={4}
                   placeholder="Please describe your requirements..."
-                  className="w-full rounded-lg px-3 py-2 bg-gray-50 dark:bg-[#1B1E24] text-[#111827] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#2F7D33] transition-colors"
+                  className="w-full rounded-lg px-3 py-2 bg-gray-50  text-[#111827] focus:outline-none focus:ring-2 focus:ring-[#2F7D33] transition-colors"
                   value={formData.message}
                   onChange={handleChange}
                 />
@@ -196,7 +196,7 @@ export default function ContactSection() {
                 Send Message
               </button>
 
-              <p className="text-xs text-gray-500 dark:text-gray-400">
+              <p className="text-xs text-gray-500 ">
                 * Required fields. We'll get back to you within 24 hours.
               </p>
             </div>
@@ -220,8 +220,8 @@ export default function ContactSection() {
 
             <SideCard data-aos="fade-left" title="Find Us" icon={<FaMapMarkerAlt className="h-5 w-5" />}>
               <div className="space-y-1 mb-4">
-                <p className="font-semibold text-[#111827] dark:text-white">Stoneley's Garage Services</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
+                <p className="font-semibold text-[#111827] ">Stoneley's Garage Services</p>
+                <p className="text-sm text-gray-500 ">
                   Oakham Business Park, Hamilton Way, Mansfield NG18 5BU, UK
                 </p>
               </div>
@@ -231,7 +231,7 @@ export default function ContactSection() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <button className="h-9 w-full rounded-lg px-4 py-2 text-sm font-medium flex items-center justify-center bg-gray-50 dark:bg-[#1B1E24] text-[#111827] dark:text-white hover:bg-gray-100 dark:hover:bg-[#252830] hover:shadow-md transition-all duration-200">
+                <button className="h-9 w-full rounded-lg px-4 py-2 text-sm font-medium flex items-center justify-center bg-gray-50  text-[#111827]  hover:bg-gray-100  hover:shadow-md transition-all duration-200">
                   <FaDirections className="mr-2 h-4 w-4 text-[#2F7D33]" />
                   View on Google Maps
                 </button>
@@ -239,7 +239,7 @@ export default function ContactSection() {
             </SideCard>
 
             <SideCard data-aos="fade-left" title="About Stoneley's Garage">
-              <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+              <p className="text-sm text-gray-500 leading-relaxed">
                 Family-run garage established in 1973, serving Mansfield and surrounding areas.
                 Our certified technicians provide reliable service for cars, commercial vehicles,
                 and motorhomes.
@@ -257,7 +257,7 @@ export default function ContactSection() {
 function FormInput({ id, label, placeholder, icon, value, onChange, type = "text", error }) {
   return (
     <div className="space-y-2">
-      <label htmlFor={id} className="text-sm font-medium text-[#111827] dark:text-gray-200">
+      <label htmlFor={id} className="text-sm font-medium text-[#111827] ">
         {label}
       </label>
       <div className="relative">
@@ -267,7 +267,7 @@ function FormInput({ id, label, placeholder, icon, value, onChange, type = "text
           name={id}
           type={type}
           placeholder={placeholder}
-          className={`h-9 w-full rounded-lg px-3 pl-10 bg-gray-50 dark:bg-[#1B1E24] text-[#111827] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#2F7D33] transition-colors ${
+          className={`h-9 w-full rounded-lg px-3 pl-10 bg-gray-50  text-[#111827]  focus:outline-none focus:ring-2 focus:ring-[#2F7D33] transition-colors ${
             error ? "ring-2 ring-red-500" : ""
           }`}
           value={value}
@@ -283,10 +283,10 @@ function SideCard({ title, icon, children, ...props }) {
   return (
     <div
       {...props}
-      className="rounded-2xl bg-white dark:bg-[#0F1115] py-6 shadow-lg hover:shadow-xl transition-shadow duration-300 w-full"
+      className="rounded-2xl bg-white  py-6 shadow-lg hover:shadow-xl transition-shadow duration-300 w-full"
     >
       <div className="px-6 mb-2">
-        <div className="text-xl font-bold flex items-center text-[#111827] dark:text-white">
+        <div className="text-xl font-bold flex items-center text-[#111827] ">
           {icon && <span className="mr-2 text-[#2F7D33]">{icon}</span>}
           {title}
         </div>
@@ -299,8 +299,8 @@ function SideCard({ title, icon, children, ...props }) {
 function HoursRow({ day, time, muted }) {
   return (
     <div className="flex items-center justify-between py-1">
-      <span className="font-medium text-[#111827] dark:text-white">{day}</span>
-      <span className={`text-sm ${muted ? "text-gray-400" : "text-[#111827] dark:text-white"}`}>
+      <span className="font-medium text-[#111827]">{day}</span>
+      <span className={`text-sm ${muted ? "text-gray-400" : "text-[#111827] "}`}>
         {time}
       </span>
     </div>
