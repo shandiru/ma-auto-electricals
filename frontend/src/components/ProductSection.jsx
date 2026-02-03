@@ -1,75 +1,109 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-const products = [
-  {
-    id: 1,
-    name: "SPEAKERS JVC CS-J1720X",
-    price: 64.0,
-    image: "/1.jpg",
-  },
-  {
-    id: 2,
-    name: "Road Angel RA-X622BT",
-    price: 119.0,
-    image: "/2.png",
-  },
-  {
-    id: 3,
-    name: "SUBWOOFER Pioneer – TS-WX306B",
-    price: 99.0,
-    image: "/3.jpg",
-  },
-  {
-    id: 4,
-    name: "Halo View Rear Cam",
-    price: 129.0,
-    image: "/4.png",
-  },
-];
 
 export default function ProductSellers() {
   const navigate = useNavigate();
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // Directly using localhost as requested
+  const BASE_URL = "http://localhost:4000";
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        console.log("Fetching from:", `${BASE_URL}/api/products`);
+        const res = await fetch(`${BASE_URL}/api/products`);
+        const data = await res.json();
+
+        console.log("Full API Response:", data);
+
+        // API array structure handle panrom
+        const allProducts = Array.isArray(data) ? data : data.data;
+
+        if (allProducts) {
+          // FILTER: isBestSelling true-ah irundha mattum filter pannum
+          const filteredSellers = allProducts.filter((item) => {
+            console.log(`Product: ${item.name} | isBestSelling:`, item.isBestSelling);
+            return item.isBestSelling === true;
+          });
+
+          console.log("Filtered Results (Best Sellers Only):", filteredSellers);
+          setProducts(filteredSellers);
+        }
+      } catch (error) {
+        console.error("Fetch Error:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="text-center py-20 font-semibold text-green-600">
+        Loading Best Sellers...
+      </div>
+    );
+  }
+
+  // Best seller products illana section-ai hide pannidum
+  if (products.length === 0) return null;
 
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8">
+    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
       <div className="max-w-6xl mx-auto">
-
-        <h2 className="text-2xl font-bold mb-8">OUR BEST SELLERS</h2>
+        
+        {/* Title - Using Green color */}
+        <h2 className="text-2xl font-bold mb-8 uppercase tracking-widest text-gray-900 border-l-4 border-green-500 pl-4">
+          OUR <span className="text-green-600">BEST SELLERS</span>
+        </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {products.map((product) => (
             <div
-              key={product.id}
-              onClick={() => navigate(`/`)}
-              className="bg-white rounded-xl shadow-sm p-4 flex flex-col cursor-pointer
-                         hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+              key={product._id}
+              onClick={() => navigate(`/`)} // Not connecting routes as requested
+              className="group bg-white rounded-2xl shadow-sm hover:shadow-xl border border-gray-100 p-5 flex flex-col cursor-pointer transition-all duration-300 transform hover:-translate-y-2"
             >
-              {/* Badge */}
-              <span className="inline-block bg-[#aaee9d] text-[#317F21] text-xs font-medium px-2 py-1 rounded-full mb-2 w-max">
-                Best Seller
-              </span>
+              {/* Green Badge */}
+              <div className="mb-3">
+                <span className="bg-[#aaee9d] text-[#317F21] text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-tighter">
+                  Best Seller
+                </span>
+              </div>
 
-              {/* Image */}
-              <div className="flex justify-center items-center mb-4">
+              {/* Product Image */}
+              <div className="flex justify-center items-center mb-5 h-44 overflow-hidden">
                 <img
-                  src={product.image}
+                  src={`${BASE_URL}/images/${product.images[0]}`}
                   alt={product.name}
-                  className="h-40 w-auto object-contain"
+                  className="h-full w-auto object-contain group-hover:scale-110 transition-transform duration-500"
                 />
               </div>
 
-              {/* Name */}
-              <h3 className="text-sm font-semibold text-gray-900 mb-1">
-                {product.name}
-              </h3>
-
-              {/* Price */}
-              <span className="text-sm font-bold text-gray-900">
-                £{product.price.toFixed(2)}
-              </span>
+              {/* Product Info */}
+              <div className="mt-auto">
+                <h3 className="text-sm font-bold text-gray-800 mb-2 line-clamp-2 h-10 leading-tight">
+                  {product.name}
+                </h3>
+                
+                <div className="flex justify-between items-center">
+                  {/* Price in Green */}
+                  <span className="text-lg font-extrabold text-green-600">
+                    £{product.price.toFixed(2)}
+                  </span>
+                  
+                  {/* Icon in Green on Hover */}
+                  <div className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-green-600 group-hover:text-white transition-colors">
+                    <span className="text-xs">→</span>
+                  </div>
+                </div>
+              </div>
             </div>
           ))}
         </div>

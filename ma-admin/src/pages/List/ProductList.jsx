@@ -269,6 +269,9 @@ const ProductList = ({ url }) => {
                     </div>
                   </th>
                   <th className="px-6 py-4 text-center text-sm font-semibold uppercase tracking-wider">
+                    Best Selling
+                  </th>
+                  <th className="px-6 py-4 text-center text-sm font-semibold uppercase tracking-wider">
                     Actions
                   </th>
                 </tr>
@@ -309,6 +312,13 @@ const ProductList = ({ url }) => {
                       </td>
                       <td className="px-6 py-4 text-green-600 font-bold text-lg">
                         ${item.price?.toLocaleString()}
+                      </td>
+                      <td className="px-6 py-4 font-bold text-lg">
+                        {item.isBestSelling ? (
+                          <span className="text-green-600">Yes</span>
+                        ) : (
+                          <span className="text-[#B62025] dark:text-[#FF4B4B]">No</span>
+                        )}
                       </td>
                       <td className="px-6 py-4">
                         <div className="flex justify-center gap-2">
@@ -492,11 +502,10 @@ const ProductList = ({ url }) => {
                           )}
                           <button
                             onClick={() => setCurrentPage(page)}
-                            className={`min-w-10 px-3 py-2 rounded-lg font-medium transition-colors ${
-                              currentPage === page
+                            className={`min-w-10 px-3 py-2 rounded-lg font-medium transition-colors ${currentPage === page
                                 ? "bg-blue-500 text-white"
                                 : "border border-slate-300 hover:bg-slate-100"
-                            }`}
+                              }`}
                           >
                             {page}
                           </button>

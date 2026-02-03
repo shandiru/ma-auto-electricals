@@ -11,6 +11,7 @@ const EditProduct = ({ url, existingData, onSuccess, onClose }) => {
     price: "",
     count: "",
     category: "",
+    isBestSelling: ""
   });
 
   const [images, setImages] = useState([]); // New or existing images
@@ -26,6 +27,7 @@ const EditProduct = ({ url, existingData, onSuccess, onClose }) => {
         price: existingData.price,
         count: existingData.count,
         category: existingData.category,
+        isBestSelling: existingData.isBestSelling,
       });
       setImages(existingData.images || []);
       setPreviews(existingData.images ? existingData.images.map(img => `${url}/images/${img}`) : []);
@@ -63,6 +65,7 @@ const EditProduct = ({ url, existingData, onSuccess, onClose }) => {
       data.append("price", formData.price);
       data.append("count", formData.count);
       data.append("category", formData.category);
+      data.append("isBestSelling", formData.isBestSelling);
       data.append("removeImages", JSON.stringify(removeImages));
 
       images.forEach(img => {
@@ -166,6 +169,20 @@ const EditProduct = ({ url, existingData, onSuccess, onClose }) => {
           <div className="space-y-3">
             <label className="flex items-center gap-2 text-gray-700 font-semibold"><Tag /> Category</label>
             <input type="text" name="category" value={formData.category} onChange={handleChange} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 outline-none transition-all duration-300" required />
+          </div>
+          {/* Best Selling Toggle */}
+          <div className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl border border-gray-200">
+            <input
+              type="checkbox"
+              id="isBestSelling"
+              name="isBestSelling"
+              checked={formData.isBestSelling}
+              onChange={(e) => setFormData(prev => ({ ...prev, isBestSelling: e.target.checked }))}
+              className="w-5 h-5 accent-blue-600 cursor-pointer"
+            />
+            <label htmlFor="isBestSelling" className="text-gray-700 font-semibold cursor-pointer select-none">
+              Mark as <span className="text-[#B62025] dark:text-[#FF4B4B]">Best Selling</span> Product
+            </label>
           </div>
 
           {/* Submit */}

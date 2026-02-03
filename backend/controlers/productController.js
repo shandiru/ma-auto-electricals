@@ -67,13 +67,18 @@ export const updateProduct = async (req, res) => {
     const product = await productModel.findById(req.params.id);
     if (!product) return res.status(404).json({ success: false, message: "Product not found" });
 
-    const { name, description, price, count, category, removeImages } = req.body;
+    const { name, description, price, count, category, removeImages,isBestSelling } = req.body;
 
     if (name) product.name = name;
     if (description) product.description = description;
     if (price) product.price = Number(price);
     if (count) product.count = Number(count);
     if (category) product.category = category;
+    if (isBestSelling !== undefined) {
+      
+      product.isBestSelling = isBestSelling === "true" || isBestSelling === true;
+    }
+   
 
     // Remove images
     if (removeImages) {

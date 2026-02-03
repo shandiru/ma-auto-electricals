@@ -7,6 +7,7 @@ const productSchema = new mongoose.Schema({
   price: { type: Number, required: true },
   images: { type: [String], required: true },
   category: { type: String, required: true },
+  isBestSelling: { type: Boolean, default: false },
 });
 
 const productModel = mongoose.models.product || mongoose.model("product", productSchema);
