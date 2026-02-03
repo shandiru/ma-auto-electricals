@@ -77,13 +77,60 @@ export default function HeroSection() {
 /* FEATURE CARD COMPONENT */
 function FeatureCard({ icon, title, desc }) {
   return (
-    <div className="backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl p-4 sm:p-6 flex flex-col gap-4 shadow-lg">
-      <div className="flex items-center justify-center w-12 h-12 rounded-full border border-white/30 bg-white/10 mb-4">
-        <div className="text-white">{icon}</div>
+    <div
+      className="
+        group
+        backdrop-blur-md bg-white/10 border border-white/20
+        rounded-2xl p-4 sm:p-6 flex flex-col gap-4 shadow-lg
+        transition-all duration-300
+
+        hover:border-[#317F21]
+        active:border-[#317F21]
+      "
+    >
+      {/* Icon */}
+      <div
+        className="
+          flex items-center justify-center w-12 h-12 rounded-full
+          border border-white/30 bg-white/10 mb-4
+          transition-colors duration-300
+
+          group-hover:border-[#317F21]
+          group-active:border-[#317F21]
+        "
+      >
+        <div
+          className="
+            text-white transition-colors duration-300
+            group-hover:text-[#317F21]
+            group-active:text-[#317F21]
+          "
+        >
+          {icon}
+        </div>
       </div>
 
-      <h3 className="text-lg font-semibold text-white">{title}</h3>
-      <p className="text-sm text-white/80">{desc}</p>
+      {/* Title */}
+      <h3
+        className="
+          text-lg font-semibold text-white transition-colors duration-300
+          group-hover:text-[#317F21]
+          group-active:text-[#317F21]
+        "
+      >
+        {title}
+      </h3>
+
+      {/* Description */}
+      <p
+        className="
+          text-sm text-white/80 transition-colors duration-300
+          group-hover:text-[#317F21]
+          group-active:text-[#317F21]
+        "
+      >
+        {desc}
+      </p>
     </div>
   );
 }
