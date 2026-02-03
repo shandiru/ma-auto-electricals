@@ -30,7 +30,8 @@ const Layout = ({ children }) => {
 };
 
 const App = () => {
-  const url = "https://ma-auto-electricals.onrender.com";
+   const url = "https://ma-auto-electricals.onrender.com";
+
 
   return (
     <BrowserRouter>
