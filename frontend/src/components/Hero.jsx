@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export default function HeroSection() {
   return (
     <section
-      className="relative w-full min-h-[120vh] flex items-center text-white overflow-hidden"
+      className="relative w-full min-h-[20vh] flex items-center text-white overflow-hidden py-20"
       id="#"
     >
       {/* Background Video */}
