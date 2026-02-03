@@ -16,7 +16,6 @@ import {
 } from "react-icons/fa";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { FiPhone } from "react-icons/fi";
 
 // EmailJS credentials
 const SERVICE_ID = "service_2u9sb2c";
@@ -90,21 +89,20 @@ export default function ContactSection() {
   };
 
   return (
-    <section className="py-16 bg-[#F3F6F4]  overflow-x-hidden scroll-m-10" id="contact">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-16 bg-[#F3F6F4] dark:bg-[#0B0F0C] overflow-x-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12">
           {/* FORM */}
           <div
             data-aos="fade-right"
-            className="flex flex-col gap-6 rounded-xl border border-brand-border  
-                       bg-white  py-6 shadow-sm box-border w-full"
+            className="flex flex-col gap-6 rounded-2xl bg-white dark:bg-[#0F1115] py-6 shadow-lg hover:shadow-xl transition-shadow duration-300 w-full"
           >
             <div className="px-6">
-              <div className="text-2xl font-bold flex items-center text-[#111827] ">
+              <div className="text-2xl font-bold flex items-center text-[#111827] dark:text-gray-100">
                 <FaCommentDots className="mr-2 h-5 w-5 text-[#2F7D33]" />
                 Send Us a Message
               </div>
-              <p className="text-sm mt-1 text-muted ">
+              <p className="text-sm mt-1 text-gray-500 dark:text-gray-400">
                 Get in touch for quotes, bookings, or any questions about our services
               </p>
             </div>
@@ -123,7 +121,7 @@ export default function ContactSection() {
                   id="phone"
                   label="Phone Number *"
                   placeholder="Your phone number"
-                  icon={<FiPhone className="h-4 w-4" />}
+                  icon={<FaPhone className="h-4 w-4" />}
                   value={formData.phone}
                   onChange={handleChange}
                   error={formErrors.phone}
@@ -151,13 +149,13 @@ export default function ContactSection() {
               />
 
               <div className="space-y-2">
-                <label htmlFor="service" className="text-sm font-medium ">
+                <label htmlFor="service" className="text-sm font-medium text-[#111827] dark:text-gray-200">
                   Service Required
                 </label>
                 <select
                   id="service"
                   name="service"
-                  className="w-full px-3 py-2 rounded-md border bg-white  text-[#111827]  border-brand-border  hover:border-[#2F7D33] focus:border-[#2F7D33] focus:ring-[#2F7D33]"
+                  className="w-full px-3 py-2 rounded-lg bg-gray-50 dark:bg-[#1B1E24] text-[#111827] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#2F7D33] transition-colors"
                   value={formData.service}
                   onChange={handleChange}
                 >
@@ -176,7 +174,7 @@ export default function ContactSection() {
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="message" className="text-sm font-medium ">
+                <label htmlFor="message" className="text-sm font-medium text-[#111827] dark:text-gray-200">
                   Message *
                 </label>
                 <textarea
@@ -184,7 +182,7 @@ export default function ContactSection() {
                   name="message"
                   rows={4}
                   placeholder="Please describe your requirements..."
-                  className="w-full rounded-md border px-3 py-2 bg-white text-[#111827] "
+                  className="w-full rounded-lg px-3 py-2 bg-gray-50 dark:bg-[#1B1E24] text-[#111827] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#2F7D33] transition-colors"
                   value={formData.message}
                   onChange={handleChange}
                 />
@@ -192,13 +190,13 @@ export default function ContactSection() {
 
               <button
                 onClick={handleSubmit}
-                className="inline-flex items-center justify-center gap-2 h-9 w-full rounded-md font-semibold transition-colors bg-[#2F7D33] text-white hover:shadow-md"
+                className="inline-flex items-center justify-center gap-2 h-9 w-full rounded-md font-semibold transition-all bg-[#2F7D33] text-white hover:bg-[#266b2a] hover:shadow-md"
               >
                 <FaCommentDots className="h-4 w-4" />
                 Send Message
               </button>
 
-              <p className="text-xs text-muted ">
+              <p className="text-xs text-gray-500 dark:text-gray-400">
                 * Required fields. We'll get back to you within 24 hours.
               </p>
             </div>
@@ -211,38 +209,40 @@ export default function ContactSection() {
               title="Opening Hours"
               icon={<FaClock className="h-5 w-5" />}
             >
-              <HoursRow day="Monday" time="9:00 AM – 6:00 PM" />
-              <HoursRow day="Tuesday" time="9:00 AM – 6:00 PM" />
-              <HoursRow day="Wednesday" time="9:00 AM – 6:00 PM" />
-              <HoursRow day="Thursday" time="9:00 AM – 6:00 PM" />
-              <HoursRow day="Friday" time="9:00 AM – 6:00 PM" />
-              <HoursRow day="Saturday" time="9:00 AM – 6:00 PM" />
-              <HoursRow day="Sunday" time="9:00 AM – 6:00 PM" />
+              <HoursRow day="Monday" time="8:00 AM – 5:30 PM" />
+              <HoursRow day="Tuesday" time="8:00 AM – 5:30 PM" />
+              <HoursRow day="Wednesday" time="8:00 AM – 5:30 PM" />
+              <HoursRow day="Thursday" time="8:00 AM – 5:30 PM" />
+              <HoursRow day="Friday" time="8:00 AM – 5:30 PM" />
+              <HoursRow day="Saturday" time="8:00 AM – 4:00 PM" />
+              <HoursRow day="Sunday" time="Closed" muted />
             </SideCard>
 
             <SideCard data-aos="fade-left" title="Find Us" icon={<FaMapMarkerAlt className="h-5 w-5" />}>
               <div className="space-y-1 mb-4">
-                <p className="font-semibold">MA Auto Electrics</p>
-                <p className="text-sm text-muted ">
-                  13 laburnum drive oswaldtwistele accrington bb5 3aw
+                <p className="font-semibold text-[#111827] dark:text-white">Stoneley's Garage Services</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  Oakham Business Park, Hamilton Way, Mansfield NG18 5BU, UK
                 </p>
               </div>
 
               <a
-                href="https://maps.app.goo.gl/EPnqrDkCRBvqW38z8"
+                href="https://www.google.com/maps/place/Stoneley's+Garage+Services/data=!4m2!3m1!1s0x0:0x5a644c3262063baf"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <button className="h-9 w-full rounded-md border px-4 py-2 text-sm font-medium flex items-center justify-center bg-white  text-[#111827]  border-brand-border hover:shadow">
-                  <FaDirections className="mr-2 h-4 w-4" />
+                <button className="h-9 w-full rounded-lg px-4 py-2 text-sm font-medium flex items-center justify-center bg-gray-50 dark:bg-[#1B1E24] text-[#111827] dark:text-white hover:bg-gray-100 dark:hover:bg-[#252830] hover:shadow-md transition-all duration-200">
+                  <FaDirections className="mr-2 h-4 w-4 text-[#2F7D33]" />
                   View on Google Maps
                 </button>
               </a>
             </SideCard>
 
-            <SideCard data-aos="fade-left" title="MA Auto Electrics">
-              <p className="text-sm text-muted  leading-relaxed">
-                MA Auto Electrics specialise in supplying and fitting of in car audio & car DVD / navigation solutions, vehicle security, diagnostics and dashcams. Get in touch for further details
+            <SideCard data-aos="fade-left" title="About Stoneley's Garage">
+              <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+                Family-run garage established in 1973, serving Mansfield and surrounding areas.
+                Our certified technicians provide reliable service for cars, commercial vehicles,
+                and motorhomes.
               </p>
             </SideCard>
           </div>
@@ -257,7 +257,7 @@ export default function ContactSection() {
 function FormInput({ id, label, placeholder, icon, value, onChange, type = "text", error }) {
   return (
     <div className="space-y-2">
-      <label htmlFor={id} className="text-sm font-medium ">
+      <label htmlFor={id} className="text-sm font-medium text-[#111827] dark:text-gray-200">
         {label}
       </label>
       <div className="relative">
@@ -267,8 +267,9 @@ function FormInput({ id, label, placeholder, icon, value, onChange, type = "text
           name={id}
           type={type}
           placeholder={placeholder}
-          className={`h-9 w-full rounded-md border bg-white  px-3 pl-10 text-[#111827]  ${error ? "border-red-500" : "border-brand-border "
-            }`}
+          className={`h-9 w-full rounded-lg px-3 pl-10 bg-gray-50 dark:bg-[#1B1E24] text-[#111827] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#2F7D33] transition-colors ${
+            error ? "ring-2 ring-red-500" : ""
+          }`}
           value={value}
           onChange={onChange}
         />
@@ -282,10 +283,10 @@ function SideCard({ title, icon, children, ...props }) {
   return (
     <div
       {...props}
-      className="rounded-xl border border-brand-border  bg-white  py-6 shadow-sm box-border w-full"
+      className="rounded-2xl bg-white dark:bg-[#0F1115] py-6 shadow-lg hover:shadow-xl transition-shadow duration-300 w-full"
     >
       <div className="px-6 mb-2">
-        <div className="text-xl font-bold flex items-center text-[#111827] ">
+        <div className="text-xl font-bold flex items-center text-[#111827] dark:text-white">
           {icon && <span className="mr-2 text-[#2F7D33]">{icon}</span>}
           {title}
         </div>
@@ -298,8 +299,8 @@ function SideCard({ title, icon, children, ...props }) {
 function HoursRow({ day, time, muted }) {
   return (
     <div className="flex items-center justify-between py-1">
-      <span className="font-medium text-[#111827] ">{day}</span>
-      <span className={`text-sm ${muted ? "text-gray-400" : "text-[#111827] "}`}>
+      <span className="font-medium text-[#111827] dark:text-white">{day}</span>
+      <span className={`text-sm ${muted ? "text-gray-400" : "text-[#111827] dark:text-white"}`}>
         {time}
       </span>
     </div>
