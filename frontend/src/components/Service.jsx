@@ -144,6 +144,15 @@ export default function Service() {
                     image: "/Break.jpeg",
                     link: "/BrakePads",
                 },
+                 {
+                    id: 7,
+                    title: "MOT",
+                    description:
+                        "Trusted MOT testing and preparation to meet all legal safety and emissions standards.",
+                    icon: <ClipboardCheck className="w-6 h-6 text-[#317F21]" />,
+                    image: "MOT.jpeg",
+                    link: "/mot",
+                },
             ],
         },
         {
@@ -176,6 +185,33 @@ export default function Service() {
                     image: "/ECU.jpg",
                     link: "/ECURepair&Services",
                 },
+                {
+                    id: 12,
+                    title: "Window Regulators",
+                    description:
+                        "Repair and replacement of faulty electric window regulators to restore smooth operation.",
+                    icon: <Sliders className="w-6 h-6 text-[#317F21]" />,
+                    image: "/Window.jpg",
+                    link: "/WindowRegulators",
+                },
+                 {
+                    id: 13,
+                    title: "Wiper Motors",
+                    description:
+                        "Wiper motor repairs and replacements for clear visibility in all weather conditions.",
+                    icon: <Wind className="w-6 h-6 text-[#317F21]" />,
+                    image: "/Wiper.jpg",
+                    link: "/WiperMotors",
+                },
+                {
+                    id: 14,
+                    title: "Central Door Motors",
+                    description:
+                        "Diagnosis and repair of central locking systems to keep your doors working perfectly.",
+                    icon: <Lock className="w-6 h-6 text-[#317F21]" />,
+                    image: "/Central.jpg",
+                    link: "/central-door-motors",
+                },
             ],
         },
         {
@@ -199,15 +235,7 @@ export default function Service() {
                     image: "/Adblue.jpg",
                     link: "/AdBlue",
                 },
-                {
-                    id: 7,
-                    title: "MOT",
-                    description:
-                        "Trusted MOT testing and preparation to meet all legal safety and emissions standards.",
-                    icon: <ClipboardCheck className="w-6 h-6 text-[#317F21]" />,
-                    image: "MOT.jpeg",
-                    link: "/mot",
-                },
+               
             ],
         },
         {
@@ -231,15 +259,7 @@ export default function Service() {
                     image: "Vehicle.jpeg",
                     link: "/vehicle-tracking",
                 },
-                {
-                    id: 5,
-                    title: "Parking Sensors / Cameras",
-                    description:
-                        "Parking sensors and reversing cameras improve visibility and safety when manoeuvring.",
-                    icon: <Camera className="w-6 h-6 text-[#317F21]" />,
-                    image: "Parking.jpeg",
-                    link: "/parking",
-                },
+               
             ],
         },
         {
@@ -272,33 +292,17 @@ export default function Service() {
                     image: "Installations.jpg",
                     link: "/installation",
                 },
-                {
-                    id: 12,
-                    title: "Window Regulators",
+                 {
+                    id: 5,
+                    title: "Parking Sensors / Cameras",
                     description:
-                        "Repair and replacement of faulty electric window regulators to restore smooth operation.",
-                    icon: <Sliders className="w-6 h-6 text-[#317F21]" />,
-                    image: "/Window.jpg",
-                    link: "/WindowRegulators",
+                        "Parking sensors and reversing cameras improve visibility and safety when manoeuvring.",
+                    icon: <Camera className="w-6 h-6 text-[#317F21]" />,
+                    image: "Parking.jpeg",
+                    link: "/parking",
                 },
-                {
-                    id: 13,
-                    title: "Wiper Motors",
-                    description:
-                        "Wiper motor repairs and replacements for clear visibility in all weather conditions.",
-                    icon: <Wind className="w-6 h-6 text-[#317F21]" />,
-                    image: "/Wiper.jpg",
-                    link: "/WiperMotors",
-                },
-                {
-                    id: 14,
-                    title: "Central Door Motors",
-                    description:
-                        "Diagnosis and repair of central locking systems to keep your doors working perfectly.",
-                    icon: <Lock className="w-6 h-6 text-[#317F21]" />,
-                    image: "/Central.jpg",
-                    link: "/central-door-motors",
-                },
+               
+                
             ],
         },
     ];
