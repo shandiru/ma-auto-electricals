@@ -9,7 +9,7 @@ export default function ProductSellers() {
   const [loading, setLoading] = useState(true);
 
   // Directly using localhost as requested
-  const BASE_URL = "http://localhost:4000";
+  const BASE_URL = "https://ma-auto-electricals.onrender.com/";
 
   useEffect(() => {
     const fetchProducts = async () => {
