@@ -11,18 +11,16 @@ const InvoiceGenerator = () => {
   const [items, setItems] = useState([{ description: '', price: 0, count: 1 }]);
 
   // Get values from .env
-  const companyName = import.meta.env.VITE_COMPANY_NAME ;
-  const companyAddress = import.meta.env.VITE_COMPANY_ADDRESS ;
-  const companyCity = import.meta.env.VITE_COMPANY_CITY ;
-  const companyPhone = import.meta.env.VITE_COMPANY_PHONE ;
-  const companyEmail = import.meta.env.VITE_COMPANY_EMAIL ;
+  const companyName = import.meta.env.VITE_COMPANY_NAME;
+  const companyAddress = import.meta.env.VITE_COMPANY_ADDRESS;
+  const companyCity = import.meta.env.VITE_COMPANY_CITY;
+  const companyPhone = import.meta.env.VITE_COMPANY_PHONE;
+  const companyEmail = import.meta.env.VITE_COMPANY_EMAIL;
   
-  const primaryColor = import.meta.env.VITE_PRIMARY_COLOR ;
+  const primaryColor = import.meta.env.VITE_PRIMARY_COLOR;
   const secondaryColor = import.meta.env.VITE_SECONDARY_COLOR;
-  const accentColor = import.meta.env.VITE_ACCENT_COLOR ;
-  const borderColor = import.meta.env.VITE_BORDER_COLOR ;
-  
- 
+  const accentColor = import.meta.env.VITE_ACCENT_COLOR;
+  const borderColor = import.meta.env.VITE_BORDER_COLOR;
 
   const addItem = () => {
     setItems([...items, { description: '', price: 0, count: 1 }]);
@@ -263,7 +261,6 @@ const InvoiceGenerator = () => {
     pdf.setFont('helvetica', 'normal');
     
     yPos += 5;
-    
 
     // Bottom brand strip
     yPos = pdf.internal.pageSize.getHeight() - 5;
@@ -275,74 +272,78 @@ const InvoiceGenerator = () => {
   };
 
   return (
-    <div className="min-h-screen py-10 px-4" style={{ backgroundColor: '#f5f5f5' }}>
+    <div className="min-h-screen py-4 sm:py-6 md:py-10 px-3 sm:px-4" style={{ backgroundColor: '#f5f5f5' }}>
       <div 
-        className="max-w-4xl mx-auto bg-white shadow-lg p-16 border-t-8"
+        className="max-w-4xl mx-auto bg-white shadow-lg p-4 sm:p-8 md:p-12 lg:p-16 border-t-4 sm:border-t-8"
         style={{ 
           borderColor: primaryColor,
           fontFamily: 'Georgia, "Times New Roman", Times, serif'
         }}
       >
         {/* Header */}
-        <div className="border-b-4 pb-8 mb-10" style={{ borderColor: primaryColor, borderBottomStyle: 'double' }}>
-          <div className="flex justify-between items-start">
-            <div>
-              <h1 className="text-4xl font-bold mb-2 tracking-wide" style={{ color: secondaryColor }}>
+        <div className="border-b-2 sm:border-b-4 pb-4 sm:pb-6 md:pb-8 mb-6 sm:mb-8 md:mb-10" style={{ borderColor: primaryColor, borderBottomStyle: 'double' }}>
+          <div className="flex flex-col sm:flex-row justify-between items-start gap-4 sm:gap-0">
+            <div className="w-full sm:w-auto">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 tracking-wide" style={{ color: secondaryColor }}>
                 {companyName}
               </h1>
-              <div className="text-sm leading-relaxed" style={{ color: accentColor }}>
+              <div className="text-xs sm:text-sm leading-relaxed" style={{ color: accentColor }}>
                 {companyAddress}<br/>
                 {companyCity}<br/>
                 {companyPhone}
                 {companyEmail && <><br/>{companyEmail}</>}
               </div>
             </div>
-            <div className="text-right">
-              <h2 className="text-5xl font-bold mb-5 tracking-widest" style={{ color: primaryColor }}>
+            <div className="w-full sm:w-auto sm:text-right">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-5 tracking-widest" style={{ color: primaryColor }}>
                 INVOICE
               </h2>
-              <div className="text-sm mb-2" style={{ color: accentColor }}>
-                <span className="font-bold">Invoice #:</span>
-                <input 
-                  className="ml-2 px-2 py-1 border text-sm"
-                  style={{ 
-                    width: '120px', 
-                    borderColor: borderColor,
-                    fontFamily: 'Georgia, "Times New Roman", Times, serif'
-                  }}
-                  type="text" 
-                  placeholder="INV-001"
-                  value={invoiceNumber} 
-                  onChange={(e) => setInvoiceNumber(e.target.value)} 
-                />
-              </div>
-              <div className="text-sm" style={{ color: accentColor }}>
-                <span className="font-bold">Date:</span>
-                <input 
-                  className="ml-2 px-2 py-1 border text-sm"
-                  style={{ 
-                    width: '130px', 
-                    borderColor: borderColor,
-                    fontFamily: 'Georgia, "Times New Roman", Times, serif'
-                  }}
-                  type="date" 
-                  value={date} 
-                  onChange={(e) => setDate(e.target.value)} 
-                />
+              <div className="flex flex-col gap-2">
+                <div className="text-xs sm:text-sm flex items-center sm:justify-end gap-2" style={{ color: accentColor }}>
+                  <span className="font-bold whitespace-nowrap">Invoice #:</span>
+                  <input 
+                    className="px-2 py-1 border text-xs sm:text-sm flex-1 sm:flex-none"
+                    style={{ 
+                      width: '100%',
+                      maxWidth: '120px',
+                      borderColor: borderColor,
+                      fontFamily: 'Georgia, "Times New Roman", Times, serif'
+                    }}
+                    type="text" 
+                    placeholder="INV-001"
+                    value={invoiceNumber} 
+                    onChange={(e) => setInvoiceNumber(e.target.value)} 
+                  />
+                </div>
+                <div className="text-xs sm:text-sm flex items-center sm:justify-end gap-2" style={{ color: accentColor }}>
+                  <span className="font-bold whitespace-nowrap">Date:</span>
+                  <input 
+                    className="px-2 py-1 border text-xs sm:text-sm flex-1 sm:flex-none"
+                    style={{ 
+                      width: '100%',
+                      maxWidth: '130px',
+                      borderColor: borderColor,
+                      fontFamily: 'Georgia, "Times New Roman", Times, serif'
+                    }}
+                    type="date" 
+                    value={date} 
+                    onChange={(e) => setDate(e.target.value)} 
+                  />
+                </div>
               </div>
             </div>
           </div>
         </div>
 
         {/* Bill To */}
-        <div className="mb-10">
-          <div className="text-sm font-bold mb-3 uppercase tracking-wide" style={{ color: primaryColor }}>
+        <div className="mb-6 sm:mb-8 md:mb-10">
+          <div className="text-xs sm:text-sm font-bold mb-2 sm:mb-3 uppercase tracking-wide" style={{ color: primaryColor }}>
             Bill To:
           </div>
-          <div className="p-5 border" style={{ backgroundColor: '#fafafa', borderColor: primaryColor }}>
+          <div className="p-3 sm:p-4 md:p-5 border" style={{ backgroundColor: '#fafafa', borderColor: primaryColor }}>
             <input 
               placeholder="Customer Name"
-              className="w-full text-lg font-semibold mb-2 bg-transparent border-none outline-none"
+              className="w-full text-base sm:text-lg font-semibold mb-2 bg-transparent border-none outline-none"
               style={{ 
                 color: secondaryColor,
                 fontFamily: 'Georgia, "Times New Roman", Times, serif'
@@ -353,7 +354,7 @@ const InvoiceGenerator = () => {
             />
             <input 
               placeholder="Address"
-              className="w-full text-sm mb-1.5 bg-transparent border-none outline-none"
+              className="w-full text-xs sm:text-sm mb-1.5 bg-transparent border-none outline-none"
               style={{ 
                 color: accentColor,
                 fontFamily: 'Georgia, "Times New Roman", Times, serif'
@@ -364,7 +365,7 @@ const InvoiceGenerator = () => {
             />
             <input 
               placeholder="Phone Number"
-              className="w-full text-sm bg-transparent border-none outline-none"
+              className="w-full text-xs sm:text-sm bg-transparent border-none outline-none"
               style={{ 
                 color: accentColor,
                 fontFamily: 'Georgia, "Times New Roman", Times, serif'
@@ -376,91 +377,93 @@ const InvoiceGenerator = () => {
           </div>
         </div>
 
-        {/* Items Table */}
-        <div className="mb-10">
-          <table className="w-full border-2" style={{ borderColor: secondaryColor, borderCollapse: 'collapse' }}>
-            <thead>
-              <tr style={{ backgroundColor: secondaryColor }}>
-                <th className="px-3 py-3.5 text-left text-xs font-bold uppercase tracking-wide text-white" style={{ fontFamily: 'Arial, Helvetica, sans-serif' }}>
-                  Description
-                </th>
-                <th className="px-3 py-3.5 text-center text-xs font-bold uppercase tracking-wide text-white w-24" style={{ fontFamily: 'Arial, Helvetica, sans-serif' }}>
-                  Unit Price
-                </th>
-                <th className="px-3 py-3.5 text-center text-xs font-bold uppercase tracking-wide text-white w-20" style={{ fontFamily: 'Arial, Helvetica, sans-serif' }}>
-                  Qty
-                </th>
-                <th className="px-3 py-3.5 text-right text-xs font-bold uppercase tracking-wide text-white w-28" style={{ fontFamily: 'Arial, Helvetica, sans-serif' }}>
-                  Amount
-                </th>
-                <th className="w-12"></th>
-              </tr>
-            </thead>
-            <tbody>
-              {items.map((item, index) => (
-                <tr key={index} className="border-b" style={{ borderColor: borderColor }}>
-                  <td className="px-3 py-3.5">
-                    <input 
-                      className="w-full outline-none border-none text-sm"
-                      style={{ 
-                        color: '#333333',
-                        fontFamily: 'Georgia, "Times New Roman", Times, serif'
-                      }}
-                      placeholder="Item or service description"
-                      value={item.description}
-                      onChange={(e) => handleItemChange(index, 'description', e.target.value)}
-                    />
-                  </td>
-                  <td className="px-3 py-3.5 text-center">
-                    <span className="text-sm" style={{ color: accentColor }}>£</span>
-                    <input 
-                      className="w-16 text-right outline-none border-none text-sm"
-                      style={{ 
-                        color: '#333333',
-                        fontFamily: 'Georgia, "Times New Roman", Times, serif'
-                      }}
-                      type="number"
-                      step="0.01"
-                      value={item.price}
-                      onChange={(e) => handleItemChange(index, 'price', parseFloat(e.target.value) || 0)}
-                    />
-                  </td>
-                  <td className="px-3 py-3.5 text-center">
-                    <input 
-                      className="w-12 text-center outline-none border-none text-sm"
-                      style={{ 
-                        color: '#333333',
-                        fontFamily: 'Georgia, "Times New Roman", Times, serif'
-                      }}
-                      type="number"
-                      value={item.count}
-                      onChange={(e) => handleItemChange(index, 'count', parseInt(e.target.value) || 1)}
-                    />
-                  </td>
-                  <td className="px-3 py-3.5 text-right text-base font-semibold" style={{ 
-                    color: secondaryColor,
-                    fontFamily: 'Georgia, "Times New Roman", Times, serif'
-                  }}>
-                    £{(item.price * item.count).toFixed(2)}
-                  </td>
-                  <td className="px-3 py-3.5 text-center">
-                    <button 
-                      onClick={() => removeItem(index)} 
-                      className="text-base px-2 transition-colors"
-                      style={{ color: '#999999' }}
-                      onMouseEnter={(e) => e.target.style.color = '#ef4444'}
-                      onMouseLeave={(e) => e.target.style.color = '#999999'}
-                    >
-                      ✕
-                    </button>
-                  </td>
+        {/* Items Table - Desktop/Tablet View */}
+        <div className="mb-6 sm:mb-8 md:mb-10 hidden sm:block">
+          <div className="overflow-x-auto">
+            <table className="w-full border-2" style={{ borderColor: secondaryColor, borderCollapse: 'collapse', minWidth: '600px' }}>
+              <thead>
+                <tr style={{ backgroundColor: secondaryColor }}>
+                  <th className="px-2 md:px-3 py-2.5 md:py-3.5 text-left text-xs font-bold uppercase tracking-wide text-white" style={{ fontFamily: 'Arial, Helvetica, sans-serif' }}>
+                    Description
+                  </th>
+                  <th className="px-2 md:px-3 py-2.5 md:py-3.5 text-center text-xs font-bold uppercase tracking-wide text-white w-20 md:w-24" style={{ fontFamily: 'Arial, Helvetica, sans-serif' }}>
+                    Unit Price
+                  </th>
+                  <th className="px-2 md:px-3 py-2.5 md:py-3.5 text-center text-xs font-bold uppercase tracking-wide text-white w-16 md:w-20" style={{ fontFamily: 'Arial, Helvetica, sans-serif' }}>
+                    Qty
+                  </th>
+                  <th className="px-2 md:px-3 py-2.5 md:py-3.5 text-right text-xs font-bold uppercase tracking-wide text-white w-24 md:w-28" style={{ fontFamily: 'Arial, Helvetica, sans-serif' }}>
+                    Amount
+                  </th>
+                  <th className="w-10 md:w-12"></th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {items.map((item, index) => (
+                  <tr key={index} className="border-b" style={{ borderColor: borderColor }}>
+                    <td className="px-2 md:px-3 py-2.5 md:py-3.5">
+                      <input 
+                        className="w-full outline-none border-none text-xs sm:text-sm"
+                        style={{ 
+                          color: '#333333',
+                          fontFamily: 'Georgia, "Times New Roman", Times, serif'
+                        }}
+                        placeholder="Item or service description"
+                        value={item.description}
+                        onChange={(e) => handleItemChange(index, 'description', e.target.value)}
+                      />
+                    </td>
+                    <td className="px-2 md:px-3 py-2.5 md:py-3.5 text-center">
+                      <span className="text-xs sm:text-sm" style={{ color: accentColor }}>£</span>
+                      <input 
+                        className="w-12 sm:w-16 text-right outline-none border-none text-xs sm:text-sm"
+                        style={{ 
+                          color: '#333333',
+                          fontFamily: 'Georgia, "Times New Roman", Times, serif'
+                        }}
+                        type="number"
+                        step="0.01"
+                        value={item.price}
+                        onChange={(e) => handleItemChange(index, 'price', parseFloat(e.target.value) || 0)}
+                      />
+                    </td>
+                    <td className="px-2 md:px-3 py-2.5 md:py-3.5 text-center">
+                      <input 
+                        className="w-10 sm:w-12 text-center outline-none border-none text-xs sm:text-sm"
+                        style={{ 
+                          color: '#333333',
+                          fontFamily: 'Georgia, "Times New Roman", Times, serif'
+                        }}
+                        type="number"
+                        value={item.count}
+                        onChange={(e) => handleItemChange(index, 'count', parseInt(e.target.value) || 1)}
+                      />
+                    </td>
+                    <td className="px-2 md:px-3 py-2.5 md:py-3.5 text-right text-sm md:text-base font-semibold" style={{ 
+                      color: secondaryColor,
+                      fontFamily: 'Georgia, "Times New Roman", Times, serif'
+                    }}>
+                      £{(item.price * item.count).toFixed(2)}
+                    </td>
+                    <td className="px-2 md:px-3 py-2.5 md:py-3.5 text-center">
+                      <button 
+                        onClick={() => removeItem(index)} 
+                        className="text-sm md:text-base px-1 md:px-2 transition-colors"
+                        style={{ color: '#999999' }}
+                        onMouseEnter={(e) => e.target.style.color = '#ef4444'}
+                        onMouseLeave={(e) => e.target.style.color = '#999999'}
+                      >
+                        ✕
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
           <button 
             onClick={addItem}
-            className="mt-3 px-5 py-2 text-xs font-semibold border transition-colors tracking-wide"
+            className="mt-3 px-4 sm:px-5 py-2 text-xs font-semibold border transition-colors tracking-wide"
             style={{ 
               color: primaryColor, 
               backgroundColor: '#ffffff',
@@ -480,10 +483,117 @@ const InvoiceGenerator = () => {
           </button>
         </div>
 
+        {/* Items - Mobile Card View */}
+        <div className="mb-6 sm:mb-8 md:mb-10 block sm:hidden">
+          <div className="space-y-3">
+            {items.map((item, index) => (
+              <div key={index} className="border-2 p-3 rounded" style={{ borderColor: secondaryColor }}>
+                <div className="flex justify-between items-start mb-2">
+                  <span className="text-xs font-bold uppercase tracking-wide" style={{ color: primaryColor }}>
+                    Item {index + 1}
+                  </span>
+                  <button 
+                    onClick={() => removeItem(index)} 
+                    className="text-base px-2 transition-colors"
+                    style={{ color: '#999999' }}
+                    onTouchStart={(e) => e.target.style.color = '#ef4444'}
+                    onTouchEnd={(e) => e.target.style.color = '#999999'}
+                  >
+                    ✕
+                  </button>
+                </div>
+                
+                <div className="space-y-2">
+                  <div>
+                    <label className="text-xs font-semibold mb-1 block" style={{ color: accentColor }}>Description</label>
+                    <input 
+                      className="w-full outline-none border px-2 py-1.5 text-sm"
+                      style={{ 
+                        color: '#333333',
+                        borderColor: borderColor,
+                        fontFamily: 'Georgia, "Times New Roman", Times, serif'
+                      }}
+                      placeholder="Item or service description"
+                      value={item.description}
+                      onChange={(e) => handleItemChange(index, 'description', e.target.value)}
+                    />
+                  </div>
+                  
+                  <div className="grid grid-cols-3 gap-2">
+                    <div>
+                      <label className="text-xs font-semibold mb-1 block" style={{ color: accentColor }}>Unit Price</label>
+                      <div className="flex items-center border px-2 py-1.5" style={{ borderColor: borderColor }}>
+                        <span className="text-xs mr-1" style={{ color: accentColor }}>£</span>
+                        <input 
+                          className="w-full outline-none border-none text-sm"
+                          style={{ 
+                            color: '#333333',
+                            fontFamily: 'Georgia, "Times New Roman", Times, serif'
+                          }}
+                          type="number"
+                          step="0.01"
+                          value={item.price}
+                          onChange={(e) => handleItemChange(index, 'price', parseFloat(e.target.value) || 0)}
+                        />
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <label className="text-xs font-semibold mb-1 block" style={{ color: accentColor }}>Qty</label>
+                      <input 
+                        className="w-full text-center outline-none border px-2 py-1.5 text-sm"
+                        style={{ 
+                          color: '#333333',
+                          borderColor: borderColor,
+                          fontFamily: 'Georgia, "Times New Roman", Times, serif'
+                        }}
+                        type="number"
+                        value={item.count}
+                        onChange={(e) => handleItemChange(index, 'count', parseInt(e.target.value) || 1)}
+                      />
+                    </div>
+                    
+                    <div>
+                      <label className="text-xs font-semibold mb-1 block" style={{ color: accentColor }}>Amount</label>
+                      <div className="text-base font-bold text-right px-2 py-1.5" style={{ 
+                        color: secondaryColor,
+                        fontFamily: 'Georgia, "Times New Roman", Times, serif'
+                      }}>
+                        £{(item.price * item.count).toFixed(2)}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          <button 
+            onClick={addItem}
+            className="mt-3 w-full px-4 py-2.5 text-xs font-semibold border transition-colors tracking-wide"
+            style={{ 
+              color: primaryColor, 
+              backgroundColor: '#ffffff',
+              borderColor: primaryColor,
+              fontFamily: 'Arial, Helvetica, sans-serif'
+            }}
+            onTouchStart={(e) => {
+              e.target.style.backgroundColor = primaryColor;
+              e.target.style.color = '#ffffff';
+            }}
+            onTouchEnd={(e) => {
+              e.target.style.backgroundColor = '#ffffff';
+              e.target.style.color = primaryColor;
+            }}
+          >
+            + ADD LINE ITEM
+          </button>
+        </div>
+
         {/* Totals */}
         <div className="flex justify-end">
-          <div className="w-80">
-            <div className="flex justify-between py-3 border-b text-base" style={{ 
+          <div className="w-full sm:w-80">
+            <div className="flex justify-between py-2 sm:py-3 border-b text-sm sm:text-base" style={{ 
               borderColor: borderColor,
               fontFamily: 'Georgia, "Times New Roman", Times, serif'
             }}>
@@ -491,15 +601,15 @@ const InvoiceGenerator = () => {
               <span className="font-semibold" style={{ color: secondaryColor }}>£{subTotal.toFixed(2)}</span>
             </div>
             
-            <div className="flex justify-between items-center py-3 border-b text-base" style={{ 
+            <div className="flex justify-between items-center py-2 sm:py-3 border-b text-sm sm:text-base" style={{ 
               borderColor: borderColor,
               fontFamily: 'Georgia, "Times New Roman", Times, serif'
             }}>
-              <div>
-                <span className="mr-2" style={{ color: accentColor }}>Tax</span>
+              <div className="flex items-center gap-1 sm:gap-2">
+                <span style={{ color: accentColor }}>Tax</span>
                 <input 
                   type="number" 
-                  className="w-12 px-1 py-1 border text-center text-sm"
+                  className="w-10 sm:w-12 px-1 py-1 border text-center text-xs sm:text-sm"
                   style={{ 
                     borderColor: borderColor,
                     fontFamily: 'Georgia, "Times New Roman", Times, serif'
@@ -507,23 +617,23 @@ const InvoiceGenerator = () => {
                   value={taxPercent}
                   onChange={(e) => setTaxPercent(parseFloat(e.target.value) || 0)}
                 />
-                <span className="ml-1" style={{ color: accentColor }}>%</span>
+                <span style={{ color: accentColor }}>%</span>
               </div>
               <span className="font-semibold" style={{ color: secondaryColor }}>£{taxAmount.toFixed(2)}</span>
             </div>
             
-            <div className="flex justify-between items-center mt-3 px-4 py-4 rounded" style={{ 
+            <div className="flex justify-between items-center mt-3 px-3 sm:px-4 py-3 sm:py-4 rounded" style={{ 
               backgroundColor: secondaryColor,
               fontFamily: 'Georgia, "Times New Roman", Times, serif'
             }}>
-              <span className="font-bold text-white text-sm">TOTAL:</span>
-              <span className="font-bold text-2xl" style={{ color: primaryColor }}>£{total.toFixed(2)}</span>
+              <span className="font-bold text-white text-xs sm:text-sm">TOTAL:</span>
+              <span className="font-bold text-xl sm:text-2xl" style={{ color: primaryColor }}>£{total.toFixed(2)}</span>
             </div>
           </div>
         </div>
 
         {/* Footer */}
-        <div className="mt-16 pt-8 border-t text-center text-xs" style={{ 
+        <div className="mt-10 sm:mt-12 md:mt-16 pt-6 sm:pt-8 border-t text-center text-xs" style={{ 
           borderColor: primaryColor, 
           color: '#999999',
           fontFamily: 'Arial, Helvetica, sans-serif'
@@ -533,10 +643,10 @@ const InvoiceGenerator = () => {
         </div>
 
         {/* Download Button */}
-        <div className="mt-10 text-center">
+        <div className="mt-6 sm:mt-8 md:mt-10 text-center">
           <button 
             onClick={downloadPDF}
-            className="px-10 py-3.5 text-sm font-bold tracking-wider shadow-md transition-colors"
+            className="w-full sm:w-auto px-8 sm:px-10 py-3 sm:py-3.5 text-xs sm:text-sm font-bold tracking-wider shadow-md transition-colors"
             style={{
               backgroundColor: primaryColor,
               color: '#ffffff',
@@ -544,6 +654,8 @@ const InvoiceGenerator = () => {
             }}
             onMouseEnter={(e) => e.target.style.opacity = '0.9'}
             onMouseLeave={(e) => e.target.style.opacity = '1'}
+            onTouchStart={(e) => e.target.style.opacity = '0.9'}
+            onTouchEnd={(e) => e.target.style.opacity = '1'}
           >
             DOWNLOAD PDF
           </button>
