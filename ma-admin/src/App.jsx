@@ -1,5 +1,12 @@
 import React from "react";
-import { Routes, Route, BrowserRouter, Navigate, Outlet } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  BrowserRouter,
+  Navigate,
+  Outlet,
+} from "react-router-dom";
+
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -19,14 +26,27 @@ import Signup from "./components/Signup";
 const ProtectedRoute = () => {
   const token = localStorage.getItem("token");
 
+  // If no token → go Signup (NOT login)
   if (!token) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/signup" replace />;
   }
 
   return <Outlet />;
 };
 
-/* ---------------- LAYOUT (INLINE) ---------------- */
+/* ---------------- AUTH ROUTE BLOCK ---------------- */
+/* Prevent logged-in users opening login/signup */
+const AuthRoute = ({ children }) => {
+  const token = localStorage.getItem("token");
+
+  if (token) {
+    return <Navigate to="/list/product" replace />;
+  }
+
+  return children;
+};
+
+/* ---------------- LAYOUT ---------------- */
 const Layout = () => {
   return (
     <div className="flex min-h-screen">
@@ -37,7 +57,7 @@ const Layout = () => {
       <div className="flex-1 bg-slate-50 p-4 md:p-8 overflow-auto">
         <Navbar />
 
-        {/* Child pages render here */}
+        {/* Child pages */}
         <Outlet />
       </div>
     </div>
@@ -53,11 +73,26 @@ const App = () => {
       <ToastContainer />
 
       <Routes>
-        {/* -------- PUBLIC ROUTES -------- */}
-        <Route path="/" element={<Login url={url} />} />
-        <Route path="/signup" element={<Signup url={url} />} />
+        {/* -------- AUTH ROUTES -------- */}
+        <Route
+          path="/"
+          element={
+            <AuthRoute>
+              <Login url={url} />
+            </AuthRoute>
+          }
+        />
 
-        {/* -------- PROTECTED ROUTES -------- */}
+        <Route
+          path="/signup"
+          element={
+            <AuthRoute>
+              <Signup url={url} />
+            </AuthRoute>
+          }
+        />
+
+        {/* -------- PROTECTED -------- */}
         <Route element={<ProtectedRoute />}>
           <Route element={<Layout />}>
             <Route path="/list/product" element={<ProductList url={url} />} />
@@ -67,6 +102,9 @@ const App = () => {
             <Route path="/list/order" element={<OrdersTable url={url} />} />
           </Route>
         </Route>
+
+        {/* -------- FALLBACK -------- */}
+        <Route path="*" element={<Navigate to="/signup" replace />} />
       </Routes>
     </BrowserRouter>
   );
