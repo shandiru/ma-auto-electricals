@@ -21,6 +21,7 @@ import OrdersTable from "./pages/Order";
 
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+import InvoiceGenerator from "./pages/InvoicePage";
 
 /* ---------------- PROTECTED ROUTE ---------------- */
 const ProtectedRoute = () => {
@@ -100,6 +101,7 @@ const App = () => {
             <Route path="/add/car" element={<AddCar url={url} />} />
             <Route path="/add/product" element={<AddProduct url={url} />} />
             <Route path="/list/order" element={<OrdersTable url={url} />} />
+            <Route path="/invoice" element={<InvoiceGenerator url={url} />} />
           </Route>
         </Route>
 

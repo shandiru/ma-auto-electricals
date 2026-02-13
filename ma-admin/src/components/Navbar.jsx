@@ -41,65 +41,9 @@ const Navbar = () => {
         </div>
 
         {/* Right Section - Actions & Profile */}
-        <div className="flex items-center gap-2 md:gap-4">
-          {/* Profile */}
-          <div className="relative">
-            <button 
-              onClick={() => {
-                setShowProfileMenu(!showProfileMenu);
-                setShowNotifications(false);
-              }}
-              className="flex items-center gap-2 md:gap-3 p-1 md:pl-3 md:pr-2 md:py-1 
-                       hover:bg-slate-100 rounded-full transition-colors"
-            >
-              <span className="hidden md:block text-sm font-medium text-slate-700">
-                Admin User
-              </span>
-              <div className="relative">
-                <img 
-                  className="w-10 h-10 object-cover rounded-full ring-2 ring-slate-200 
-                           hover:ring-blue-500 transition-all" 
-                  src="/profile_image.png"
-                  alt="Profile" 
-                />
-                <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full 
-                              ring-2 ring-white"></div>
-              </div>
-            </button>
-
-            {/* Profile Dropdown */}
-            {showProfileMenu && (
-              <div className="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-xl 
-                            border border-slate-200 overflow-hidden z-50">
-                <div className="px-4 py-3 bg-linear-to-r from-blue-600 to-purple-600">
-                  <p className="text-white font-semibold">Admin User</p>
-                  <p className="text-blue-100 text-xs">admin@example.com</p>
-                </div>
-                
-                <div className="py-2">
-                  <button className="w-full px-4 py-2 text-left text-sm text-slate-700 
-                                   hover:bg-slate-50 flex items-center gap-3 transition-colors">
-                    <User size={16} />
-                    View Profile
-                  </button>
-                  <button className="w-full px-4 py-2 text-left text-sm text-slate-700 
-                                   hover:bg-slate-50 flex items-center gap-3 transition-colors">
-                    <Settings size={16} />
-                    Settings
-                  </button>
-                </div>
-
-                <div className="border-t border-slate-200 py-2">
-                  <button className="w-full px-4 py-2 text-left text-sm text-red-600 
-                                   hover:bg-red-50 flex items-center gap-3 transition-colors">
-                    <LogOut size={16} />
-                    Logout
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
+        
+         
+         
       </div>
 
       {/* Mobile Menu Overlay */}
