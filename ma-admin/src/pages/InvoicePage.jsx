@@ -11,19 +11,18 @@ const InvoiceGenerator = () => {
   const [items, setItems] = useState([{ description: '', price: 0, count: 1 }]);
 
   // Get values from .env
-  const companyName = import.meta.env.VITE_COMPANY_NAME || "CLASSIC DESIGNS";
-  const companyAddress = import.meta.env.VITE_COMPANY_ADDRESS || "123 Business Street";
-  const companyCity = import.meta.env.VITE_COMPANY_CITY || "New York, NY 10001";
-  const companyPhone = import.meta.env.VITE_COMPANY_PHONE || "(555) 123-4567";
-  const companyEmail = import.meta.env.VITE_COMPANY_EMAIL || "";
+  const companyName = import.meta.env.VITE_COMPANY_NAME ;
+  const companyAddress = import.meta.env.VITE_COMPANY_ADDRESS ;
+  const companyCity = import.meta.env.VITE_COMPANY_CITY ;
+  const companyPhone = import.meta.env.VITE_COMPANY_PHONE ;
+  const companyEmail = import.meta.env.VITE_COMPANY_EMAIL ;
   
-  const primaryColor = import.meta.env.VITE_PRIMARY_COLOR || "#317F21";
-  const secondaryColor = import.meta.env.VITE_SECONDARY_COLOR || "#000000";
-  const accentColor = import.meta.env.VITE_ACCENT_COLOR || "#666666";
-  const borderColor = import.meta.env.VITE_BORDER_COLOR || "#e0e0e0";
+  const primaryColor = import.meta.env.VITE_PRIMARY_COLOR ;
+  const secondaryColor = import.meta.env.VITE_SECONDARY_COLOR;
+  const accentColor = import.meta.env.VITE_ACCENT_COLOR ;
+  const borderColor = import.meta.env.VITE_BORDER_COLOR ;
   
-  const thankYouMsg = import.meta.env.VITE_THANK_YOU_MESSAGE || "Thank you for your business!";
-  const paymentTerms = import.meta.env.VITE_PAYMENT_TERMS || "Payment is due within 30 days";
+ 
 
   const addItem = () => {
     setItems([...items, { description: '', price: 0, count: 1 }]);
@@ -263,9 +262,8 @@ const InvoiceGenerator = () => {
     pdf.setTextColor('#999999');
     pdf.setFont('helvetica', 'normal');
     
-    pdf.text(thankYouMsg, pageWidth / 2, yPos, { align: 'center' });
     yPos += 5;
-    pdf.text(`${paymentTerms}. Please make payments to ${companyName}.`, pageWidth / 2, yPos, { align: 'center' });
+    
 
     // Bottom brand strip
     yPos = pdf.internal.pageSize.getHeight() - 5;
@@ -530,8 +528,8 @@ const InvoiceGenerator = () => {
           color: '#999999',
           fontFamily: 'Arial, Helvetica, sans-serif'
         }}>
-          <p className="mb-2">{thankYouMsg}</p>
-          <p>{paymentTerms}. Please make payments to {companyName}.</p>
+          
+         
         </div>
 
         {/* Download Button */}
