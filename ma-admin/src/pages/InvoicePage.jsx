@@ -73,7 +73,7 @@ const InvoiceGenerator = () => {
       } else if (options.color) {
         pdf.setTextColor(options.color);
       } else {
-        pdf.setTextColor('#000000');
+        pdf.setTextColor(0, 0, 0);
       }
       
       pdf.text(text, x, y, options.align ? { align: options.align } : undefined);
@@ -102,7 +102,7 @@ const InvoiceGenerator = () => {
     
     yPos += 8;
     pdf.setFontSize(9);
-    pdf.setTextColor('#666666');
+    pdf.setTextColor(102, 102, 102);
     pdf.text(companyAddress, 20, yPos);
     
     yPos += 5;
@@ -116,13 +116,17 @@ const InvoiceGenerator = () => {
       pdf.text(companyEmail, 20, yPos);
     }
 
-    // Invoice details (right side)
+    // Invoice details (right side) - FIXED POSITIONING
     const rightX = pageWidth - 20;
+    let invoiceDetailY = 28; // Start position for invoice details
+    
     pdf.setFontSize(9);
     pdf.setFont('helvetica', 'bold');
-    pdf.setTextColor('#000000');
-    pdf.text(`Invoice #: ${invoiceNumber || 'N/A'}`, rightX, yPos - 10, { align: 'right' });
-    pdf.text(`Date: ${date || 'N/A'}`, rightX, yPos - 5, { align: 'right' });
+    pdf.setTextColor(0, 0, 0);
+    pdf.text(`Invoice #: ${invoiceNumber || 'N/A'}`, rightX, invoiceDetailY, { align: 'right' });
+    
+    invoiceDetailY += 5;
+    pdf.text(`Date: ${date || 'N/A'}`, rightX, invoiceDetailY, { align: 'right' });
 
     yPos += 10;
     
@@ -140,25 +144,39 @@ const InvoiceGenerator = () => {
     yPos += 7;
     
     // Bill To box with brand accent
+    const boxHeight = 25;
     pdf.setFillColor(250, 250, 250);
-    pdf.rect(20, yPos - 5, pageWidth - 40, 25, 'F');
+    pdf.rect(20, yPos - 5, pageWidth - 40, boxHeight, 'F');
     pdf.setDrawColor(primaryRgb.r, primaryRgb.g, primaryRgb.b);
     pdf.setLineWidth(0.5);
-    pdf.rect(20, yPos - 5, pageWidth - 40, 25);
+    pdf.rect(20, yPos - 5, pageWidth - 40, boxHeight);
     
+    // Customer Name
     pdf.setFontSize(11);
     pdf.setFont('helvetica', 'bold');
-    pdf.setTextColor('#1a1a1a');
+    pdf.setTextColor(26, 26, 26);
     pdf.text(customerName || 'Customer Name', 25, yPos);
     
     yPos += 6;
+    
+    // Customer Address - FIXED
     pdf.setFontSize(9);
     pdf.setFont('helvetica', 'normal');
-    pdf.setTextColor('#666666');
-    pdf.text(customerAddress || 'Address', 25, yPos);
+    pdf.setTextColor(102, 102, 102);
+    if (customerAddress) {
+      pdf.text(customerAddress, 25, yPos);
+    } else {
+      pdf.text('Address', 25, yPos);
+    }
     
     yPos += 5;
-    pdf.text(customerPhone || 'Phone Number', 25, yPos);
+    
+    // Customer Phone - FIXED
+    if (customerPhone) {
+      pdf.text(customerPhone, 25, yPos);
+    } else {
+      pdf.text('Phone Number', 25, yPos);
+    }
     
     yPos += 15;
 
@@ -186,7 +204,7 @@ const InvoiceGenerator = () => {
 
     // Table rows
     pdf.setFont('helvetica', 'normal');
-    pdf.setTextColor('#333333');
+    pdf.setTextColor(51, 51, 51);
     
     items.forEach((item, index) => {
       yPos += 8;
@@ -219,26 +237,37 @@ const InvoiceGenerator = () => {
     const totalsX = pageWidth - 75;
     
     pdf.setFontSize(10);
-    pdf.setTextColor('#666666');
+    pdf.setTextColor(102, 102, 102);
     pdf.text('Subtotal:', totalsX, yPos);
     pdf.setFont('helvetica', 'bold');
-    pdf.setTextColor('#000000');
+    pdf.setTextColor(0, 0, 0);
     pdf.text(`£${subTotal.toFixed(2)}`, pageWidth - 20, yPos, { align: 'right' });
     
     yPos += 7;
     
     pdf.setFont('helvetica', 'normal');
-    pdf.setTextColor('#666666');
+    pdf.setTextColor(102, 102, 102);
     pdf.text(`Tax (${taxPercent}%):`, totalsX, yPos);
     pdf.setFont('helvetica', 'bold');
-    pdf.setTextColor('#000000');
+    pdf.setTextColor(0, 0, 0);
     pdf.text(`£${taxAmount.toFixed(2)}`, pageWidth - 20, yPos, { align: 'right' });
     
     yPos += 10;
     
-    // Total box with brand color
+    // Total box with brand color - FIXED BORDER
+    const totalBoxX = totalsX - 5;
+    const totalBoxY = yPos - 6;
+    const totalBoxWidth = pageWidth - totalBoxX - 15;
+    const totalBoxHeight = 12;
+    
+    // Fill the box
     pdf.setFillColor(secondaryRgb.r, secondaryRgb.g, secondaryRgb.b);
-    pdf.rect(totalsX - 5, yPos - 6, pageWidth - totalsX - 15, 12, 'F');
+    pdf.rect(totalBoxX, totalBoxY, totalBoxWidth, totalBoxHeight, 'F');
+    
+    // Add border to the box - FIXED
+    pdf.setDrawColor(secondaryRgb.r, secondaryRgb.g, secondaryRgb.b);
+    pdf.setLineWidth(0.5);
+    pdf.rect(totalBoxX, totalBoxY, totalBoxWidth, totalBoxHeight, 'S');
     
     pdf.setFontSize(12);
     pdf.setFont('helvetica', 'bold');
@@ -257,7 +286,7 @@ const InvoiceGenerator = () => {
     yPos += 8;
     
     pdf.setFontSize(8);
-    pdf.setTextColor('#999999');
+    pdf.setTextColor(153, 153, 153);
     pdf.setFont('helvetica', 'normal');
     
     yPos += 5;
