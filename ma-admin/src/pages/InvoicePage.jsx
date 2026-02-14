@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import jsPDF from 'jspdf';
 
 const InvoiceGenerator = () => {
@@ -8,7 +8,19 @@ const InvoiceGenerator = () => {
   const [invoiceNumber, setInvoiceNumber] = useState('');
   const [date, setDate] = useState('');
   const [taxPercent, setTaxPercent] = useState(0);
-  const [items, setItems] = useState([{ description: '', price: 0, count: 1 }]);
+  const [items, setItems] = useState([{ 
+    mode: 'service', // 'service' or 'custom'
+    category: '', 
+    serviceId: '', 
+    description: '', 
+    price: 0, 
+    count: 1 
+  }]);
+
+  // API data states
+  const [categories, setCategories] = useState([]);
+  const [servicesByCategory, setServicesByCategory] = useState({});
+  const [loading, setLoading] = useState(false);
 
   // Get values from .env
   const companyName = import.meta.env.VITE_COMPANY_NAME;
@@ -22,8 +34,73 @@ const InvoiceGenerator = () => {
   const accentColor = import.meta.env.VITE_ACCENT_COLOR;
   const borderColor = import.meta.env.VITE_BORDER_COLOR;
 
+  // API base URL - update this to your backend URL
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://ma-auto-electricals.onrender.com/api';
+
+  // Fetch all categories on component mount
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
+  const fetchCategories = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch(`${API_BASE_URL}/invoices/categories`);
+      const result = await response.json();
+      
+      if (result.success) {
+        setCategories(result.data);
+      }
+    } catch (error) {
+      console.error('Error fetching categories:', error);
+      alert('Failed to load categories');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Fetch services when category is selected
+  const fetchServicesByCategory = async (category) => {
+    if (servicesByCategory[category]) {
+      return; // Already fetched
+    }
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/invoices/category/${encodeURIComponent(category)}`);
+      const result = await response.json();
+      
+      if (result.success) {
+        setServicesByCategory(prev => ({
+          ...prev,
+          [category]: result.data
+        }));
+      }
+    } catch (error) {
+      console.error('Error fetching services:', error);
+      alert('Failed to load services');
+    }
+  };
+
   const addItem = () => {
-    setItems([...items, { description: '', price: 0, count: 1 }]);
+    setItems([...items, { 
+      mode: 'service',
+      category: '', 
+      serviceId: '', 
+      description: '', 
+      price: 0, 
+      count: 1 
+    }]);
+  };
+
+  const toggleItemMode = (index) => {
+    const newItems = [...items];
+    newItems[index].mode = newItems[index].mode === 'service' ? 'custom' : 'service';
+    // Reset fields when switching modes
+    if (newItems[index].mode === 'custom') {
+      newItems[index].category = '';
+      newItems[index].serviceId = '';
+    }
+    setItems(newItems);
   };
 
   const removeItem = (index) => {
@@ -31,6 +108,35 @@ const InvoiceGenerator = () => {
       const newItems = items.filter((_, i) => i !== index);
       setItems(newItems);
     }
+  };
+
+  const handleCategoryChange = async (index, category) => {
+    const newItems = [...items];
+    newItems[index].category = category;
+    newItems[index].serviceId = '';
+    newItems[index].description = '';
+    newItems[index].price = 0;
+    setItems(newItems);
+
+    // Fetch services for this category
+    if (category) {
+      await fetchServicesByCategory(category);
+    }
+  };
+
+  const handleServiceChange = (index, serviceId) => {
+    const newItems = [...items];
+    const category = newItems[index].category;
+    const services = servicesByCategory[category] || [];
+    const selectedService = services.find(s => s._id === serviceId);
+
+    if (selectedService) {
+      newItems[index].serviceId = serviceId;
+      newItems[index].description = selectedService.serviceName;
+      newItems[index].price = selectedService.price;
+    }
+    
+    setItems(newItems);
   };
 
   const handleItemChange = (index, field, value) => {
@@ -116,9 +222,9 @@ const InvoiceGenerator = () => {
       pdf.text(companyEmail, 20, yPos);
     }
 
-    // Invoice details (right side) - FIXED POSITIONING
+    // Invoice details (right side)
     const rightX = pageWidth - 20;
-    let invoiceDetailY = 28; // Start position for invoice details
+    let invoiceDetailY = 28;
     
     pdf.setFontSize(9);
     pdf.setFont('helvetica', 'bold');
@@ -130,7 +236,7 @@ const InvoiceGenerator = () => {
 
     yPos += 10;
     
-    // Separator line with brand color
+    // Separator line
     addLine(20, yPos, pageWidth - 20, yPos, 1.5, 'primary');
     
     yPos += 10;
@@ -143,7 +249,7 @@ const InvoiceGenerator = () => {
     
     yPos += 7;
     
-    // Bill To box with brand accent
+    // Bill To box
     const boxHeight = 25;
     pdf.setFillColor(250, 250, 250);
     pdf.rect(20, yPos - 5, pageWidth - 40, boxHeight, 'F');
@@ -159,7 +265,7 @@ const InvoiceGenerator = () => {
     
     yPos += 6;
     
-    // Customer Address - FIXED
+    // Customer Address
     pdf.setFontSize(9);
     pdf.setFont('helvetica', 'normal');
     pdf.setTextColor(102, 102, 102);
@@ -171,7 +277,7 @@ const InvoiceGenerator = () => {
     
     yPos += 5;
     
-    // Customer Phone - FIXED
+    // Customer Phone
     if (customerPhone) {
       pdf.text(customerPhone, 25, yPos);
     } else {
@@ -187,7 +293,7 @@ const InvoiceGenerator = () => {
     const colQty = 145;
     const colAmount = 165;
     
-    // Header background with brand color
+    // Header background
     pdf.setFillColor(secondaryRgb.r, secondaryRgb.g, secondaryRgb.b);
     pdf.rect(colDesc, tableStartY, pageWidth - 40, 10, 'F');
     
@@ -254,17 +360,15 @@ const InvoiceGenerator = () => {
     
     yPos += 10;
     
-    // Total box with brand color - FIXED BORDER
+    // Total box
     const totalBoxX = totalsX - 5;
     const totalBoxY = yPos - 6;
     const totalBoxWidth = pageWidth - totalBoxX - 15;
     const totalBoxHeight = 12;
     
-    // Fill the box
     pdf.setFillColor(secondaryRgb.r, secondaryRgb.g, secondaryRgb.b);
     pdf.rect(totalBoxX, totalBoxY, totalBoxWidth, totalBoxHeight, 'F');
     
-    // Add border to the box - FIXED
     pdf.setDrawColor(secondaryRgb.r, secondaryRgb.g, secondaryRgb.b);
     pdf.setLineWidth(0.5);
     pdf.rect(totalBoxX, totalBoxY, totalBoxWidth, totalBoxHeight, 'S');
@@ -278,18 +382,10 @@ const InvoiceGenerator = () => {
 
     yPos += 15;
     
-    // Footer with brand accent
+    // Footer
     pdf.setDrawColor(primaryRgb.r, primaryRgb.g, primaryRgb.b);
     pdf.setLineWidth(0.5);
     pdf.line(20, yPos, pageWidth - 20, yPos);
-    
-    yPos += 8;
-    
-    pdf.setFontSize(8);
-    pdf.setTextColor(153, 153, 153);
-    pdf.setFont('helvetica', 'normal');
-    
-    yPos += 5;
 
     // Bottom brand strip
     yPos = pdf.internal.pageSize.getHeight() - 5;
@@ -406,11 +502,14 @@ const InvoiceGenerator = () => {
           </div>
         </div>
 
-        {/* Items Table - Desktop/Large Tablet View (1024px+) */}
+        {/* Items Table - Desktop View */}
         <div className="mb-6 md:mb-8 lg:mb-10 hidden lg:block">
           <table className="w-full border-2" style={{ borderColor: secondaryColor, borderCollapse: 'collapse' }}>
             <thead>
               <tr style={{ backgroundColor: secondaryColor }}>
+                <th className="px-3 py-3.5 text-left text-xs font-bold uppercase tracking-wide text-white w-24" style={{ fontFamily: 'Arial, Helvetica, sans-serif' }}>
+                  Type
+                </th>
                 <th className="px-3 py-3.5 text-left text-xs font-bold uppercase tracking-wide text-white" style={{ fontFamily: 'Arial, Helvetica, sans-serif' }}>
                   Description
                 </th>
@@ -430,16 +529,70 @@ const InvoiceGenerator = () => {
               {items.map((item, index) => (
                 <tr key={index} className="border-b" style={{ borderColor: borderColor }}>
                   <td className="px-3 py-3.5">
-                    <input 
-                      className="w-full outline-none border-none text-sm"
-                      style={{ 
-                        color: '#333333',
-                        fontFamily: 'Georgia, "Times New Roman", Times, serif'
+                    <button
+                      onClick={() => toggleItemMode(index)}
+                      className="px-3 py-1.5 text-xs font-semibold rounded border transition-colors"
+                      style={{
+                        backgroundColor: item.mode === 'service' ? primaryColor : '#6b7280',
+                        color: '#ffffff',
+                        borderColor: item.mode === 'service' ? primaryColor : '#6b7280',
+                        fontFamily: 'Arial, Helvetica, sans-serif'
                       }}
-                      placeholder="Item or service description"
-                      value={item.description}
-                      onChange={(e) => handleItemChange(index, 'description', e.target.value)}
-                    />
+                      title={item.mode === 'service' ? 'Click to switch to Custom entry' : 'Click to switch to Service selection'}
+                    >
+                      {item.mode === 'service' ? 'Service' : 'Custom'}
+                    </button>
+                  </td>
+                  <td className="px-3 py-3.5">
+                    {item.mode === 'service' ? (
+                      <div className="space-y-2">
+                        <select
+                          className="w-full outline-none border px-2 py-1 text-sm"
+                          style={{ 
+                            color: '#333333',
+                            borderColor: borderColor,
+                            fontFamily: 'Georgia, "Times New Roman", Times, serif'
+                          }}
+                          value={item.category}
+                          onChange={(e) => handleCategoryChange(index, e.target.value)}
+                        >
+                          <option value="">Select Category</option>
+                          {categories.map((cat) => (
+                            <option key={cat} value={cat}>{cat}</option>
+                          ))}
+                        </select>
+                        <select
+                          className="w-full outline-none border px-2 py-1 text-sm"
+                          style={{ 
+                            color: '#333333',
+                            borderColor: borderColor,
+                            fontFamily: 'Georgia, "Times New Roman", Times, serif'
+                          }}
+                          value={item.serviceId}
+                          onChange={(e) => handleServiceChange(index, e.target.value)}
+                          disabled={!item.category}
+                        >
+                          <option value="">Select Service</option>
+                          {item.category && servicesByCategory[item.category]?.map((service) => (
+                            <option key={service._id} value={service._id}>
+                              {service.serviceName}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    ) : (
+                      <input 
+                        className="w-full outline-none border px-2 py-1 text-sm"
+                        style={{ 
+                          color: '#333333',
+                          borderColor: borderColor,
+                          fontFamily: 'Georgia, "Times New Roman", Times, serif'
+                        }}
+                        placeholder="Item or service description"
+                        value={item.description}
+                        onChange={(e) => handleItemChange(index, 'description', e.target.value)}
+                      />
+                    )}
                   </td>
                   <td className="px-3 py-3.5 text-center">
                     <span className="text-sm" style={{ color: accentColor }}>£</span>
@@ -510,43 +663,100 @@ const InvoiceGenerator = () => {
           </button>
         </div>
 
-        {/* Items - Mobile & Tablet Card View (<1024px) */}
+        {/* Items - Mobile & Tablet Card View */}
         <div className="mb-6 md:mb-8 lg:mb-10 block lg:hidden">
           <div className="space-y-3">
             {items.map((item, index) => (
               <div key={index} className="border-2 p-3 md:p-4 rounded" style={{ borderColor: secondaryColor }}>
                 <div className="flex justify-between items-start mb-3">
-                  <span className="text-xs font-bold uppercase tracking-wide" style={{ color: primaryColor }}>
-                    Item {index + 1}
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-bold uppercase tracking-wide" style={{ color: primaryColor }}>
+                      Item {index + 1}
+                    </span>
+                    <button
+                      onClick={() => toggleItemMode(index)}
+                      className="px-2 py-1 text-xs font-semibold rounded border"
+                      style={{
+                        backgroundColor: item.mode === 'service' ? primaryColor : '#6b7280',
+                        color: '#ffffff',
+                        borderColor: item.mode === 'service' ? primaryColor : '#6b7280',
+                        fontFamily: 'Arial, Helvetica, sans-serif'
+                      }}
+                    >
+                      {item.mode === 'service' ? 'Service' : 'Custom'}
+                    </button>
+                  </div>
                   <button 
                     onClick={() => removeItem(index)} 
                     className="text-base px-2 transition-colors"
                     style={{ color: '#999999' }}
                     onMouseEnter={(e) => e.target.style.color = '#ef4444'}
                     onMouseLeave={(e) => e.target.style.color = '#999999'}
-                    onTouchStart={(e) => e.target.style.color = '#ef4444'}
-                    onTouchEnd={(e) => e.target.style.color = '#999999'}
                   >
                     ✕
                   </button>
                 </div>
                 
                 <div className="space-y-3">
-                  <div>
-                    <label className="text-xs font-semibold mb-1.5 block" style={{ color: accentColor }}>Description</label>
-                    <input 
-                      className="w-full outline-none border rounded px-3 py-2 text-sm"
-                      style={{ 
-                        color: '#333333',
-                        borderColor: borderColor,
-                        fontFamily: 'Georgia, "Times New Roman", Times, serif'
-                      }}
-                      placeholder="Item or service description"
-                      value={item.description}
-                      onChange={(e) => handleItemChange(index, 'description', e.target.value)}
-                    />
-                  </div>
+                  {item.mode === 'service' ? (
+                    <>
+                      <div>
+                        <label className="text-xs font-semibold mb-1.5 block" style={{ color: accentColor }}>Category</label>
+                        <select
+                          className="w-full outline-none border rounded px-3 py-2 text-sm"
+                          style={{ 
+                            color: '#333333',
+                            borderColor: borderColor,
+                            fontFamily: 'Georgia, "Times New Roman", Times, serif'
+                          }}
+                          value={item.category}
+                          onChange={(e) => handleCategoryChange(index, e.target.value)}
+                        >
+                          <option value="">Select Category</option>
+                          {categories.map((cat) => (
+                            <option key={cat} value={cat}>{cat}</option>
+                          ))}
+                        </select>
+                      </div>
+
+                      <div>
+                        <label className="text-xs font-semibold mb-1.5 block" style={{ color: accentColor }}>Service</label>
+                        <select
+                          className="w-full outline-none border rounded px-3 py-2 text-sm"
+                          style={{ 
+                            color: '#333333',
+                            borderColor: borderColor,
+                            fontFamily: 'Georgia, "Times New Roman", Times, serif'
+                          }}
+                          value={item.serviceId}
+                          onChange={(e) => handleServiceChange(index, e.target.value)}
+                          disabled={!item.category}
+                        >
+                          <option value="">Select Service</option>
+                          {item.category && servicesByCategory[item.category]?.map((service) => (
+                            <option key={service._id} value={service._id}>
+                              {service.serviceName}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    </>
+                  ) : (
+                    <div>
+                      <label className="text-xs font-semibold mb-1.5 block" style={{ color: accentColor }}>Description</label>
+                      <input 
+                        className="w-full outline-none border rounded px-3 py-2 text-sm"
+                        style={{ 
+                          color: '#333333',
+                          borderColor: borderColor,
+                          fontFamily: 'Georgia, "Times New Roman", Times, serif'
+                        }}
+                        placeholder="Item or service description"
+                        value={item.description}
+                        onChange={(e) => handleItemChange(index, 'description', e.target.value)}
+                      />
+                    </div>
+                  )}
                   
                   <div className="grid grid-cols-3 gap-3">
                     <div>
@@ -616,14 +826,6 @@ const InvoiceGenerator = () => {
               e.target.style.backgroundColor = '#ffffff';
               e.target.style.color = primaryColor;
             }}
-            onTouchStart={(e) => {
-              e.target.style.backgroundColor = primaryColor;
-              e.target.style.color = '#ffffff';
-            }}
-            onTouchEnd={(e) => {
-              e.target.style.backgroundColor = '#ffffff';
-              e.target.style.color = primaryColor;
-            }}
           >
             + ADD LINE ITEM
           </button>
@@ -677,8 +879,6 @@ const InvoiceGenerator = () => {
           color: '#999999',
           fontFamily: 'Arial, Helvetica, sans-serif'
         }}>
-          
-         
         </div>
 
         {/* Download Button */}
@@ -693,12 +893,16 @@ const InvoiceGenerator = () => {
             }}
             onMouseEnter={(e) => e.target.style.opacity = '0.9'}
             onMouseLeave={(e) => e.target.style.opacity = '1'}
-            onTouchStart={(e) => e.target.style.opacity = '0.9'}
-            onTouchEnd={(e) => e.target.style.opacity = '1'}
           >
             DOWNLOAD PDF
           </button>
         </div>
+
+        {loading && (
+          <div className="mt-4 text-center text-sm" style={{ color: accentColor }}>
+            Loading...
+          </div>
+        )}
       </div>
     </div>
   );
