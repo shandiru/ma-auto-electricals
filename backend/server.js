@@ -6,6 +6,7 @@ import carRouter from "./route/carRoute.js";
 import productRouter from "./route/productRoute.js";
 import stripeRouter from "./route/stripeRoute.js";
 import orderRouter from "./route/orderRoute.js";
+import invoiceRouter from "./route/invoiceRoute.js";
 import "dotenv/config.js";
 import http from "http";
 import { Server } from "socket.io";
@@ -24,6 +25,7 @@ app.use("/api/cars", carRouter);
 app.use("/api/products", productRouter);
 app.use("/api/stripe", stripeRouter);
 app.use("/api/orders", orderRouter);
+app.use("/api/invoices", invoiceRouter);
 
 // Root endpoint
 app.get("/", (req, res) => res.send("API is running"));
