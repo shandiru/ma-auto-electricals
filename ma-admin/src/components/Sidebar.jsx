@@ -35,6 +35,18 @@ const Sidebar = () => {
       icon: <Package2 size={20} />,
       label: "Orders",
       color: "blue"
+    },
+     {
+      to: "/invoice",
+      icon: <Package2 size={20} />,
+      label: "Invoices",
+      color: "green"
+    },
+     {
+      to: "/invoice-data",
+      icon: <Package2 size={20} />,
+      label: "Invoices Data",
+      color: "green"
     }
   ];
 
