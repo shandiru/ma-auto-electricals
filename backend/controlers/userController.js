@@ -9,27 +9,27 @@ const loginUser = async (req, res) => {
     const { email, password } = req.body;
 
     try {
-        const user = await userModel.findOne({email});
+        const user = await userModel.findOne({ email });
         if (!user) {
-            return res.json({success:false, message:"User Doesn't exist"});
+            return res.json({ success: false, message: "User Doesn't exist" });
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            return res.json({success:false, message:"Invalid credentials"});
+            return res.json({ success: false, message: "Invalid credentials" });
         }
 
         const token = createToken(user._id);
-        res.json({success:true, message:"User logged in successfully", token});
+        res.json({ success: true, message: "User logged in successfully", token });
 
     } catch (error) {
         console.log(error);
-        res.json({success:false, message:"Failed to login user"});
-    }    
+        res.json({ success: false, message: "Failed to login user" });
+    }
 }
 
 const createToken = (id) => {
-    return jwt.sign({id}, process.env.JWT_SECRET);
+    return jwt.sign({ id }, process.env.JWT_SECRET);
 };
 
 // resgister user
@@ -37,18 +37,18 @@ const registerUser = async (req, res) => {
     const { name, email, password } = req.body;
     try {
         // checking is user already exists
-        const exists = await userModel.findOne({email});
+        const exists = await userModel.findOne({ email });
         if (exists) {
-            return res.json({success:false, message:"User already exists"});
+            return res.json({ success: false, message: "User already exists" });
         }
 
         //validate email format & strong password
         if (!validator.isEmail(email)) {
-            return res.json({success:false, message:"Invalid email format"});
+            return res.json({ success: false, message: "Invalid email format" });
         }
 
         if (password.length < 8) {
-            return res.json({success:false, message:"Password must be atleast 8 characters"});
+            return res.json({ success: false, message: "Password must be atleast 8 characters" });
         }
 
         // hash password
@@ -56,19 +56,52 @@ const registerUser = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, salt);
 
         const newUser = new userModel({
-            name:name,
-            email:email,
+            name: name,
+            email: email,
             password: hashedPassword
         });
 
         const user = await newUser.save();
         const token = createToken(user._id);
-        res.json({success:true, message:"User registered successfully", token});
+        res.json({ success: true, message: "User registered successfully", token });
 
     } catch (error) {
         console.log(error);
-        res.json({success:false, message:"Failed to register user"});
+        res.json({ success: false, message: "Failed to register user" });
     }
 }
+const checkTokenCorrect = async (req, res) => {
+    const { token } = req.body;
 
-export { loginUser, registerUser }
+    if (!token) {
+        return res.json({ success: false, message: "Token not provided" });
+    }
+
+    try {
+
+        const token_decode = jwt.verify(token, process.env.JWT_SECRET);
+        const decoded_id = token_decode.id;
+
+
+        const user = await userModel.findById(decoded_id);
+
+        if (!user) {
+
+            return res.json({ success: false, message: "User no longer exists" });
+        }
+
+
+        res.json({
+            success: true,
+            message: "Token is valid and User found",
+            userId: decoded_id,
+            userName: user.name // confirmation-kku name kooda edukalam
+        });
+
+    } catch (error) {
+
+        console.log(error);
+        res.json({ success: false, message: "Invalid or Expired Token" });
+    }
+}
+export { loginUser, registerUser, checkTokenCorrect };
