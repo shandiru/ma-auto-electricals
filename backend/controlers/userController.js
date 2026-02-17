@@ -70,38 +70,44 @@ const registerUser = async (req, res) => {
         res.json({ success: false, message: "Failed to register user" });
     }
 }
-const checkTokenCorrect = async (req, res) => {
-    const { token } = req.body;
 
-    if (!token) {
-        return res.json({ success: false, message: "Token not provided" });
+const checkTokenCorrect = async (req, res) => {
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader) {
+        return res.status(401).json({
+            success: false,
+            message: "No token provided"
+        });
     }
 
+    const token = authHeader.split(" ")[1];
+
     try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-        const token_decode = jwt.verify(token, process.env.JWT_SECRET);
-        const decoded_id = token_decode.id;
-
-
-        const user = await userModel.findById(decoded_id);
+        const user = await userModel.findById(decoded.id);
 
         if (!user) {
-
-            return res.json({ success: false, message: "User no longer exists" });
+            return res.status(401).json({
+                success: false,
+                message: "User no longer exists"
+            });
         }
 
-
-        res.json({
+        return res.status(200).json({
             success: true,
-            message: "Token is valid and User found",
-            userId: decoded_id,
-            userName: user.name // confirmation-kku name kooda edukalam
+            message: "Token valid",
+            userId: user._id,
+            userName: user.name
         });
 
     } catch (error) {
-
-        console.log(error);
-        res.json({ success: false, message: "Invalid or Expired Token" });
+        return res.status(401).json({
+            success: false,
+            message: "Invalid or Expired Token"
+        });
     }
-}
+};
+
 export { loginUser, registerUser, checkTokenCorrect };
