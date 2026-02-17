@@ -311,7 +311,7 @@ const ProductList = ({ url }) => {
                         </div>
                       </td>
                       <td className="px-6 py-4 text-green-600 font-bold text-lg">
-                        ${item.price?.toLocaleString()}
+                        £{item.price?.toLocaleString()}
                       </td>
                       <td className="px-6 py-4 font-bold text-lg">
                         {item.isBestSelling ? (

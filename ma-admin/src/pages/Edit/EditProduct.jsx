@@ -156,7 +156,7 @@ const EditProduct = ({ url, existingData, onSuccess, onClose }) => {
           {/* Price & Count */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-3">
-              <label className="flex items-center gap-2 text-gray-700 font-semibold"><DollarSign /> Price</label>
+              <label className="flex items-center gap-2 text-gray-700 font-semibold">£ Price</label>
               <input type="number" name="price" value={formData.price} onChange={handleChange} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 outline-none transition-all duration-300" required />
             </div>
             <div className="space-y-3">
