@@ -220,14 +220,16 @@ export default function ContactSection() {
 
             <SideCard data-aos="fade-left" title="Find Us" icon={<FaMapMarkerAlt className="h-5 w-5" />}>
               <div className="space-y-1 mb-4">
-                <p className="font-semibold text-[#111827] ">Stoneley's Garage Services</p>
+                <p className="font-semibold text-[#111827] ">MA Auto Electrics</p>
                 <p className="text-sm text-gray-500 ">
-                  Oakham Business Park, Hamilton Way, Mansfield NG18 5BU, UK
+                  13 laburnum drive oswaldtwistele
+accrington bb5 3aw,
+United Kingdom
                 </p>
               </div>
 
               <a
-                href="https://www.google.com/maps/place/Stoneley's+Garage+Services/data=!4m2!3m1!1s0x0:0x5a644c3262063baf"
+                href="https://www.google.com/maps/place/M+A+Auto+Electrics/@53.7508303,-2.4371918,10.79z/data=!4m6!3m5!1s0x487ba568018c929d:0xfeef71b544682a6a!8m2!3d53.7460428!4d-2.3519864!16s%2Fg%2F1pxqdgy2t?entry=tts&g_ep=EgoyMDI1MTIwOS4wIPu8ASoASAFQAw%3D%3D&skid=8676a7fb-92f5-4c50-9af9-25be7b7b9d59"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -238,13 +240,7 @@ export default function ContactSection() {
               </a>
             </SideCard>
 
-            <SideCard data-aos="fade-left" title="About Stoneley's Garage">
-              <p className="text-sm text-gray-500 leading-relaxed">
-                Family-run garage established in 1973, serving Mansfield and surrounding areas.
-                Our certified technicians provide reliable service for cars, commercial vehicles,
-                and motorhomes.
-              </p>
-            </SideCard>
+           
           </div>
         </div>
       </div>
