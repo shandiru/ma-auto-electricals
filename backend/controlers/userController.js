@@ -34,8 +34,15 @@ const createToken = (id) => {
 
 // resgister user
 const registerUser = async (req, res) => {
-    const { name, email, password } = req.body;
+    const { name, email, password,registerKey } = req.body;
     try {
+
+        if (registerKey !== process.env.REGISTER_SECRET_KEY) {
+            return res.status(403).json({
+                success: false,
+                message: "Invalid Registration Key"
+            });
+        }
         // checking is user already exists
         const exists = await userModel.findOne({ email });
         if (exists) {

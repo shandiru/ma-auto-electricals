@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { Eye, EyeOff } from "lucide-react"; // ← Lucide icons
+import { Eye, EyeOff } from "lucide-react";
 import AuthContainer from "../components/Auth";
 
 export default function Signup({ url }) {
@@ -10,6 +10,7 @@ export default function Signup({ url }) {
     email: "",
     password: "",
     confirmPassword: "",
+    registerKey: "", // ✅ added
   });
 
   const [showPassword, setShowPassword] = useState(false);
@@ -37,6 +38,7 @@ export default function Signup({ url }) {
           name: formData.name,
           email: formData.email,
           password: formData.password,
+          registerKey: formData.registerKey, // ✅ send to backend
         }),
       });
 
@@ -113,6 +115,16 @@ export default function Signup({ url }) {
             {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
           </span>
         </div>
+
+        {/* 🔐 Register Secret Key (NEW FIELD) */}
+        <input
+          type="password"
+          name="registerKey"
+          placeholder="Enter Register Secret Key"
+          onChange={handleChange}
+          className="w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-indigo-400 outline-none"
+          required
+        />
 
         {/* Signup Button */}
         <button
