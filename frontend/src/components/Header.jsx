@@ -101,7 +101,7 @@ export default function Navbar() {
   };
 
   return (
-    <header className="fixed top-0 w-full bg-black/90 backdrop-blur-sm z-50 border-b border-gray-800">
+    <header className="fixed top-0 z-999 w-full bg-black/90 backdrop-blur-sm border-b border-gray-800">
       <div className="max-w-7xl mx-auto px-4">
         <div className="h-16 flex items-center justify-between">
           
